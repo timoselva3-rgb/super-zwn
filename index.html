@@ -36,17 +36,29 @@
       to { filter: blur(10px) brightness(0.6); }
     }
 
+    /* النص المتحرك */
     h1 {
       font-size: 2.6em;
       color: #fff;
+      position: relative;
       text-shadow: 0 0 10px #fff, 0 0 20px #ff0000, 0 0 40px #ff0000;
       margin-top: 40px;
-      animation: pulse 2s infinite alternate;
+      animation: pulse 2s infinite alternate, glitch 1.5s infinite;
     }
 
     @keyframes pulse {
-      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff0000, 0 0 40px #ff0000; }
-      to { text-shadow: 0 0 20px #fff, 0 0 40px #ff0000, 0 0 60px #ff0000; }
+      0% { transform: scale(1); text-shadow: 0 0 10px #fff, 0 0 20px #ff0000, 0 0 40px #ff0000; }
+      50% { transform: scale(1.1) rotate(-2deg); text-shadow: 0 0 20px #fff, 0 0 40px #ff0000, 0 0 60px #ff0000; }
+      100% { transform: scale(1) rotate(2deg); text-shadow: 0 0 15px #fff, 0 0 30px #ff0000, 0 0 50px #ff0000; }
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red, -2px 0 blue; }
+      20% { text-shadow: -2px 0 red, 2px 0 blue; }
+      40% { text-shadow: 2px 2px red, -2px -2px blue; }
+      60% { text-shadow: -2px 2px red, 2px -2px blue; }
+      80% { text-shadow: 2px -2px red, -2px 2px blue; }
+      100% { text-shadow: 2px 0 red, -2px 0 blue; }
     }
 
     p { font-size: 1.1em; color: #ddd; margin: 10px 0 25px; }
@@ -101,13 +113,13 @@
 
   <div class="users">
     <h3>• الوسطاء الرسميين •<br>ممنوع التعامل بدون وسيط لضمان حق الطرفين</h3>
-    <a href="https://t.me/vwvvxv" target="_blank" onclick="playClickSound()">• الوسيط تيمو •</a>
-    <a href="https://t.me/vrwvw" target="_blank" onclick="playClickSound()">• الوسيط حمو •</a>
-    <a href="https://t.me/GreaTeeid" target="_blank" onclick="playClickSound()">• الوسيط عيد •</a>
-    <a href="https://t.me/x_o_z" target="_blank" onclick="playClickSound()">• الوسيط سالك •</a>
-    <a href="https://t.me/j_e_o" target="_blank" onclick="playClickSound()">• الوسيط يوسف •</a>
-    <a href="https://t.me/mrtrgm" target="_blank" onclick="playClickSound()">• الوسيط ايرور •</a>
-    <a href="https://t.me/ahmedrio" target="_blank" onclick="playClickSound()">• الوسيط ريو •</a>
+    <a href="timo.html" onclick="playClickSound()">• الوسيط تيمو •</a>
+    <a href="hamo.html" onclick="playClickSound()">• الوسيط حمو •</a>
+    <a href="eid.html" onclick="playClickSound()">• الوسيط عيد •</a>
+    <a href="salk.html" onclick="playClickSound()">• الوسيط سالك •</a>
+    <a href="yousef.html" onclick="playClickSound()">• الوسيط يوسف •</a>
+    <a href="error.html" onclick="playClickSound()">• الوسيط ايرور •</a>
+    <a href="rio.html" onclick="playClickSound()">• الوسيط ريو •</a>
   </div>
 
   <a href="mediator.html" onclick="playClickSound()">❓ يعني اي وسيط</a>
@@ -116,7 +128,7 @@
 
   <script>
     function playClickSound() {
-      var audio = new Audio('https://www.soundjay.com/button/beep-07.wav'); 
+      var audio = new Audio('https://files.catbox.moe/txfod8.m4a'); 
       audio.play();
     }
   </script>
