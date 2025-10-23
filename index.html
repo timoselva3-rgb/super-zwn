@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuPer Zwn 🔥</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      background: #000;
+    }
+
+    /* خلفية الصورة مع تأثير النيون */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url("https://i.ibb.co/CyLyBsJ/IMG-20251005-184349-032.jpg") center/cover no-repeat;
+      filter: blur(8px) brightness(0.4);
+      animation: glow 6s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    @keyframes glow {
+      from { filter: blur(8px) brightness(0.35); }
+      to { filter: blur(10px) brightness(0.6); }
+    }
+
+    h1 {
+      font-size: 2.6em;
+      color: #fff;
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff0000, 0 0 40px #ff0000;
+      margin-top: 40px;
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff0000, 0 0 40px #ff0000; }
+      to { text-shadow: 0 0 20px #fff, 0 0 40px #ff0000, 0 0 60px #ff0000; }
+    }
+
+    p { font-size: 1.1em; color: #ddd; margin: 10px 0 25px; }
+
+    .logo {
+      width: 230px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #ff0000;
+      animation: pulse 3s infinite alternate;
+    }
+
+    a {
+      display: block;
+      background-color: rgba(15,15,15,0.8);
+      color: #fff;
+      text-decoration: none;
+      margin: 12px auto;
+      padding: 15px;
+      border-radius: 15px;
+      width: 270px;
+      font-weight: bold;
+      border: 1px solid #ff0000;
+      box-shadow: 0 0 10px #ff0000;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background-color: #ff0000;
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #ff0000;
+    }
+
+    .users { margin-top: 40px; padding-bottom: 50px; }
+
+    .users h3 {
+      color: white;
+      font-size: 1.5em;
+      text-shadow: 0 0 15px red;
+      margin-bottom: 10px;
+    }
+
+    footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <img src="https://i.ibb.co/CyLyBsJ/IMG-20251005-184349-032.jpg" alt="Super ZWN Logo" class="logo">
+  <h1>. 𝖲𝗎𝖯𝖾𝗋 𝖹𝗐𝗇 .</h1>
+  <p>أول سوبر عربي على تيليجرام 💪<br>أكبر المبيعات وأعلى درجات الثقة</p>
+
+  <!-- الزرار مع الصوت -->
+  <a href="https://t.me/superrzwn" target="_blank" onclick="playClickSound()">📢 القناة الرسمية</a>
+  <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playClickSound()">💬 جروب سوبر زون</a>
+
+  <div class="users">
+    <h3>• الوسطاء الرسميين •<br>ممنوع التعامل بدون وسيط لضمان حق الطرفين</h3>
+    <a href="https://t.me/vwvvxv" target="_blank" onclick="playClickSound()">• الوسيط تيمو •</a>
+    <a href="https://t.me/vrwvw" target="_blank" onclick="playClickSound()">• الوسيط حمو •</a>
+    <a href="https://t.me/GreaTeeid" target="_blank" onclick="playClickSound()">• الوسيط عيد •</a>
+    <a href="https://t.me/x_o_z" target="_blank" onclick="playClickSound()">• الوسيط سالك •</a>
+    <a href="https://t.me/j_e_o" target="_blank" onclick="playClickSound()">• الوسيط يوسف •</a>
+    <a href="https://t.me/mrtrgm" target="_blank" onclick="playClickSound()">• الوسيط ايرور •</a>
+    <a href="https://t.me/ahmedrio" target="_blank" onclick="playClickSound()">• الوسيط ريو •</a>
+  </div>
+
+  <!-- زرار صفحة الوسيط -->
+  <a href="mediator.html" onclick="playClickSound()">❓ يعني اي وسيط</a>
+
+  <footer>© 2025 Super ZWN | جميع الحقوق محفوظة 🔥</footer>
+
+  <script>
+    // دالة تشغيل الصوت عند الضغط
+    function playClickSound() {
+      var audio = new Audio('https://www.soundjay.com/button/beep-07.wav'); 
+      audio.play();
+    }
+  </script>
+</body>
+</html>
