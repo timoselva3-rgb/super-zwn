@@ -1,156 +1,171 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سوبر زون | اكبر سوبر عربي على تيليجرام</title>
-<meta name="description" content="سوبر زون - اول سوبر عربي على تيليجرام 💪 اكبر المبيعات واعلى درجات الثقة">
-<meta name="keywords" content="سوبر زون, تيليجرام, وسطاء, مبيعات, عربي">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سوبر زون | اكبر سوبر عربي على تيليجرام</title>
+  <meta name="description" content="سوبر زون - اول سوبر عربي على تيليجرام 💪 اكبر المبيعات واعلى درجات الثقة">
+  <meta name="keywords" content="سوبر زون, تيليجرام, وسطاء, مبيعات, عربي">
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
 
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: 'Tajawal', sans-serif;
-  color:white;
-  text-align:center;
-  overflow-x:hidden;
-  background: url("https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg") center/cover no-repeat fixed;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-h1 {
-  font-size:2.6em;
-  color:#fff;
-  position:relative;
-  text-shadow:0 0 10px #fff,0 0 20px #ff0000,0 0 40px #ff0000;
-  margin-top:40px;
-  animation: pulse 2s infinite alternate, glitch 1.5s infinite;
-}
+    body {
+      font-family: 'Tajawal', sans-serif;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      background: #000;
+    }
 
-@keyframes pulse {
-  0% { transform: scale(1); text-shadow:0 0 10px #fff,0 0 20px #ff0000,0 0 40px #ff0000;}
-  50% { transform: scale(1.1) rotate(-2deg); text-shadow:0 0 20px #fff,0 0 40px #ff0000,0 0 60px #ff0000;}
-  100% { transform: scale(1) rotate(2deg); text-shadow:0 0 15px #fff,0 0 30px #ff0000,0 0 50px #ff0000;}
-}
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url("https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg") center/cover no-repeat;
+      filter: blur(8px) brightness(0.4);
+      z-index: -1;
+    }
 
-@keyframes glitch {
-  0% { text-shadow: 2px 0 red, -2px 0 blue; }
-  20% { text-shadow: -2px 0 red, 2px 0 blue; }
-  40% { text-shadow: 2px 2px red, -2px -2px blue; }
-  60% { text-shadow: -2px 2px red, 2px -2px blue; }
-  80% { text-shadow: 2px -2px red, -2px 2px blue; }
-  100% { text-shadow: 2px 0 red, -2px 0 blue; }
-}
+    h1 {
+      font-size: 2.6em;
+      color: #fff;
+      position: relative;
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff0000, 0 0 40px #ff0000;
+      margin-top: 40px;
+      animation: pulse 2s infinite alternate, glitch 1.5s infinite;
+    }
 
-p { font-size:1.1em; color:#ddd; margin:10px 0 25px; }
+    @keyframes pulse {
+      0% { transform: scale(1); text-shadow: 0 0 10px #fff, 0 0 20px #ff0000, 0 0 40px #ff0000; }
+      50% { transform: scale(1.1) rotate(-2deg); text-shadow: 0 0 20px #fff, 0 0 40px #ff0000, 0 0 60px #ff0000; }
+      100% { transform: scale(1) rotate(2deg); text-shadow: 0 0 15px #fff, 0 0 30px #ff0000, 0 0 50px #ff0000; }
+    }
 
-.logo {
-  width:230px;
-  border-radius:20px;
-  box-shadow:0 0 25px #ff0000;
-  animation: pulse 3s infinite alternate;
-}
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red, -2px 0 blue; }
+      20% { text-shadow: -2px 0 red, 2px 0 blue; }
+      40% { text-shadow: 2px 2px red, -2px -2px blue; }
+      60% { text-shadow: -2px 2px red, 2px -2px blue; }
+      80% { text-shadow: 2px -2px red, -2px 2px blue; }
+      100% { text-shadow: 2px 0 red, -2px 0 blue; }
+    }
 
-a {
-  display:block;
-  background-color:rgba(15,15,15,0.8);
-  color:#fff;
-  text-decoration:none;
-  margin:12px auto;
-  padding:15px;
-  border-radius:15px;
-  width:270px;
-  font-weight:bold;
-  border:1px solid red;
-  box-shadow:0 0 10px red;
-  transition:0.3s;
-  animation: colorShift 3s infinite;
-}
+    p { font-size: 1.1em; color: #ddd; margin: 10px 0 25px; }
 
-a:hover { transform: scale(1.05); box-shadow:0 0 25px #ff0000; }
+    .logo {
+      width: 230px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #ff0000;
+      animation: pulse 3s infinite alternate;
+    }
 
-@keyframes colorShift {
-  0% { border-color:red; box-shadow:0 0 10px red; }
-  25% { border-color:blue; box-shadow:0 0 10px blue; }
-  50% { border-color:yellow; box-shadow:0 0 10px yellow; }
-  75% { border-color:white; box-shadow:0 0 10px white; }
-  100% { border-color:red; box-shadow:0 0 10px red; }
-}
+    a {
+      display: block;
+      background-color: rgba(15,15,15,0.8);
+      color: #fff;
+      text-decoration: none;
+      margin: 12px auto;
+      padding: 15px;
+      border-radius: 15px;
+      width: 270px;
+      font-weight: bold;
+      border: 1px solid red;
+      box-shadow: 0 0 10px red;
+      transition: 0.3s;
+      animation: colorShift 3s infinite;
+    }
 
-.users { margin-top:40px; padding-bottom:50px; }
+    a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #ff0000;
+    }
 
-.users h3 {
-  color:white;
-  font-size:1.5em;
-  text-shadow:0 0 15px red;
-  margin-bottom:10px;
-}
+    @keyframes colorShift {
+      0% { border-color: red; box-shadow: 0 0 10px red; }
+      33% { border-color: blue; box-shadow: 0 0 10px blue; }
+      66% { border-color: yellow; box-shadow: 0 0 10px yellow; }
+      100% { border-color: red; box-shadow: 0 0 10px red; }
+    }
 
-footer { margin-top:40px; color:#bbb; font-size:0.9em; }
+    .users { margin-top: 40px; padding-bottom: 50px; }
 
+    .users h3 {
+      color: white;
+      font-size: 1.5em;
+      text-shadow: 0 0 15px red;
+      margin-bottom: 10px;
+    }
 
-.snowflake {
-  position:fixed;
-  top:-10px;
-  font-size:10px;
-  z-index:1000;
-  pointer-events:none;
-  user-select:none;
-  animation-name:fall;
-  animation-timing-function:linear;
-}
+    footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 
-@keyframes fall {
-  0% { transform:translateY(0) rotate(0deg); }
-  100% { transform:translateY(100vh) rotate(360deg); }
-}
-</style>
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      font-size: 10px;
+      z-index: 1000;
+      pointer-events: none;
+      user-select: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
+  <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" alt="Super ZWN Logo" class="logo">
+  <h1>. 𝖲𝗎𝖯𝖾𝗋 𝖹𝗐𝗇 .</h1>
+  <p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
 
-<img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" alt="Super ZWN Logo" class="logo">
-<h1>. 𝖲𝗎𝖯𝖾𝗋 𝖹𝗐𝗇 .</h1>
-<p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
+  <a href="https://t.me/superrzwn" target="_blank" onclick="playClickSound()">📢 القناة الرسمية</a>
+  <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playClickSound()">💬 جروب سوبر زون</a>
 
-<a href="https://t.me/superrzwn" target="_blank" onclick="playClickSound()">📢 القناة الرسمية</a>
-<a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playClickSound()">💬 جروب سوبر زون</a>
+  <div class="users">
+    <h3>• الوسطاء الرسميين •<br>ممنوع التعامل بدون وسيط لضمان حق الطرفين</h3>
+    <a href="timo.html" onclick="playClickSound()">• الوسيط تيمو •</a>
+    <a href="hamo.html" onclick="playClickSound()">• الوسيط حمو •</a>
+    <a href="eid.html" onclick="playClickSound()">• الوسيط عيد •</a>
+    <a href="salk.html" onclick="playClickSound()">• الوسيط سالك •</a>
+    <a href="yousef.html" onclick="playClickSound()">• الوسيط يوسف •</a>
+    <a href="error.html" onclick="playClickSound()">• الوسيط ايرور •</a>
+    <a href="rio.html" onclick="playClickSound()">• الوسيط ريو •</a>
+  </div>
 
-<div class="users">
-<h3>• الوسطاء الرسميين •<br>ممنوع التعامل بدون وسيط لضمان حق الطرفين</h3>
-<a href="timo.html" onclick="playClickSound()">• الوسيط تيمو •</a>
-<a href="hamo.html" onclick="playClickSound()">• الوسيط حمو •</a>
-<a href="eid.html" onclick="playClickSound()">• الوسيط عيد •</a>
-<a href="salk.html" onclick="playClickSound()">• الوسيط سالك •</a>
-<a href="yousef.html" onclick="playClickSound()">• الوسيط يوسف •</a>
-<a href="error.html" onclick="playClickSound()">• الوسيط ايرور •</a>
-<a href="rio.html" onclick="playClickSound()">• الوسيط ريو •</a>
-</div>
+  <a href="mediator.html" onclick="playClickSound()">❓ يعني اي وسيط</a>
 
-<a href="mediator.html" onclick="playClickSound()">❓ يعني اي وسيط</a>
-<footer>© 2025 Super ZWN | جميع الحقوق محفوظة 🔥</footer>
+  <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
-<script>
-function playClickSound() {
-  var audio = new Audio('https://files.catbox.moe/txfod8.m4a');
-  audio.play();
-}
+  <script>
+    function playClickSound() {
+      var audio = new Audio('https://files.catbox.moe/txfod8.m4a'); 
+      audio.play();
+    }
 
+    const colors = ['red','blue','yellow','white'];
 
-const colors = ['red','blue','yellow','white'];
-function createSnowflake() {
-  const snowflake = document.createElement('div');
-  snowflake.className = 'snowflake';
-  snowflake.style.left = Math.random()*100+'vw';
-  snowflake.style.animationDuration = (3+Math.random()*5)+'s';
-  snowflake.style.fontSize = (5+Math.random()*10)+'px';
-  snowflake.style.color = colors[Math.floor(Math.random()*colors.length)];
-  snowflake.textContent='•';
-  document.body.appendChild(snowflake);
-  setTimeout(()=>snowflake.remove(),8000);
-}
-setInterval(createSnowflake,150);
-</script>
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      snowflake.style.left = Math.random() * 100 + 'vw';
+      snowflake.style.animationDuration = (3 + Math.random() * 5) + 's';
+      snowflake.style.fontSize = (5 + Math.random() * 10) + 'px';
+      snowflake.style.color = colors[Math.floor(Math.random() * colors.length)];
+      snowflake.textContent = '•';
+      document.body.appendChild(snowflake);
 
+      setTimeout(() => {
+        snowflake.remove();
+      }, 8000);
+    }
+
+    setInterval(createSnowflake, 200);
+  </script>
 </body>
 </html>
