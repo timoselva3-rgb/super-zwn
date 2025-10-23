@@ -36,7 +36,6 @@
       to { filter: blur(10px) brightness(0.6); }
     }
 
-    /* النص المتحرك */
     h1 {
       font-size: 2.6em;
       color: #fff;
@@ -80,15 +79,22 @@
       border-radius: 15px;
       width: 270px;
       font-weight: bold;
-      border: 1px solid #ff0000;
-      box-shadow: 0 0 10px #ff0000;
+      border: 1px solid red;
+      box-shadow: 0 0 10px red;
       transition: 0.3s;
+      animation: colorShift 3s infinite;
     }
 
     a:hover {
-      background-color: #ff0000;
       transform: scale(1.05);
       box-shadow: 0 0 25px #ff0000;
+    }
+
+    @keyframes colorShift {
+      0% { border-color: red; box-shadow: 0 0 10px red; }
+      33% { border-color: blue; box-shadow: 0 0 10px blue; }
+      66% { border-color: yellow; box-shadow: 0 0 10px yellow; }
+      100% { border-color: red; box-shadow: 0 0 10px red; }
     }
 
     .users { margin-top: 40px; padding-bottom: 50px; }
@@ -101,6 +107,24 @@
     }
 
     footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
+
+
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: red;
+      font-size: 10px;
+      z-index: 1000;
+      pointer-events: none;
+      user-select: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -131,6 +155,23 @@
       var audio = new Audio('https://files.catbox.moe/txfod8.m4a'); 
       audio.play();
     }
+
+
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      snowflake.style.left = Math.random() * 100 + 'vw';
+      snowflake.style.animationDuration = (3 + Math.random() * 5) + 's';
+      snowflake.style.fontSize = (5 + Math.random() * 10) + 'px';
+      snowflake.textContent = '•';
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 8000);
+    }
+
+    setInterval(createSnowflake, 200);
   </script>
 </body>
 </html>
