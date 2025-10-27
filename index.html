@@ -7,9 +7,25 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@700;900&display=swap');
 
+        /* أنماط خاصة للفيديو كخلفية */
+        #video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100; /* يجعله تحت كل المحتوى */
+            background-size: cover;
+            filter: brightness(0.4) blur(2px); /* لتعتيم الخلفية وجعل النص أكثر وضوحاً */
+            object-fit: cover; /* يضمن تغطية الشاشة بالكامل */
+        }
+
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #0d1117;
+            /* تغيير لون الخلفية الأساسي ليكون شفافاً أو شبه شفاف */
+            background-color: rgba(13, 17, 23, 0.5); /* إضافة شفافية لإظهار الفيديو */
             color: #ffffff;
             text-align: center;
             margin: 0;
@@ -20,6 +36,9 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
+            /* لضمان وضع المحتوى فوق الفيديو */
+            position: relative; 
+            z-index: 1;
         }
 
         .container {
@@ -28,20 +47,22 @@
             padding: 0 15px;
             box-sizing: border-box;
             padding-top: 20px; 
+            /* إضافة خلفية للمحتوى لجعل النص أكثر وضوحاً فوق الفيديو */
+            background-color: rgba(13, 17, 23, 0.7); 
+            min-height: 100vh;
         }
-
+        
+        /* باقي الأنماط كما هي */
         .hero-image-container {
-            /* تعديل الأبعاد لجعلها مربعة وصغيرة (حوالي 180x180 بكسل كحد أقصى) */
             width: 180px; 
             height: 180px; 
             max-width: 180px;
             overflow: hidden;
             position: relative;
             background: #1f2731;
-            margin: 0 auto 30px auto; /* مسافة بعد الصورة */
+            margin: 0 auto 30px auto; 
             border-radius: 15px; 
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            /* إضافة هامش علوي أكبر قليلاً بعد إزالة الهيدر */
             margin-top: 40px; 
         }
 
@@ -53,7 +74,7 @@
             width: 100%;
             height: 60%;
             background: linear-gradient(to top, #0d1117 0%, rgba(13, 17, 23, 0.01) 100%);
-            opacity: 0; /* إزالة تأثير التدرج على الصورة المربعة الصغيرة */
+            opacity: 0; 
         }
         
         .hero-image {
@@ -66,15 +87,13 @@
         h1 {
             font-size: 1.8em;
             font-weight: 900;
-            /* توحيد اللون للأبيض */
             color: #ffffff; 
             line-height: 1.5;
-            margin-top: 0; /* تقليل المسافة بعد الصورة */
+            margin-top: 0; 
             margin-bottom: 20px;
         }
 
         .highlight-text {
-            /* توحيد اللون للأبيض */
             color: #ffffff; 
         }
 
@@ -133,15 +152,20 @@
     </style>
 </head>
 <body>
+
+    <video autoplay muted loop playsinline id="video-background">
+        <source src="https://files.catbox.moe/qnusbz.mp4" type="video/mp4">
+        متصفحك لا يدعم علامة الفيديو.
+    </video>
     
     <div class="hero-image-container">
-        <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" alt="Trading Room" class="hero-image">
+        <img src="https://i.ibb.co/Ps852QvC/IMG-20251028-014051-864.jpg" alt="Trading Room" class="hero-image">
     </div>
 
     <div class="container">
         
         <h1>
-            <span style="font-size: 1.2em;">🏦</span> شركة استثمار وتداول 
+            <span style="font-size: 1.2em;"></span> شركة استثمار وتداول 
             <br>
             وتسليم <span class="highlight-text">أرباح</span> <span style="font-size: 1.2em;">💰</span>
         </h1>
@@ -151,7 +175,7 @@
         </p>
 
         <p class="instruction-text">
-            <span>📢</span> يرجى اتباع التعليمات داخل القناة
+            <span></span> يرجى اتباع التعليمات داخل القناة
         </p>
 
         <a href="https://t.me/your_telegram_link" target="_blank" class="join-button">
