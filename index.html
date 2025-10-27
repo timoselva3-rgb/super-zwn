@@ -24,71 +24,114 @@ body::before {
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: url("https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg") center/cover no-repeat;
-  filter: brightness(0.4);
+  filter: brightness(0.4) contrast(1.2); /* تعزيز التباين للأسود والأحمر */
+  background-attachment: fixed;
   z-index: -1;
   transition: filter 0.5s;
 }
-body.dark-mode::before { filter: brightness(0.15); }
+body.dark-mode::before { filter: brightness(0.15) contrast(1.2); }
 
-.content { display: none; margin-top: 20px; }
+.content { display: none; margin-top: 20px; padding-bottom: 70px; /* مسافة للفوتر */ }
 .content.active { display: block; }
 
-h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
-h2 { font-size: 1.2em; margin-top: 10px; text-shadow: 0 0 6px #ff0000; }
-p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
+h1 { font-size: 1.8em; margin-top: 10px; color: #fff; text-shadow: 0 0 10px #ff0000; }
+h2 { font-size: 1.2em; margin-top: 10px; color: #ddd; text-shadow: 0 0 6px #cc0000; }
+p { font-size: 1em; color: #ccc; margin: 5px 0 20px 0; }
 
-.logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
+.logo { width: 100px; border-radius: 50%; border: 3px solid #ff0000; box-shadow: 0 0 15px #ff0000; margin-top: 20px; }
 
+/* تصميم الأزرار الموحد */
 a, button {
-  display: block;
-  background-color: rgba(15,15,15,0.8);
+  display: flex; /* لمركزة الأيقونات والنص */
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(5,5,5,0.85); /* خلفية شبه شفافة داكنة */
   color: #fff;
   text-decoration: none;
-  margin: 6px auto;
-  padding: 10px;
+  margin: 8px auto;
+  padding: 12px;
   border-radius: 12px;
-  width: 220px;
+  width: 250px; /* زيادة عرض الأزرار قليلاً */
   font-weight: bold;
-  border: 1px solid red;
-  box-shadow: 0 0 10px red;
-  transition: 0.3s;
-  font-size: 0.95em;
+  border: 1px solid #cc0000;
+  box-shadow: 0 0 10px rgba(255,0,0,0.7); /* ظل أحمر قوي */
+  transition: all 0.3s ease-in-out;
+  font-size: 1em;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
-a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
+a:hover, button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff0000, 0 0 40px rgba(255,0,0,0.3); /* توهج أكبر عند المرور */
+  background-color: rgba(15,15,15,0.95);
+}
 
-.menu-btn { position: fixed; top: 15px; left: 15px; font-size: 20px; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 8px; cursor: pointer; z-index: 1002; }
+/* شكل البطاقات الجديدة للصفحة الرئيسية */
+.fixed-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* مسافة أكبر بين الأزرار */
+    margin-top: 30px;
+}
+.fixed-buttons a, .fixed-buttons button {
+    width: 85%; /* عرض أكبر على الشاشات الصغيرة */
+    max-width: 350px; /* حد أقصى للعرض */
+    border-radius: 15px;
+    padding: 15px 10px;
+}
+
+/* لون خاص لأزرار البيانات (السعر، الوقت، التاريخ) */
+#tonBtn, #timeBtn, #dateBtn {
+    background-color: rgba(10,10,10,0.85);
+    color: #ffcccc; /* لون فاتح مميز */
+    border: 1px solid #550000;
+    box-shadow: 0 0 5px rgba(255,0,0,0.4);
+    font-size: 0.9em;
+}
 
 /* القائمة الجانبية */
 .sidebar {
   width: 240px;
   height: 100%;
-  background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(5px);
+  background: rgba(0,0,0,0.95); /* خلفية سوداء شبه شفافة تماماً */
+  backdrop-filter: blur(8px); /* تأثير ضبابي قوي */
   position: fixed;
   top: 0;
   left: -240px;
   transition: 0.4s;
   padding-top: 70px;
   z-index: 1001;
-  border-right: 2px solid #ff0000;
-  box-shadow: 0 0 15px rgba(255,0,0,0.4);
+  border-right: 3px solid #ff0000; /* خط أحمر سميك */
+  box-shadow: 2px 0 20px rgba(255,0,0,0.7); /* ظل أحمر للتأكيد */
 }
 .sidebar a, .sidebar button {
-  width: 85%;
+  width: 90%;
   margin: 10px auto;
-  background: rgba(20,20,20,0.8);
-  border: 1px solid #ff0000;
-  border-radius: 10px;
+  background: rgba(15,15,15,0.9);
+  border: 1px solid #ff3333;
   box-shadow: 0 0 8px #ff0000;
 }
+.menu-btn {
+  position: fixed; top: 15px; left: 15px; font-size: 24px;
+  background: rgba(255,0,0,0.7); /* زر قائمة أحمر واضح */
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer; z-index: 1002;
+  border: 1px solid #fff;
+  box-shadow: 0 0 10px #ff0000;
+  transition: 0.3s;
+}
+.menu-btn:hover { background: #ff3333; box-shadow: 0 0 15px #ff0000; }
 
 /* popup */
 .popup-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.85); /* خلفية داكنة جداً */
   display: none;
   justify-content: center;
   align-items: center;
@@ -96,35 +139,38 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   animation: fadeIn 0.4s;
 }
 .popup-box {
-  background: rgba(20,20,20,0.95);
-  border: 2px solid #ff0000;
+  background: #000;
+  border: 3px solid #ff0000;
   border-radius: 15px;
-  padding: 20px;
-  width: 85%;
-  max-width: 400px;
-  box-shadow: 0 0 20px rgba(255,0,0,0.5);
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 0 30px rgba(255,0,0,0.9);
   text-align: center;
   animation: fadeInUp 0.4s;
 }
 .popup-box h3 {
   color: #ff0000;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 5px #ff0000;
 }
 .popup-box p {
-  color: #ddd;
-  font-size: 1em;
-  line-height: 1.6em;
+  color: #eee;
+  font-size: 1.1em;
+  line-height: 1.8em;
 }
 .close-btn {
   background: #ff0000;
   color: #fff;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 10px;
-  margin-top: 15px;
+  border: 1px solid #fff;
+  padding: 10px 25px;
+  border-radius: 12px;
+  margin-top: 20px;
   cursor: pointer;
   font-weight: bold;
   transition: 0.3s;
+  box-shadow: 0 0 10px #ff0000;
+  width: auto; /* لتجنب العرض الكامل */
 }
 .close-btn:hover {
   background: #cc0000;
@@ -133,26 +179,23 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes fadeInUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-.snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
+.snowflake { position: fixed; top: -10px; background: #ff0000; border-radius: 50%; opacity: 0.6; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
 .language-buttons { display: none; margin-top: 5px; flex-direction: column; }
-.language-buttons button { width: 80%; margin: 4px auto; }
+.language-buttons button { width: 90%; margin: 4px auto; }
 
-.fixed-buttons a, .fixed-buttons button {
-  width: 220px;
-  font-size: 0.95em;
-  box-shadow: 0 0 8px red;
-}
+
 footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   padding: 10px 0;
-  background: rgba(0,0,0,0.8);
-  font-size: 0.8em;
+  background: rgba(0,0,0,0.9);
+  font-size: 0.85em;
   color: #ff0000;
   z-index: 10;
-  box-shadow: 0 0 10px rgba(255,0,0,0.5);
+  box-shadow: 0 0 15px rgba(255,0,0,0.9);
+  border-top: 2px solid #cc0000;
 }
 </style>
 </head>
@@ -195,8 +238,8 @@ footer {
       <a id="groupBtn" href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
       <button id="brokersBtn" onclick="playSound(); show('brokers')">🤝 وسطاء السوبر</button>
 
-      <button id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</button>
-      <button id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</button>
+      <button id="tonBtn" onclick="playSound()">💎 جاري تحميل التون...</button>
+      <button id="timeBtn" onclick="playSound()">⏰ جاري التحديث...</button>
       <button id="dateBtn" onclick="playSound()">📅 جاري التحديث...</button>
     </div>
   </section>
@@ -253,6 +296,8 @@ function show(id){
   document.querySelectorAll('.content').forEach(sec => sec.classList.remove('active'));
   const target = document.getElementById(id);
   if(target) target.classList.add('active');
+  // إغلاق القائمة الجانبية عند التبديل بين الصفحات
+  document.getElementById("sidebar").style.left = "-240px";
 }
 
 function toggleDarkModeFunc() {
@@ -405,7 +450,7 @@ async function updateTonPrice() {
 }
 setInterval(updateTonPrice, 60000); 
 
-// ثلج
+// ثلج أحمر (تأثير الجو)
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
@@ -415,6 +460,14 @@ function createSnowflake() {
   snow.style.left = `${Math.random() * window.innerWidth}px`;
   snow.style.animationDuration = `${Math.random() * 5 + 5}s`;
   snow.style.opacity = Math.random();
+  // التأكد من أن الخلفية سوداء لجعل "الثلج" الأحمر مرئياً
+  if(document.body.classList.contains('dark-mode')){
+      snow.style.backgroundColor = '#cc0000'; // أحمر داكن في الوضع الداكن
+      snow.style.boxShadow = '0 0 5px #ff0000';
+  } else {
+      snow.style.backgroundColor = '#ff0000';
+      snow.style.boxShadow = '0 0 8px #ff0000';
+  }
   document.body.appendChild(snow);
   setTimeout(() => snow.remove(), 10000);
 }
