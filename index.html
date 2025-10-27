@@ -112,7 +112,6 @@
       100% { transform: translateY(100vh) rotate(360deg); }
     }
 
-    /* سعر التون */
     #tonPrice {
       margin-top: 25px;
       font-size: 1em;
@@ -121,18 +120,6 @@
       box-shadow: 0 0 15px #00ff88;
       color: #00ff88;
       width: 240px;
-    }
-
-    /* الساعة */
-    #clock {
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      color: #00ffcc;
-      font-size: 1.2em;
-      font-family: monospace;
-      text-shadow: 0 0 10px #00ffcc;
-      z-index: 1000;
     }
   </style>
 </head>
@@ -143,8 +130,6 @@
 <div class="sidebar" id="sidebar">
   <a href="mediator.html">❓ يعني اي وسيط</a>
 </div>
-
-<div id="clock">00:00:00</div>
 
 <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
 <h1>. 𝖲𝗎𝖯𝖾𝗋 𝖹𝗐𝗇 .</h1>
@@ -166,8 +151,8 @@
 </div>
 
 <a id="tonPrice" href="#" onclick="event.preventDefault()">💎 سعر التون: <span id="price">جاري التحميل...</span></a>
-<a href="#" onclick="event.preventDefault()">⏰ الساعة</a>
-<a href="#" onclick="event.preventDefault()">📅 التاريخ</a>
+<a href="#" onclick="showTime()">⏰ الساعة</a>
+<a href="#" onclick="showDate()">📅 التاريخ</a>
 
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
@@ -211,12 +196,16 @@ async function fetchTonPrice() {
 fetchTonPrice();
 setInterval(fetchTonPrice, 60000);
 
-function updateClock() {
-  document.getElementById('clock').textContent =
-    new Date().toLocaleTimeString('en-US', { hour12: false });
+function showTime() {
+  const now = new Date();
+  alert("⏰ الوقت الحالي: " + now.toLocaleTimeString('en-US', { hour12: false }));
 }
-setInterval(updateClock, 1000);
-updateClock();
+
+function showDate() {
+  const today = new Date();
+  const date = today.getDate() + "/" + (today.getMonth()+1) + "/" + today.getFullYear();
+  alert("📅 تاريخ اليوم: " + date);
+}
 </script>
 
 </body>
