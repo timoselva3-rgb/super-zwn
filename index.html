@@ -25,12 +25,21 @@ body::before {
   filter: brightness(0.4);
   z-index: -1;
 }
-h1 { font-size: 2.6em; text-shadow: 0 0 10px #ff0000; margin-top: 40px; }
-p { font-size: 1.1em; color: #ddd; margin: 10px 0 25px; }
+h1 {
+  font-size: 1.8em; 
+  margin-top: 10px; 
+  text-shadow: 0 0 8px #ff0000;
+}
+p {
+  font-size: 1em; 
+  color: #ddd; 
+  margin-top: 5px; 
+  margin-bottom: 15px;
+}
 .logo {
-  width: 130px;
-  border-radius: 20px;
-  box-shadow: 0 0 15px #ff0000;
+  width: 100px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #ff0000;
   margin-top: 20px;
 }
 a {
@@ -38,7 +47,7 @@ a {
   background-color: rgba(15,15,15,0.8);
   color: #fff;
   text-decoration: none;
-  margin: 8px auto;
+  margin: 6px auto;
   padding: 10px;
   border-radius: 12px;
   width: 220px;
@@ -80,7 +89,7 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 <body>
 
 <!-- عنصر الصوت -->
-<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+<audio id="clickSound" src="https://files.catbox.moe/opzbli.mp3"></audio>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
@@ -97,7 +106,6 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 <a href="mediators.html" onclick="playSound()">🤝 وسطاء السوبر</a>
 
 <a href="#" id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</a>
-
 <a href="#" id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</a>
 <a href="#" id="dateBtn" onclick="playSound()">📅 جاري التحديث...</a>
 
@@ -115,6 +123,7 @@ function playSound() {
   document.getElementById("clickSound").play();
 }
 
+// تحديث الوقت
 function updateTime() {
   const now = new Date();
   document.getElementById("timeBtn").textContent =
@@ -123,6 +132,7 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
+// تحديث التاريخ
 function updateDate() {
   const today = new Date();
   document.getElementById("dateBtn").textContent =
@@ -130,6 +140,7 @@ function updateDate() {
 }
 updateDate();
 
+// جلب سعر التون من Binance وتحديث كل دقيقة
 async function updateTonPrice() {
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
