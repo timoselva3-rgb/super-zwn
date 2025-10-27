@@ -57,40 +57,30 @@ a, button {
 }
 a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
-.menu-btn { position: fixed; top: 15px; left: 15px; font-size: 26px; background: rgba(255,255,255,0.12); padding: 6px 12px; border-radius: 10px; cursor: pointer; z-index: 1002; }
+.menu-btn { position: fixed; top: 15px; left: 15px; font-size: 20px; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 8px; cursor: pointer; z-index: 1002; }
 .sidebar {
-  width: 200px; height: 100%;
-  background: rgba(0,0,0,0.9);
-  position: fixed; top: 0; left: -220px;
+  width: 220px; height: 100%;
+  background: rgba(0,0,0,0.95);
+  position: fixed; top: 0; left: -240px;
   transition: 0.4s;
   padding-top: 70px;
   z-index: 1001;
   border-right: 2px solid red;
+  overflow-y: auto;
 }
-.sidebar a { width: 90%; margin: 10px auto; box-shadow: none; }
+.sidebar a, .sidebar button { width: 90%; margin: 8px auto; }
 
 .spaced { margin-top: 6px; }
 
 .snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
+.language-buttons { display: none; margin-top: 5px; flex-direction: column; }
+.language-buttons button { width: 80%; margin: 4px auto; }
 
-#languageMenu {
-  display: none;
-  position: fixed;
-  top: 60px;
-  left: 15px;
-  width: 160px;
-  background: rgba(0,0,0,0.9);
-  border: 1px solid red;
-  border-radius: 10px;
-  z-index: 1003;
-  padding: 5px 0;
-}
-#languageMenu button {
-  width: 90%;
-  margin: 4px auto;
-  background: rgba(15,15,15,0.8);
-  border: 1px solid red;
+.fixed-buttons a, .fixed-buttons button {
+  width: 220px;
+  font-size: 0.95em;
+  box-shadow: 0 0 8px red;
 }
 </style>
 </head>
@@ -102,43 +92,44 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 <div class="sidebar" id="sidebar">
   <a href="#" onclick="playSound(); show('info')">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
-  <a href="#" id="languageBtn" onclick="playSound(); toggleLanguageMenu()">🌐 اللغة</a>
-</div>
-
-<div id="languageMenu">
-  <button onclick="playSound(); setLanguage('ar')">عربي</button>
-  <button onclick="playSound(); setLanguage('en')">English</button>
+  <button onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
+  <div class="language-buttons" id="langBtns">
+    <button onclick="setLang('ar'); playSound()">عربي</button>
+    <button onclick="setLang('en'); playSound()">English</button>
+  </div>
 </div>
 
 <div class="wrapper">
-  <!-- الصفحة الرئيسية -->
   <section class="content active" id="main">
     <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
-    <h1>سوبر زون - Super Zwn</h1>
-    <p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
+    <h1 id="mainTitle">سوبر زون - Super Zwn</h1>
+    <p id="mainDesc">اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
 
-    <a href="https://t.me/superrzwn" target="_blank" onclick="playSound()">📢 القناة الرسمية</a>
-    <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
-    <button onclick="playSound(); show('brokers')">🤝 وسطاء السوبر</button>
+    <div class="fixed-buttons">
+      <a id="channelBtn" href="https://t.me/superrzwn" target="_blank" onclick="playSound()">📢 القناة الرسمية</a>
+      <a id="groupBtn" href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
+      <button id="brokersBtn" onclick="playSound(); show('brokers')">🤝 وسطاء السوبر</button>
 
-    <a href="#" id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</a>
-    <a href="#" id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</a>
-    <a href="#" id="dateBtn" onclick="playSound()">📅 جاري التحديث...</a>
+      <button id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</button>
+      <button id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</button>
+      <button id="dateBtn" onclick="playSound()">📅 جاري التحديث...</button>
+    </div>
   </section>
 
-  <!-- صفحة الوسطاء -->
   <section class="content" id="brokers">
     <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
-    <h1>سوبر زون - Super Zwn</h1>
-    <h2>الوسطاء المعتمدون</h2>
-    <a class="btn" href="https://t.me/vwvvxv" target="_blank">• الوسيط تيمو</a>
-    <a class="btn" href="https://t.me/hamo_user" target="_blank">• الوسيط حمو</a>
-    <a class="btn" href="https://t.me/eid_user" target="_blank">• الوسيط عيد</a>
-    <a class="btn" href="https://t.me/salk_user" target="_blank">• الوسيط سالك</a>
-    <a class="btn" href="https://t.me/yousef_user" target="_blank">• الوسيط يوسف</a>
-    <a class="btn" href="https://t.me/error_user" target="_blank">• الوسيط ايرور</a>
-    <a class="btn" href="https://t.me/rio_user" target="_blank">• الوسيط ريو</a>
-    <button class="btn" onclick="show('main')">⬅️ العودة للقائمة الرئيسية</button>
+    <h1 id="brokersTitle">سوبر زون - Super Zwn</h1>
+    <h2 id="brokersDesc">الوسطاء المعتمدون</h2>
+    <div id="brokersList">
+      <a class="btn" href="https://t.me/vwvvxv" target="_blank" onclick="playSound()">• الوسيط تيمو</a>
+      <a class="btn" href="https://t.me/hamo_user" target="_blank" onclick="playSound()">• الوسيط حمو</a>
+      <a class="btn" href="https://t.me/eid_user" target="_blank" onclick="playSound()">• الوسيط عيد</a>
+      <a class="btn" href="https://t.me/salk_user" target="_blank" onclick="playSound()">• الوسيط سالك</a>
+      <a class="btn" href="https://t.me/yousef_user" target="_blank" onclick="playSound()">• الوسيط يوسف</a>
+      <a class="btn" href="https://t.me/error_user" target="_blank" onclick="playSound()">• الوسيط ايرور</a>
+      <a class="btn" href="https://t.me/rio_user" target="_blank" onclick="playSound()">• الوسيط ريو</a>
+    </div>
+    <button class="btn" onclick="playSound(); show('main')">⬅️ العودة للقائمة الرئيسية</button>
   </section>
 </div>
 
@@ -147,7 +138,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 <script>
 function toggleMenu() {
   const s = document.getElementById("sidebar");
-  s.style.left = (s.style.left === "0px") ? "-220px" : "0px";
+  s.style.left = (s.style.left === "0px") ? "-240px" : "0px";
 }
 
 function playSound() {
@@ -162,7 +153,66 @@ function show(id){
   if(target) target.classList.add('active');
 }
 
-// الوقت و التاريخ
+function toggleDarkModeFunc() {
+  const body = document.body;
+  const btn = document.getElementById('darkModeBtn');
+  body.classList.toggle('dark-mode');
+  btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+}
+
+// اللغة
+function toggleLangBtns() {
+  const div = document.getElementById('langBtns');
+  div.style.display = (div.style.display === 'flex') ? 'none' : 'flex';
+}
+
+function setLang(lang) {
+  if(lang === 'ar') {
+    document.getElementById('mainTitle').innerText = 'سوبر زون - Super Zwn';
+    document.getElementById('mainDesc').innerHTML = 'اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة';
+    document.getElementById('channelBtn').innerText = '📢 القناة الرسمية';
+    document.getElementById('groupBtn').innerText = '💬 جروب سوبر زون';
+    document.getElementById('brokersBtn').innerText = '🤝 وسطاء السوبر';
+    document.getElementById('brokersTitle').innerText = 'سوبر زون - Super Zwn';
+    document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
+    const brokers = ['الوسيط تيمو','الوسيط حمو','الوسيط عيد','الوسيط سالك','الوسيط يوسف','الوسيط ايرور','الوسيط ريو'];
+    const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
+    const brokersList = document.getElementById('brokersList');
+    brokersList.innerHTML = '';
+    for(let i=0;i<brokers.length;i++){
+      let a = document.createElement('a');
+      a.className = 'btn';
+      a.href = brokersLinks[i];
+      a.target = '_blank';
+      a.innerText = '• ' + brokers[i];
+      a.onclick = playSound;
+      brokersList.appendChild(a);
+    }
+  } else if(lang === 'en') {
+    document.getElementById('mainTitle').innerText = 'Super Zone - Biggest Arabic Super on Telegram';
+    document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
+    document.getElementById('channelBtn').innerText = '📢 Official Channel';
+    document.getElementById('groupBtn').innerText = '💬 Super Zone Group';
+    document.getElementById('brokersBtn').innerText = '🤝 Super Brokers';
+    document.getElementById('brokersTitle').innerText = 'Super Zone - Super Zwn';
+    document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
+    const brokers = ['Broker Timo','Broker Hamo','Broker Eid','Broker Salk','Broker Yousef','Broker Error','Broker Rio'];
+    const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
+    const brokersList = document.getElementById('brokersList');
+    brokersList.innerHTML = '';
+    for(let i=0;i<brokers.length;i++){
+      let a = document.createElement('a');
+      a.className = 'btn';
+      a.href = brokersLinks[i];
+      a.target = '_blank';
+      a.innerText = '• ' + brokers[i];
+      a.onclick = playSound;
+      brokersList.appendChild(a);
+    }
+  }
+}
+
+// الوقت و التاريخ (ثابتين)
 function updateTime() {
   const now = new Date();
   document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
@@ -175,7 +225,7 @@ function updateDate() {
 }
 updateDate();
 
-// سعر TON
+// سعر TON (ثابت)
 async function updateTonPrice() {
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
@@ -202,79 +252,14 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-// الوضع الليلي
-function toggleDarkModeFunc() {
-  const body = document.body;
-  const btn = document.getElementById('darkModeBtn');
-  body.classList.toggle('dark-mode');
-  btn.innerHTML = body.classList.contains('dark-mode') ? (body.lang === 'en' ? "🌞 Day Mode" : "🌞 الوضع النهاري") : (body.lang === 'en' ? "🌓 Night Mode" : "🌓 الوضع الليلي");
-}
-
-// غلق sidebar وقائمة اللغة عند الضغط خارجها
+// غلق sidebar عند الضغط خارجها
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
-  const languageMenu = document.getElementById('languageMenu');
-
   if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
-    sidebar.style.left = "-220px";
-  }
-
-  if(languageMenu.style.display === "block" && !languageMenu.contains(event.target) && event.target.id !== 'languageBtn') {
-    languageMenu.style.display = "none";
+    sidebar.style.left = "-240px";
   }
 });
-
-// اللغة
-function toggleLanguageMenu() {
-  const menu = document.getElementById('languageMenu');
-  menu.style.display = (menu.style.display === "block") ? "none" : "block";
-}
-
-function setLanguage(lang) {
-  const body = document.body;
-  body.setAttribute('lang', lang);
-  
-  if(lang === 'ar') {
-    document.querySelector('h1').textContent = "سوبر زون - Super Zwn";
-    document.querySelector('p').innerHTML = "اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة";
-    document.querySelector('#tonBtn').textContent = "💎 جاري تحميل التون...";
-    document.querySelector('#timeBtn').textContent = "⏰ جاري التحديث...";
-    document.querySelector('#dateBtn').textContent = "📅 جاري التحديث...";
-    document.getElementById('darkModeBtn').innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
-    document.querySelector('#languageBtn').textContent = "🌐 اللغة";
-    document.querySelector('#brokers h2').textContent = "الوسطاء المعتمدون";
-    const brokers = document.querySelectorAll('#brokers .btn');
-    brokers[0].textContent = "• الوسيط تيمو";
-    brokers[1].textContent = "• الوسيط حمو";
-    brokers[2].textContent = "• الوسيط عيد";
-    brokers[3].textContent = "• الوسيط سالك";
-    brokers[4].textContent = "• الوسيط يوسف";
-    brokers[5].textContent = "• الوسيط ايرور";
-    brokers[6].textContent = "• الوسيط ريو";
-    brokers[7].textContent = "⬅️ العودة للقائمة الرئيسية";
-  } else if(lang === 'en') {
-    document.querySelector('h1').textContent = "Super Zone - Super Zwn";
-    document.querySelector('p').innerHTML = "First Arab Super on Telegram 💪<br>Highest sales and trust";
-    document.querySelector('#tonBtn').textContent = "💎 Loading TON...";
-    document.querySelector('#timeBtn').textContent = "⏰ Updating...";
-    document.querySelector('#dateBtn').textContent = "📅 Updating...";
-    document.getElementById('darkModeBtn').innerHTML = body.classList.contains('dark-mode') ? "🌞 Day Mode" : "🌓 Night Mode";
-    document.querySelector('#languageBtn').textContent = "🌐 Language";
-    document.querySelector('#brokers h2').textContent = "Certified Brokers";
-    const brokers = document.querySelectorAll('#brokers .btn');
-    brokers[0].textContent = "• Broker Timo";
-    brokers[1].textContent = "• Broker Hamo";
-    brokers[2].textContent = "• Broker Eid";
-    brokers[3].textContent = "• Broker Salk";
-    brokers[4].textContent = "• Broker Yousef";
-    brokers[5].textContent = "• Broker Error";
-    brokers[6].textContent = "• Broker Rio";
-    brokers[7].textContent = "⬅️ Back to Main Menu";
-  }
-
-  document.getElementById('languageMenu').style.display = "none";
-}
 </script>
 </body>
 </html>
