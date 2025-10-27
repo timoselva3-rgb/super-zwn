@@ -70,7 +70,8 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 .snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
 
-.mediators-list { display: none; margin-top: 20px; }
+.content { display: none; margin-top: 20px; }
+.content.active { display: block; }
 </style>
 </head>
 <body>
@@ -80,63 +81,80 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="#" onclick="playSound(); showSection('info')">❓ يعني اي وسيط</a>
+  <a href="#" onclick="playSound(); show('info')">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
 </div>
 
-<img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
-<h1>سوبر زون - Super Zwn</h1>
-<p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
+<div class="wrapper">
+  <!-- الصفحة الرئيسية -->
+  <section class="content active" id="main">
+    <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
+    <h1>سوبر زون - Super Zwn</h1>
+    <p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
 
-<a href="https://t.me/superrzwn" target="_blank" onclick="playSound()">📢 القناة الرسمية</a>
-<a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
-<button onclick="playSound(); showSection('mediators-list')">🤝 وسطاء السوبر</button>
+    <a href="https://t.me/superrzwn" target="_blank" onclick="playSound()">📢 القناة الرسمية</a>
+    <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
+    <button onclick="playSound(); show('brokers')">🤝 وسطاء السوبر</button>
 
-<a href="#" id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</a>
-<a href="#" id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</a>
-<a href="#" id="dateBtn" onclick="playSound()">📅 جاري التحديث...</a>
+    <a href="#" id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</a>
+    <a href="#" id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</a>
+    <a href="#" id="dateBtn" onclick="playSound()">📅 جاري التحديث...</a>
+  </section>
 
-<!-- قائمة الوسطاء -->
-<div id="mediators-list" class="mediators-list">
-  <h1>الوسطاء المعتمدون</h1>
-  <a href="https://t.me/vwvvxv" target="_blank" onclick="playSound()">• الوسيط تيمو</a>
-  <a href="https://t.me/hamo_user" target="_blank" onclick="playSound()">• الوسيط حمو</a>
-  <a href="https://t.me/eid_user" target="_blank" onclick="playSound()">• الوسيط عيد</a>
-  <a href="https://t.me/salk_user" target="_blank" onclick="playSound()">• الوسيط سالك</a>
-  <a href="https://t.me/yousef_user" target="_blank" onclick="playSound()">• الوسيط يوسف</a>
-  <a href="https://t.me/error_user" target="_blank" onclick="playSound()">• الوسيط ايرور</a>
-  <a href="https://t.me/rio_user" target="_blank" onclick="playSound()">• الوسيط ريو</a>
-  <button onclick="showSection('main')">⬅️ العودة للقائمة الرئيسية</button>
+  <!-- قسم الوسطاء -->
+  <section class="content" id="brokers">
+    <h1>الوسطاء المعتمدون</h1>
+    <a class="btn" href="https://t.me/vwvvxv" target="_blank">• الوسيط تيمو</a>
+    <a class="btn" href="https://t.me/hamo_user" target="_blank">• الوسيط حمو</a>
+    <a class="btn" href="https://t.me/eid_user" target="_blank">• الوسيط عيد</a>
+    <a class="btn" href="https://t.me/salk_user" target="_blank">• الوسيط سالك</a>
+    <a class="btn" href="https://t.me/yousef_user" target="_blank">• الوسيط يوسف</a>
+    <a class="btn" href="https://t.me/error_user" target="_blank">• الوسيط ايرور</a>
+    <a class="btn" href="https://t.me/rio_user" target="_blank">• الوسيط ريو</a>
+    <button class="btn" onclick="show('main')">⬅️ العودة للقائمة الرئيسية</button>
+  </section>
 </div>
 
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
 <script>
+// toggle sidebar
 function toggleMenu() {
   const s = document.getElementById("sidebar");
   s.style.left = (s.style.left === "0px") ? "-220px" : "0px";
 }
 
+// play click sound
 function playSound() {
-  document.getElementById("clickSound").currentTime = 0;
-  document.getElementById("clickSound").play();
+  const audio = document.getElementById("clickSound");
+  audio.currentTime = 0;
+  audio.play();
 }
 
+// show section
+function show(id){
+  document.querySelectorAll('.content').forEach(sec => {
+    sec.classList.remove('active');
+  });
+  const target = document.getElementById(id);
+  if(target) target.classList.add('active');
+}
+
+// update time & date
 function updateTime() {
   const now = new Date();
-  document.getElementById("timeBtn").textContent =
-    "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
+  document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
 }
 setInterval(updateTime, 1000);
 updateTime();
 
 function updateDate() {
   const today = new Date();
-  document.getElementById("dateBtn").textContent =
-    "📅 " + today.toLocaleDateString('ar-EG');
+  document.getElementById("dateBtn").textContent = "📅 " + today.toLocaleDateString('ar-EG');
 }
 updateDate();
 
+// fetch TON price
 async function updateTonPrice() {
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
@@ -146,10 +164,10 @@ async function updateTonPrice() {
     document.getElementById("tonBtn").textContent = "💎 تعذر جلب سعر التون";
   }
 }
-setInterval(updateTonPrice, 60000); 
+setInterval(updateTonPrice, 60000);
 updateTonPrice();
 
-/* إنشاء ثلج */
+// create snow
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
@@ -164,7 +182,7 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-/* الوضع الليلي */
+// dark mode
 function toggleDarkModeFunc() {
   const body = document.body;
   const btn = document.getElementById('darkModeBtn');
@@ -172,34 +190,7 @@ function toggleDarkModeFunc() {
   btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
 }
 
-/* إخفاء / اظهار قسم الوسطاء */
-function showSection(id){
-  const mainElements = Array.from(document.body.children).filter(el => el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE');
-  mainElements.forEach(el => el.style.display = (el.id === id || el.closest('#'+id)) ? 'block' : (el.id === 'mediators-list' ? 'none' : 'block'));
-  if(id === 'mediators-list'){
-    document.querySelector('img.logo').style.display = 'none';
-    document.querySelector('h1').style.display = 'none';
-    document.querySelector('p').style.display = 'none';
-    document.querySelectorAll('a, button').forEach(el => {
-  if(!el.closest('#mediators-list')) el.style.display = 'none';
-});
-    document.getElementById(id).style.display = 'block';
-  } else if(id === 'main'){
-    document.querySelector('img.logo').style.display = 'block';
-    document.querySelector('h1').style.display = 'block';
-    document.querySelector('p').style.display = 'block';
-    document.querySelectorAll('a, button').forEach(el => {
-      if(el.closest('#mediators-list')) el.style.display = 'none';
-      else el.style.display = 'block';
-    });
-    document.getElementById('mediators-list').style.display = 'none';
-  } else {
-    // لو في أقسام تانية مستقبلاً
-    document.getElementById('mediators-list').style.display = 'none';
-  }
-}
-
-/* غلق sidebar عند الضغط خارجها */
+// close sidebar when click outside
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
