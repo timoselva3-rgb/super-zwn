@@ -32,7 +32,7 @@ body.dark-mode::before { filter: brightness(0.15); }
 h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
 p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
 .logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
-a, button {
+a {
   display: block;
   background-color: rgba(15,15,15,0.8);
   color: #fff;
@@ -46,9 +46,8 @@ a, button {
   box-shadow: 0 0 10px red;
   transition: 0.3s;
   font-size: 0.95em;
-  cursor: pointer;
 }
-a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
+a:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 .menu-btn { position: fixed; top: 15px; left: 15px; font-size: 26px; background: rgba(255,255,255,0.12); padding: 6px 12px; border-radius: 10px; cursor: pointer; z-index: 1002; }
 .sidebar {
@@ -64,12 +63,6 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 .spaced { margin-top: 6px; }
 .snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
-
-.mediator-content { display: none; margin-top: 20px; }
-.mediator-content h2 { text-shadow: 0 0 6px #ff0000; margin-bottom: 10px; }
-.mediators-list button { width: 220px; margin-top:6px; }
-.back-btn { background-color: rgba(255,0,0,0.8); margin-top: 15px; }
-
 </style>
 </head>
 <body>
@@ -79,7 +72,7 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="#" onclick="playSound(); alert('وسيط هو شخص يضمن لك المبيعات')">❓ يعني اي وسيط</a>
+  <a href="mediator.html" onclick="playSound()">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
 </div>
 
@@ -89,73 +82,30 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 
 <a href="https://t.me/superrzwn" target="_blank" onclick="playSound()">📢 القناة الرسمية</a>
 <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
+<a href="#" onclick="toggleMediators(); playSound()">🤝 وسطاء السوبر</a>
 
-<button onclick="toggleMediators(); playSound()">🤝 وسطاء السوبر</button>
+<a href="#" id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</a>
+<a href="#" id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</a>
+<a href="#" id="dateBtn" onclick="playSound()">📅 جاري التحديث...</a>
 
-<div id="mediatorsSection" style="display:none; margin-top:20px;">
-  <div class="mediators-list">
-    <button onclick="showMediator('timo')">• الوسيط تيمو •</button>
-    <button onclick="showMediator('hamo')">• الوسيط حمو •</button>
-    <button onclick="showMediator('eid')">• الوسيط عيد •</button>
-    <button onclick="showMediator('salk')">• الوسيط سالك •</button>
-    <button onclick="showMediator('yousef')">• الوسيط يوسف •</button>
-    <button onclick="showMediator('error')">• الوسيط ايرور •</button>
-    <button onclick="showMediator('rio')">• الوسيط ريو •</button>
-  </div>
+
+<div id="mediatorsSection" style="display:none; margin-top:10px;">
+  <button onclick="window.open('https://t.me/vwvvxv','_blank'); playSound()">• الوسيط تيمو</button>
+  <button onclick="window.open('https://t.me/hamo','_blank'); playSound()">• الوسيط حمو</button>
+  <button onclick="window.open('https://t.me/eid','_blank'); playSound()">• الوسيط عيد</button>
+  <button onclick="window.open('https://t.me/salk','_blank'); playSound()">• الوسيط سالك</button>
+  <button onclick="window.open('https://t.me/yousef','_blank'); playSound()">• الوسيط يوسف</button>
+  <button onclick="window.open('https://t.me/error','_blank'); playSound()">• الوسيط ايرور</button>
+  <button onclick="window.open('https://t.me/rio','_blank'); playSound()">• الوسيط ريو</button>
+  <button onclick="toggleMediators(); playSound()" style="background-color: rgba(255,0,0,0.8); margin-top:10px;">⬅️ العودة للقائمة الرئيسية</button>
 </div>
 
-<!-- mediator details -->
-<div id="timo" class="mediator-content">
-  <h2>الوسيط تيمو</h2>
-  <p>• اسم الحساب ⋮ 𓏺.𝘁𝗶𝗺𝗼 𝘀𝗲𝗹𝘃𝗮𝗮 .⤸ <br>
-     • رقم الوسيط ⋮ 01024482704 <br>
-     • يوزر الوسيط ⋮ <a href="https://t.me/vwvvxv" target="_blank" style="color:#ff4444;">t.me/vwvvxv</a></p>
-  <a href="https://t.me/vwvvxv" target="_blank" onclick="playSound()">📩 تواصل مع الوسيط تيمو</a>
-  <button class="back-btn" onclick="backToList()">⬅️ العودة للقائمة</button>
-</div>
-
-<!-- باقي الوسطاء -->
-<div id="hamo" class="mediator-content">
-  <h2>الوسيط حمو</h2>
-  <p>• اسم الحساب ⋮ حمو<br>• رقم الوسيط ⋮ 010xxxxxx<br>• يوزر الوسيط ⋮ <a href="#" target="_blank" style="color:#ff4444;">t.me/hamo</a></p>
-  <a href="#" target="_blank" onclick="playSound()">📩 تواصل مع الوسيط حمو</a>
-  <button class="back-btn" onclick="backToList()">⬅️ العودة للقائمة</button>
-</div>
-
-<div id="eid" class="mediator-content">
-  <h2>الوسيط عيد</h2>
-  <p>• اسم الحساب ⋮ عيد<br>• رقم الوسيط ⋮ 010xxxxxx<br>• يوزر الوسيط ⋮ <a href="#" target="_blank" style="color:#ff4444;">t.me/eid</a></p>
-  <a href="#" target="_blank" onclick="playSound()">📩 تواصل مع الوسيط عيد</a>
-  <button class="back-btn" onclick="backToList()">⬅️ العودة للقائمة</button>
-</div>
-
-<div id="salk" class="mediator-content">
-  <h2>الوسيط سالك</h2>
-  <p>• اسم الحساب ⋮ سالك<br>• رقم الوسيط ⋮ 010xxxxxx<br>• يوزر الوسيط ⋮ <a href="#" target="_blank" style="color:#ff4444;">t.me/salk</a></p>
-  <a href="#" target="_blank" onclick="playSound()">📩 تواصل مع الوسيط سالك</a>
-  <button class="back-btn" onclick="backToList()">⬅️ العودة للقائمة</button>
-</div>
-
-<div id="yousef" class="mediator-content">
-  <h2>الوسيط يوسف</h2>
-  <p>• اسم الحساب ⋮ يوسف<br>• رقم الوسيط ⋮ 010xxxxxx<br>• يوزر الوسيط ⋮ <a href="#" target="_blank" style="color:#ff4444;">t.me/yousef</a></p>
-  <a href="#" target="_blank" onclick="playSound()">📩 تواصل مع الوسيط يوسف</a>
-  <button class="back-btn" onclick="backToList()">⬅️ العودة للقائمة</button>
-</div>
-
-<div id="error" class="mediator-content">
-  <h2>الوسيط ايرور</h2>
-  <p>• اسم الحساب ⋮ ايرور<br>• رقم الوسيط ⋮ 010xxxxxx<br>• يوزر الوسيط ⋮ <a href="#" target="_blank" style="color:#ff4444;">t.me/error</a></p>
-  <a href="#" target="_blank" onclick="playSound()">📩 تواصل مع الوسيط ايرور</a>
-  <button class="back-btn" onclick="backToList()">⬅️ العودة للقائمة</button>
-</div>
-
-<div id="rio" class="mediator-content">
-  <h2>الوسيط ريو</h2>
-  <p>• اسم الحساب ⋮ ريو<br>• رقم الوسيط ⋮ 010xxxxxx<br>• يوزر الوسيط ⋮ <a href="#" target="_blank" style="color:#ff4444;">t.me/rio</a></p>
-  <a href="#" target="_blank" onclick="playSound()">📩 تواصل مع الوسيط ريو</a>
-  <button class="back-btn" onclick="backToList()">⬅️ العودة للقائمة</button>
-</div>
+<script>
+function toggleMediators() {
+  const section = document.getElementById('mediatorsSection');
+  section.style.display = (section.style.display === 'block') ? 'none' : 'block';
+}
+</script>
 
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
@@ -170,30 +120,34 @@ function playSound() {
   document.getElementById("clickSound").play();
 }
 
-function toggleDarkModeFunc() {
-  const body = document.body;
-  const btn = document.getElementById('darkModeBtn');
-  body.classList.toggle('dark-mode');
-  btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+function updateTime() {
+  const now = new Date();
+  document.getElementById("timeBtn").textContent =
+    "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
 }
+setInterval(updateTime, 1000);
+updateTime();
 
-function toggleMediators() {
-  const section = document.getElementById('mediatorsSection');
-  section.style.display = (section.style.display === 'block') ? 'none' : 'block';
+function updateDate() {
+  const today = new Date();
+  document.getElementById("dateBtn").textContent =
+    "📅 " + today.toLocaleDateString('ar-EG');
 }
+updateDate();
 
-function showMediator(id) {
-  document.querySelectorAll('.mediator-content').forEach(el => el.style.display='none');
-  document.getElementById(id).style.display='block';
-  document.getElementById('mediatorsSection').style.display='none';
+async function updateTonPrice() {
+  try {
+    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
+    const data = await res.json();
+    document.getElementById("tonBtn").textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
+  } catch {
+    document.getElementById("tonBtn").textContent = "💎 تعذر جلب سعر التون";
+  }
 }
+setInterval(updateTonPrice, 60000); 
+updateTonPrice();
 
-function backToList() {
-  document.querySelectorAll('.mediator-content').forEach(el => el.style.display='none');
-  document.getElementById('mediatorsSection').style.display='block';
-}
-
-/* ثلج */
+/* إنشاء ثلج */
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
@@ -208,34 +162,19 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-/* الوقت والتاريخ */
-function updateTime() {
-  const now = new Date();
-  document.getElementById("timeBtn")?.textContent = "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
-}
-setInterval(updateTime, 1000);
-updateTime();
 
-function updateDate() {
-  const today = new Date();
-  document.getElementById("dateBtn")?.textContent = "📅 " + today.toLocaleDateString('ar-EG');
-}
-updateDate();
-
-/* سعر TON */
-async function updateTonPrice() {
-  try {
-    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
-    const data = await res.json();
-    document.getElementById("tonBtn")?.textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
-  } catch {
-    document.getElementById("tonBtn")?.textContent = "💎 تعذر جلب سعر التون";
+function toggleDarkModeFunc() {
+  const body = document.body;
+  const btn = document.getElementById('darkModeBtn');
+  body.classList.toggle('dark-mode');
+  if(body.classList.contains('dark-mode')) {
+    btn.innerHTML = "🌞 الوضع النهاري";
+  } else {
+    btn.innerHTML = "🌓 الوضع الليلي";
   }
 }
-setInterval(updateTonPrice, 60000);
-updateTonPrice();
 
-/* اغلاق القايمة الجانبية عند الضغط خارجها */
+
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
