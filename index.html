@@ -29,10 +29,13 @@ body::before {
   transition: filter 0.5s;
 }
 body.dark-mode::before { filter: brightness(0.15); }
+
 h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
 p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
+
 .logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
-a {
+
+a, button {
   display: block;
   background-color: rgba(15,15,15,0.8);
   color: #fff;
@@ -46,9 +49,12 @@ a {
   box-shadow: 0 0 10px red;
   transition: 0.3s;
   font-size: 0.95em;
+  cursor: pointer;
 }
-a:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
+a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
+
 footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
+
 .menu-btn { position: fixed; top: 15px; left: 15px; font-size: 26px; background: rgba(255,255,255,0.12); padding: 6px 12px; border-radius: 10px; cursor: pointer; z-index: 1002; }
 .sidebar {
   width: 200px; height: 100%;
@@ -60,9 +66,22 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
   border-right: 2px solid red;
 }
 .sidebar a { width: 90%; margin: 10px auto; box-shadow: none; }
+
 .spaced { margin-top: 6px; }
-.snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
+
+.snowflake {
+  position: fixed; top: -10px; background: white; border-radius: 50%;
+  opacity: 0.8; pointer-events: none; z-index: 1000;
+  animation-name: fall; animation-timing-function: linear;
+}
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
+
+.mediator-content { display: none; margin-top: 20px; }
+.mediator-content h2 { text-shadow: 0 0 6px #ff0000; margin-bottom: 10px; }
+
+.mediators-list button { width: 220px; }
+.back-btn { background-color: rgba(255,0,0,0.8); margin-top: 15px; }
+
 </style>
 </head>
 <body>
@@ -72,7 +91,7 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="mediator.html" onclick="playSound()">❓ يعني اي وسيط</a>
+  <a href="#" onclick="playSound(); showSection('mediator-info')">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
 </div>
 
@@ -82,11 +101,54 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 
 <a href="https://t.me/superrzwn" target="_blank" onclick="playSound()">📢 القناة الرسمية</a>
 <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
-<a href="mediators.html" onclick="playSound()">🤝 وسطاء السوبر</a>
 
-<a href="#" id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</a>
-<a href="#" id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</a>
-<a href="#" id="dateBtn" onclick="playSound()">📅 جاري التحديث...</a>
+<h1>• وسطاء السوبر •</h1>
+<div class="mediators-list">
+  <button onclick="showMediator('timo')">• الوسيط تيمو •</button>
+  <button onclick="showMediator('hamo')">• الوسيط حمو •</button>
+  <button onclick="showMediator('eid')">• الوسيط عيد •</button>
+  <button onclick="showMediator('salk')">• الوسيط سالك •</button>
+  <button onclick="showMediator('yousef')">• الوسيط يوسف •</button>
+  <button onclick="showMediator('error')">• الوسيط ايرور •</button>
+  <button onclick="showMediator('rio')">• الوسيط ريو •</button>
+</div>
+
+<div id="timo" class="mediator-content">
+  <h2>الوسيط تيمو</h2>
+  <p>معلومات تيمو هنا...</p>
+</div>
+
+<div id="hamo" class="mediator-content">
+  <h2>الوسيط حمو</h2>
+  <p>معلومات حمو هنا...</p>
+</div>
+
+<div id="eid" class="mediator-content">
+  <h2>الوسيط عيد</h2>
+  <p>معلومات عيد هنا...</p>
+</div>
+
+<div id="salk" class="mediator-content">
+  <h2>الوسيط سالك</h2>
+  <p>معلومات سالك هنا...</p>
+</div>
+
+<div id="yousef" class="mediator-content">
+  <h2>الوسيط يوسف</h2>
+  <p>معلومات يوسف هنا...</p>
+</div>
+
+<div id="error" class="mediator-content">
+  <h2>الوسيط ايرور</h2>
+  <p>معلومات ايرور هنا...</p>
+</div>
+
+<div id="rio" class="mediator-content">
+  <h2>الوسيط ريو</h2>
+  <p>معلومات ريو هنا...</p>
+</div>
+
+<button class="back-btn" onclick="backToList()">⬅️ العودة للقائمة</button>
 
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
@@ -103,7 +165,7 @@ function playSound() {
 
 function updateTime() {
   const now = new Date();
-  document.getElementById("timeBtn").textContent =
+  document.getElementById("timeBtn")?.textContent =
     "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
 }
 setInterval(updateTime, 1000);
@@ -111,7 +173,7 @@ updateTime();
 
 function updateDate() {
   const today = new Date();
-  document.getElementById("dateBtn").textContent =
+  document.getElementById("dateBtn")?.textContent =
     "📅 " + today.toLocaleDateString('ar-EG');
 }
 updateDate();
@@ -120,15 +182,15 @@ async function updateTonPrice() {
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
     const data = await res.json();
-    document.getElementById("tonBtn").textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
+    document.getElementById("tonBtn")?.textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
   } catch {
-    document.getElementById("tonBtn").textContent = "💎 تعذر جلب سعر التون";
+    document.getElementById("tonBtn")?.textContent = "💎 تعذر جلب سعر التون";
   }
 }
 setInterval(updateTonPrice, 60000); 
 updateTonPrice();
 
-/* إنشاء ثلج */
+/* ثلج */
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
@@ -143,19 +205,14 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-
 function toggleDarkModeFunc() {
   const body = document.body;
   const btn = document.getElementById('darkModeBtn');
   body.classList.toggle('dark-mode');
-  if(body.classList.contains('dark-mode')) {
-    btn.innerHTML = "🌞 الوضع النهاري";
-  } else {
-    btn.innerHTML = "🌓 الوضع الليلي";
-  }
+  btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
 }
 
-
+/* القوائم الجانبية */
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
@@ -163,6 +220,19 @@ document.addEventListener('click', function(event) {
     sidebar.style.left = "-220px";
   }
 });
+
+/* وسطاء السوبر */
+function showMediator(name){
+  document.querySelectorAll('.mediator-content').forEach(el => el.style.display = 'none');
+  document.getElementById(name).style.display = 'block';
+  document.querySelector('.mediators-list').style.display = 'none';
+}
+
+function backToList(){
+  document.querySelectorAll('.mediator-content').forEach(el => el.style.display = 'none');
+  document.querySelector('.mediators-list').style.display = 'block';
+}
+
 </script>
 
 </body>
