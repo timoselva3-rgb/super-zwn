@@ -328,7 +328,6 @@ function setLang(lang) {
 
     document.getElementById("tonBtn").textContent = "💎 جاري تحميل التون...";
     
-
     updateTime(true); 
     updateDate(true); 
 
@@ -378,7 +377,6 @@ function setLang(lang) {
 
     document.getElementById("tonBtn").textContent = "💎 Loading TON...";
     
-
     updateTime(true); 
     updateDate(true); 
 
@@ -402,31 +400,21 @@ function setLang(lang) {
   updateTonPrice();
 }
 
-
- * @param {boolean} forceUpdateLabel إذا كان True، يتم تحديث الزر حتى لو كان النص الحالي لا يحتوي على نص التحميل.
- */
 function updateTime(forceUpdateLabel = false) {
   const now = new Date();
   
-
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   const seconds = String(now.getSeconds()).padStart(2, '0');
   
-  // تنسيق الوقت (HH:MM:SS) 
   const timeText = `${hours}:${minutes}:${seconds}`; 
   
   const timeBtn = document.getElementById("timeBtn");
   
-
   timeBtn.textContent = "⏰ " + timeText;
 }
 
-
 setInterval(updateTime, 1000); 
-
-
- * @param {boolean} forceUpdateLabel إذا كان True، يتم تحديث الزر حتى لو كان النص الحالي لا يحتوي على نص التحميل.
 
 function updateDate(forceUpdateLabel = false) {
   const today = new Date();
@@ -494,7 +482,6 @@ document.addEventListener('click', function(event) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
     setLang('ar');
     updateTime(); 
     updateDate(); 
