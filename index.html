@@ -27,16 +27,22 @@
             max-width: 450px;
             padding: 0 15px;
             box-sizing: border-box;
-            margin-top: 0;
+            padding-top: 20px; 
         }
 
         .hero-image-container {
-            width: 100%;
-            max-width: 100%;
-            height: 250px; 
+            /* تعديل الأبعاد لجعلها مربعة وصغيرة (حوالي 180x180 بكسل كحد أقصى) */
+            width: 180px; 
+            height: 180px; 
+            max-width: 180px;
             overflow: hidden;
             position: relative;
             background: #1f2731;
+            margin: 0 auto 30px auto; /* مسافة بعد الصورة */
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            /* إضافة هامش علوي أكبر قليلاً بعد إزالة الهيدر */
+            margin-top: 40px; 
         }
 
         .hero-image-container::after {
@@ -47,6 +53,7 @@
             width: 100%;
             height: 60%;
             background: linear-gradient(to top, #0d1117 0%, rgba(13, 17, 23, 0.01) 100%);
+            opacity: 0; /* إزالة تأثير التدرج على الصورة المربعة الصغيرة */
         }
         
         .hero-image {
@@ -59,14 +66,16 @@
         h1 {
             font-size: 1.8em;
             font-weight: 900;
-            color: #ffffff;
+            /* توحيد اللون للأبيض */
+            color: #ffffff; 
             line-height: 1.5;
-            margin-top: 20px;
+            margin-top: 0; /* تقليل المسافة بعد الصورة */
             margin-bottom: 20px;
         }
 
         .highlight-text {
-            color: #4CAF50;
+            /* توحيد اللون للأبيض */
+            color: #ffffff; 
         }
 
         .status-message {
@@ -84,6 +93,9 @@
         }
 
         .instruction-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1em;
             font-weight: 700;
             color: #c9d1d9;
@@ -118,39 +130,9 @@
             box-shadow: 0 6px 20px rgba(30, 144, 255, 0.6);
         }
 
-        .browser-header {
-            width: 100%;
-            background-color: #0d1117;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #c9d1d9;
-            font-size: 0.9em;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .browser-header .title {
-            font-weight: 700;
-        }
-        .browser-header .close-btn {
-            font-size: 1.5em;
-            cursor: pointer;
-        }
-        /* تم حذف تنسيق .browser-header .address لأنه لم يعد له فائدة */
     </style>
 </head>
 <body>
-
-    <div class="browser-header">
-        <span class="close-btn">✕</span>
-        <div>
-            <div class="title">تداول خبراء توقع - شركة الاستثمار</div>
-            </div>
-        <span>⋮</span>
-    </div>
     
     <div class="hero-image-container">
         <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" alt="Trading Room" class="hero-image">
