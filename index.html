@@ -32,7 +32,8 @@ body.dark-mode::before { filter: brightness(0.15); }
 h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
 p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
 .logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
-a {
+
+a, button {
   display: block;
   background-color: rgba(15,15,15,0.8);
   color: #fff;
@@ -46,9 +47,12 @@ a {
   box-shadow: 0 0 10px red;
   transition: 0.3s;
   font-size: 0.95em;
+  cursor: pointer;
 }
-a:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
+a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
+
 footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
+
 .menu-btn { position: fixed; top: 15px; left: 15px; font-size: 26px; background: rgba(255,255,255,0.12); padding: 6px 12px; border-radius: 10px; cursor: pointer; z-index: 1002; }
 .sidebar {
   width: 200px; height: 100%;
@@ -60,9 +64,13 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
   border-right: 2px solid red;
 }
 .sidebar a { width: 90%; margin: 10px auto; box-shadow: none; }
+
 .spaced { margin-top: 6px; }
+
 .snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
+
+.mediators-list { display: none; margin-top: 20px; }
 </style>
 </head>
 <body>
@@ -72,7 +80,7 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="mediator.html" onclick="playSound()">❓ يعني اي وسيط</a>
+  <a href="#" onclick="playSound(); showSection('info')">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
 </div>
 
@@ -82,30 +90,24 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 
 <a href="https://t.me/superrzwn" target="_blank" onclick="playSound()">📢 القناة الرسمية</a>
 <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
-<a href="#" onclick="toggleMediators(); playSound()">🤝 وسطاء السوبر</a>
+<button onclick="playSound(); showSection('mediators-list')">🤝 وسطاء السوبر</button>
 
 <a href="#" id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</a>
 <a href="#" id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</a>
 <a href="#" id="dateBtn" onclick="playSound()">📅 جاري التحديث...</a>
 
-
-<div id="mediatorsSection" style="display:none; margin-top:10px;">
-  <button onclick="window.open('https://t.me/vwvvxv','_blank'); playSound()">• الوسيط تيمو</button>
-  <button onclick="window.open('https://t.me/hamo','_blank'); playSound()">• الوسيط حمو</button>
-  <button onclick="window.open('https://t.me/eid','_blank'); playSound()">• الوسيط عيد</button>
-  <button onclick="window.open('https://t.me/salk','_blank'); playSound()">• الوسيط سالك</button>
-  <button onclick="window.open('https://t.me/yousef','_blank'); playSound()">• الوسيط يوسف</button>
-  <button onclick="window.open('https://t.me/error','_blank'); playSound()">• الوسيط ايرور</button>
-  <button onclick="window.open('https://t.me/rio','_blank'); playSound()">• الوسيط ريو</button>
-  <button onclick="toggleMediators(); playSound()" style="background-color: rgba(255,0,0,0.8); margin-top:10px;">⬅️ العودة للقائمة الرئيسية</button>
+<!-- قائمة الوسطاء -->
+<div id="mediators-list" class="mediators-list">
+  <h1>الوسطاء المعتمدون</h1>
+  <a href="https://t.me/vwvvxv" target="_blank" onclick="playSound()">• الوسيط تيمو</a>
+  <a href="https://t.me/hamo_user" target="_blank" onclick="playSound()">• الوسيط حمو</a>
+  <a href="https://t.me/eid_user" target="_blank" onclick="playSound()">• الوسيط عيد</a>
+  <a href="https://t.me/salk_user" target="_blank" onclick="playSound()">• الوسيط سالك</a>
+  <a href="https://t.me/yousef_user" target="_blank" onclick="playSound()">• الوسيط يوسف</a>
+  <a href="https://t.me/error_user" target="_blank" onclick="playSound()">• الوسيط ايرور</a>
+  <a href="https://t.me/rio_user" target="_blank" onclick="playSound()">• الوسيط ريو</a>
+  <button onclick="showSection('main')">⬅️ العودة للقائمة الرئيسية</button>
 </div>
-
-<script>
-function toggleMediators() {
-  const section = document.getElementById('mediatorsSection');
-  section.style.display = (section.style.display === 'block') ? 'none' : 'block';
-}
-</script>
 
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
@@ -162,19 +164,42 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-
+/* الوضع الليلي */
 function toggleDarkModeFunc() {
   const body = document.body;
   const btn = document.getElementById('darkModeBtn');
   body.classList.toggle('dark-mode');
-  if(body.classList.contains('dark-mode')) {
-    btn.innerHTML = "🌞 الوضع النهاري";
+  btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+}
+
+/* إخفاء / اظهار قسم الوسطاء */
+function showSection(id){
+  const mainElements = Array.from(document.body.children).filter(el => el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE');
+  mainElements.forEach(el => el.style.display = (el.id === id || el.closest('#'+id)) ? 'block' : (el.id === 'mediators-list' ? 'none' : 'block'));
+  if(id === 'mediators-list'){
+    document.querySelector('img.logo').style.display = 'none';
+    document.querySelector('h1').style.display = 'none';
+    document.querySelector('p').style.display = 'none';
+    document.querySelectorAll('a, button').forEach(el => {
+  if(!el.closest('#mediators-list')) el.style.display = 'none';
+});
+    document.getElementById(id).style.display = 'block';
+  } else if(id === 'main'){
+    document.querySelector('img.logo').style.display = 'block';
+    document.querySelector('h1').style.display = 'block';
+    document.querySelector('p').style.display = 'block';
+    document.querySelectorAll('a, button').forEach(el => {
+      if(el.closest('#mediators-list')) el.style.display = 'none';
+      else el.style.display = 'block';
+    });
+    document.getElementById('mediators-list').style.display = 'none';
   } else {
-    btn.innerHTML = "🌓 الوضع الليلي";
+    // لو في أقسام تانية مستقبلاً
+    document.getElementById('mediators-list').style.display = 'none';
   }
 }
 
-
+/* غلق sidebar عند الضغط خارجها */
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
