@@ -18,14 +18,14 @@
             height: auto;
             z-index: -100; /* يجعله تحت كل المحتوى */
             background-size: cover;
-            filter: brightness(0.4) blur(2px); /* لتعتيم الخلفية وجعل النص أكثر وضوحاً */
+            filter: brightness(0.35) blur(2px); /* تم تعتيم الخلفية أكثر قليلاً لزيادة وضوح النص */
             object-fit: cover; /* يضمن تغطية الشاشة بالكامل */
         }
 
         body {
             font-family: 'Tajawal', sans-serif;
-            /* تغيير لون الخلفية الأساسي ليكون شفافاً أو شبه شفاف */
-            background-color: rgba(13, 17, 23, 0.5); /* إضافة شفافية لإظهار الفيديو */
+            /* تم تغيير الخلفية الأساسية لتكون شفافة بالكامل */
+            background-color: transparent; 
             color: #ffffff;
             text-align: center;
             margin: 0;
@@ -36,44 +36,33 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            /* لضمان وضع المحتوى فوق الفيديو */
             position: relative; 
             z-index: 1;
+            padding-top: 20px; /* مساحة علوية عامة */
+            /* تحديد عرض أقصى للـ body ليكون هو الحاوية للمحتوى */
+            max-width: 450px; 
+            margin: 0 auto;
         }
 
-        .container {
-            width: 100%;
-            max-width: 450px;
-            padding: 0 15px;
-            box-sizing: border-box;
-            padding-top: 20px; 
-            /* إضافة خلفية للمحتوى لجعل النص أكثر وضوحاً فوق الفيديو */
-            background-color: rgba(13, 17, 23, 0.7); 
-            min-height: 100vh;
-        }
-        
-        /* باقي الأنماط كما هي */
+        /* تم حذف أنماط .container بالكامل */
+
         .hero-image-container {
+            /* تعديل الأبعاد لجعلها مربعة وصغيرة (حوالي 180x180 بكسل كحد أقصى) */
             width: 180px; 
             height: 180px; 
             max-width: 180px;
             overflow: hidden;
             position: relative;
-            background: #1f2731;
+            /* يمكن إزالة خلفية الصورة وجعلها شفافة، لكنها ستبدو أفضل مع خلفية داكنة خفيفة */
+            background: rgba(13, 17, 23, 0.5); 
             margin: 0 auto 30px auto; 
             border-radius: 15px; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); /* زيادة ظل المربع لبروزه */
             margin-top: 40px; 
         }
 
+        /* هذا الجزء لم يعد ضرورياً بعد إزالة المربع الكبير */
         .hero-image-container::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60%;
-            background: linear-gradient(to top, #0d1117 0%, rgba(13, 17, 23, 0.01) 100%);
             opacity: 0; 
         }
         
@@ -91,6 +80,7 @@
             line-height: 1.5;
             margin-top: 0; 
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* إضافة ظل خفيف للنص لزيادة الوضوح */
         }
 
         .highlight-text {
@@ -105,6 +95,7 @@
             font-weight: 700;
             color: #4CAF50;
             margin-bottom: 15px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* إضافة ظل خفيف للنص لزيادة الوضوح */
         }
         .status-message span {
             margin-right: 8px;
@@ -119,6 +110,7 @@
             font-weight: 700;
             color: #c9d1d9;
             margin-bottom: 30px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* إضافة ظل خفيف للنص لزيادة الوضوح */
         }
         .instruction-text span {
             color: #e34c4c;
@@ -162,27 +154,23 @@
         <img src="https://i.ibb.co/Ps852QvC/IMG-20251028-014051-864.jpg" alt="Trading Room" class="hero-image">
     </div>
 
-    <div class="container">
-        
-        <h1>
-            <span style="font-size: 1.2em;"></span> شركة استثمار وتداول 
-            <br>
-            وتسليم <span class="highlight-text">أرباح</span> <span style="font-size: 1.2em;">💰</span>
-        </h1>
+    <h1>
+        <span style="font-size: 1.2em;"></span> شركة استثمار وتداول 
+        <br>
+        وتسليم <span class="highlight-text">أرباح</span> <span style="font-size: 1.2em;">💰</span>
+    </h1>
 
-        <p class="status-message">
-            <span>✅</span> اطمئن وأنت معانا لكسب المزيد
-        </p>
+    <p class="status-message">
+        <span>✅</span> اطمئن وأنت معانا لكسب المزيد
+    </p>
 
-        <p class="instruction-text">
-            <span></span> يرجى اتباع التعليمات داخل القناة
-        </p>
+    <p class="instruction-text">
+        <span></span> يرجى اتباع التعليمات داخل القناة
+    </p>
 
-        <a href="https://t.me/your_telegram_link" target="_blank" class="join-button">
-            انضم الآن على تيليجرام
-        </a>
-
-    </div>
+    <a href="https://t.me/your_telegram_link" target="_blank" class="join-button">
+        انضم الآن على تيليجرام
+    </a>
 
 </body>
 </html>
