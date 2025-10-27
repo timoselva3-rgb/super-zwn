@@ -9,7 +9,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
   font-family: 'Tajawal', sans-serif;
   color: white;
@@ -18,9 +17,7 @@ body {
   background: #000;
   transition: background 0.5s, color 0.5s;
 }
-
 body.dark-mode { background: #111; color: #ddd; }
-
 body::before {
   content: "";
   position: fixed;
@@ -31,13 +28,10 @@ body::before {
   z-index: -1;
   transition: filter 0.5s;
 }
-
 body.dark-mode::before { filter: brightness(0.15); }
-
 h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
 p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
 .logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
-
 a {
   display: block;
   background-color: rgba(15,15,15,0.8);
@@ -53,12 +47,9 @@ a {
   transition: 0.3s;
   font-size: 0.95em;
 }
-
 a:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
-
 .menu-btn { position: fixed; top: 15px; left: 15px; font-size: 26px; background: rgba(255,255,255,0.12); padding: 6px 12px; border-radius: 10px; cursor: pointer; z-index: 1002; }
-
 .sidebar {
   width: 200px; height: 100%;
   background: rgba(0,0,0,0.9);
@@ -70,16 +61,6 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 }
 .sidebar a { width: 90%; margin: 10px auto; box-shadow: none; }
 .spaced { margin-top: 6px; }
-
-/* زرارين اللغة */
-.lang-buttons { display: none; margin: 5px 0; }
-.lang-buttons button {
-  width: 90%; margin: 4px auto; display: block; padding: 8px; border-radius: 10px;
-  border: 1px solid red; background-color: rgba(15,15,15,0.8); color: #fff; font-weight: bold;
-  cursor: pointer; transition: 0.3s;
-}
-.lang-buttons button:hover { background-color: red; }
-
 .snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
 </style>
@@ -91,28 +72,23 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="mediator.html" onclick="playSound()">❓ <span data-lang="mediator">يعني اي وسيط</span></a>
-  <a href="#" id="darkBtn" onclick="toggleDarkMode(); playSound()"><span data-lang="darkmode">🌓 الوضع الليلي</span></a>
-  <a href="#" onclick="toggleLangButtons(); playSound()"><span data-lang="language">🌐 اللغة</span></a>
-  <div class="lang-buttons" id="langButtons">
-    <button onclick="setLanguage('ar'); playSound()">عربي</button>
-    <button onclick="setLanguage('en'); playSound()">English</button>
-  </div>
+  <a href="mediator.html" onclick="playSound()">❓ يعني اي وسيط</a>
+  <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
 </div>
 
 <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
-<h1 data-lang="title">سوبر زون - Super Zwn</h1>
-<p data-lang="desc">اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
+<h1>سوبر زون - Super Zwn</h1>
+<p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
 
-<a href="https://t.me/superrzwn" target="_blank" onclick="playSound()" data-lang="channel">📢 القناة الرسمية</a>
-<a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()" data-lang="group">💬 جروب سوبر زون</a>
-<a href="mediators.html" onclick="playSound()" data-lang="mediators">🤝 وسطاء السوبر</a>
+<a href="https://t.me/superrzwn" target="_blank" onclick="playSound()">📢 القناة الرسمية</a>
+<a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
+<a href="mediators.html" onclick="playSound()">🤝 وسطاء السوبر</a>
 
 <a href="#" id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</a>
 <a href="#" id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</a>
 <a href="#" id="dateBtn" onclick="playSound()">📅 جاري التحديث...</a>
 
-<footer data-lang="footer">© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
+<footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
 <script>
 function toggleMenu() {
@@ -125,64 +101,18 @@ function playSound() {
   document.getElementById("clickSound").play();
 }
 
-// تغيير الوضع الداكن / النهاري
-function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
-  const darkBtn = document.getElementById("darkBtn");
-  darkBtn.querySelector('[data-lang="darkmode"]').innerHTML = document.body.classList.contains('dark-mode') ? '🌞 الوضع النهاري' : '🌓 الوضع الليلي';
-}
-
-// إظهار/إخفاء زرارين اللغة
-function toggleLangButtons() {
-  const btns = document.getElementById("langButtons");
-  btns.style.display = (btns.style.display === "block") ? "none" : "block";
-}
-
-// النصوص باللغتين
-const translations = {
-  en: {
-    mediator: "❓ What is a mediator",
-    darkmode: "🌓 Dark Mode",
-    language: "🌐 Language",
-    title: "Super Zwn - Super Zone",
-    desc: "First Arabic Super on Telegram 💪<br>Highest sales and trust levels",
-    channel: "📢 Official Channel",
-    group: "💬 Super Zone Group",
-    mediators: "🤝 Super Mediators",
-    footer: "© 2025 Super Zwn | All rights reserved 🔥"
-  },
-  ar: {
-    mediator: "يعني اي وسيط",
-    darkmode: "🌓 الوضع الليلي",
-    language: "اللغة",
-    title: "سوبر زون - Super Zwn",
-    desc: "اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة",
-    channel: "📢 القناة الرسمية",
-    group: "💬 جروب سوبر زون",
-    mediators: "🤝 وسطاء السوبر",
-    footer: "© 2025 سوبر زون | جميع الحقوق محفوظة 🔥"
-  }
-};
-
-// تغيير اللغة
-function setLanguage(lang) {
-  document.querySelectorAll('[data-lang]').forEach(el => {
-    const key = el.getAttribute('data-lang');
-    el.innerHTML = translations[lang][key];
-  });
-}
-
-// تحديث الوقت والتاريخ وسعر TON
 function updateTime() {
   const now = new Date();
-  document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
+  document.getElementById("timeBtn").textContent =
+    "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
 }
 setInterval(updateTime, 1000);
 updateTime();
 
 function updateDate() {
   const today = new Date();
-  document.getElementById("dateBtn").textContent = "📅 " + today.toLocaleDateString('ar-EG');
+  document.getElementById("dateBtn").textContent =
+    "📅 " + today.toLocaleDateString('ar-EG');
 }
 updateDate();
 
@@ -198,28 +128,42 @@ async function updateTonPrice() {
 setInterval(updateTonPrice, 60000); 
 updateTonPrice();
 
-// إنشاء الثلج
+/* إنشاء ثلج */
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
-  snow.style.width = `${Math.random() * 4 + 2}px`;
-  snow.style.height = snow.style.width;
+  const size = Math.random() * 4 + 2;
+  snow.style.width = `${size}px`;
+  snow.style.height = `${size}px`;
   snow.style.left = `${Math.random() * window.innerWidth}px`;
   snow.style.animationDuration = `${Math.random() * 5 + 5}s`;
   snow.style.opacity = Math.random();
   document.body.appendChild(snow);
   setTimeout(() => snow.remove(), 10000);
 }
-
-// تكرار إنشاء الثلج كل 200ms
 setInterval(createSnowflake, 200);
 
-// إخفاء أزرار اللغة عند الضغط خارجها
+/* الوضع الداكن */
+function toggleDarkModeFunc() {
+  const body = document.body;
+  const btn = document.getElementById('darkModeBtn');
+  body.classList.toggle('dark-mode');
+  if(body.classList.contains('dark-mode')) {
+    btn.innerHTML = "🌞 الوضع النهاري";
+  } else {
+    btn.innerHTML = "🌓 الوضع الليلي";
+  }
+}
+
+/* اغلاق القائمة لو ضغطت في أي مكان */
 document.addEventListener('click', function(event) {
-  const langContainer = document.getElementById('langButtons');
-  const langToggle = event.target.closest('[onclick*="toggleLangButtons"]');
-  // إذا الضغط خارج قائمة اللغة وزر اللغة نفسه
-  if (!langContainer.contains(event.target) && !langToggle) {
-    langContainer.style.display = 'none';
+  const sidebar = document.getElementById('sidebar');
+  const menuBtn = document.querySelector('.menu-btn');
+  if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+    sidebar.style.left = "-220px";
   }
 });
+</script>
+
+</body>
+</html>
