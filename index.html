@@ -57,17 +57,29 @@ a, button {
 }
 a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
-/* تنسيق شريط التحكم العلوي الجديد */
+/* 🔴 التعديلات لتغيير ترتيب الأيقونات 🔴 */
 .top-bar-controls {
   position: fixed;
   top: 15px;
   left: 15px;
   z-index: 1002;
-  display: flex; /* لترتيب الزرين بجوار بعضهما */
-  gap: 10px; /* مسافة بين الزرين */
+  display: flex; 
+  gap: 10px; 
+  /* 🔄 إضافة خاصية row-reverse لعكس ترتيب العناصر */
+  flex-direction: row-reverse;
 }
 
-.menu-btn, .search-btn { 
+.menu-btn { 
+  /* ☰ القائمة: ستظهر على اليمين الآن */
+  font-size: 20px; 
+  background: rgba(255,255,255,0.15); 
+  padding: 5px 10px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+}
+
+.search-btn {
+  /* 🔍 البحث: سيظهر على اليسار الآن */
   font-size: 20px; 
   background: rgba(255,255,255,0.15); 
   padding: 5px 10px; 
@@ -120,7 +132,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.95);
-  display: none; /* إخفاؤه في البداية */
+  display: none; 
   flex-direction: column;
   align-items: center;
   padding-top: 50px;
@@ -137,15 +149,18 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 #search-input {
   flex-grow: 1;
   padding: 12px;
-  border-radius: 10px 0 0 10px;
+  /* 🟢 تم إزالة الزر الأحمر، لذا نجعل الحواف مستديرة بالكامل */
+  border-radius: 10px; 
   border: 2px solid #ff0000;
   background: rgba(20, 20, 20, 0.9);
   color: #fff;
   font-size: 1.1em;
   font-family: 'Tajawal', sans-serif;
-  text-align: right; /* لتناسب اللغة العربية */
+  text-align: right; 
 }
 
+/* ❌ تم إزالة هذا الكلاس من الـ HTML، ولن يظهر الزر الأحمر بعد الآن */
+/*
 .search-close-btn {
   background: #ff0000;
   color: #fff;
@@ -157,6 +172,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   font-weight: bold;
   transition: 0.3s;
 }
+*/
 
 .search-results {
   width: 90%;
@@ -177,9 +193,9 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   text-decoration: none;
   border-right: 3px solid #ff0000;
   transition: background 0.2s;
-  width: 100%; /* يجب أن يأخذ العرض بالكامل داخل الـ results */
-  box-shadow: none; /* إلغاء الظل الخاص بزر الرابط العادي */
-  margin: 0 0 5px 0; /* إلغاء الهامش التلقائي */
+  width: 100%; 
+  box-shadow: none; 
+  margin: 0 0 5px 0; 
 }
 
 .search-results a:hover {
@@ -254,8 +270,8 @@ footer {
 <audio id="clickSound" src="https://files.catbox.moe/opzbli.mp3"></audio>
 
 <div class="top-bar-controls">
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
   <div class="search-btn" onclick="toggleSearch()">🔍</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </div>
 
 <div class="sidebar" id="sidebar">
@@ -272,8 +288,7 @@ footer {
 <div class="search-popup" id="searchPopup">
   <div class="search-input-container">
     <input type="text" id="search-input" placeholder="اكتب كلمة البحث هنا..." onkeyup="searchContent()">
-    <button class="search-close-btn" onclick="closeSearch()">❌</button>
-  </div>
+    </div>
   <div class="search-results" id="searchResults">
     </div>
 </div>
@@ -566,7 +581,7 @@ function createSnowflake() {
 setInterval(createSnowflake, 200);
 
 
-// دوال البحث الجديدة
+
 
 function toggleSearch() {
   const popup = document.getElementById('searchPopup');
@@ -576,7 +591,7 @@ function toggleSearch() {
   } else {
     popup.style.display = 'flex';
     input.focus(); 
-    // عرض جميع الروابط المتاحة عند فتح النافذة لأول مرة
+
     if (document.getElementById('searchResults').innerHTML === '') {
         searchContent(); 
     }
@@ -597,7 +612,7 @@ function searchContent() {
 
   const searchableElements = [];
 
-  // 1. جمع جميع العناصر التي يمكن البحث فيها
+
   document.querySelectorAll('#sidebar a, #sidebar button').forEach(el => {
     searchableElements.push({
       text: el.innerText.trim(),
@@ -622,15 +637,15 @@ function searchContent() {
     });
   }
 
-  // 2. تصفية العناصر
+
   const filteredResults = searchableElements.filter(item => {
-    // إذا كان مربع البحث فارغاً، يتم عرض كل شيء
+
     if (query === '') return true;
-    // وإلا، يتم التصفية بناءً على النص
+
     return item.text.toLowerCase().includes(query);
   });
 
-  // 3. عرض النتائج
+
   if (filteredResults.length === 0 && query !== '') {
     resultsDiv.innerHTML = `<a href="#" onclick="playSound(); return false;">لا توجد نتائج مطابقة لـ "${query}"</a>`;
   } else {
@@ -638,7 +653,7 @@ function searchContent() {
       const resultLink = document.createElement('a');
       resultLink.href = '#';
       
-      // لتسليط الضوء على كلمة البحث في النص
+
       let displayText = item.text;
       if (query !== '') {
           const regex = new RegExp(query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
@@ -646,16 +661,16 @@ function searchContent() {
       }
       resultLink.innerHTML = displayText;
       
-      // تحديد الإجراء عند النقر
+
       resultLink.onclick = function(e) {
         e.preventDefault();
         playSound();
         closeSearch();
         
-        // إذا كان الزر يحتوي على رابط مباشر (قناة، وسيط)
+
         if (item.action && (item.action.startsWith('http') || item.action.startsWith('https://t.me'))) {
              window.open(item.action, '_blank');
-        // إذا كان الزر يحتوي على أمر جافاسكريبت (مثل فتح قائمة الوسطاء، أو وضع ليلي)
+
         } else if (item.action && item.action.includes('(')) {
              eval(item.action); 
         } 
@@ -676,10 +691,10 @@ document.addEventListener('click', function(event) {
   }
   
   const searchPopup = document.getElementById('searchPopup');
-  // إذا كانت نافذة البحث مفتوحة والنقرة ليست عليها أو على زر الفتح/الإغلاق
   if(searchPopup.style.display === 'flex' && !searchPopup.contains(event.target) && !topBarControls.contains(event.target)) {
       closeSearch();
   }
+  */
 });
 
 
