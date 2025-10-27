@@ -133,14 +133,17 @@
   <a href="mediator.html">❓ يعني اي وسيط</a>
 
 
-  <a id="tonPrice" href="#" onclick="event.preventDefault()"> سعر التون: <span id="price">جاري التحميل...</span> 💰</a>
+  <a id="tonPrice" href="#" onclick="event.preventDefault()"> سعر التون: <span id="price">جاري التحميل...</span> </a>
 
   <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
   <script>
+
     var clickSound = new Audio('https://files.catbox.moe/txfod8.m4a');
+
+
     document.querySelectorAll('a').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
         clickSound.currentTime = 0;
         clickSound.play();
       });
