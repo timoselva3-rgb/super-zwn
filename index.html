@@ -314,17 +314,23 @@ function setLang(lang) {
     document.getElementById('brokersBtn').innerText = '• وسطاء السوبر •';
     document.getElementById('brokersTitle').innerText = 'سوبر زون - Super Zwn';
     document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
-    document.querySelector('#brokers button').innerText = '⬅️ العودة للقائمة الرئيسية';
+    document.querySelector('#brokers button').innerText = '• العودة للقائمة الرئيسية •';
     
 
-    document.querySelector('.popup-box h3').innerText = '• يعني اي وسيط •';
-    document.querySelector('.popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
-    document.querySelector('.close-btn').innerText = 'إغلاق';
+    document.querySelector('#popup .popup-box h3').innerText = '• يعني اي وسيط •';
+    document.querySelector('#popup .popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
+    document.querySelector('#popup .close-btn').innerText = 'إغلاق';
+    
+    document.querySelector('#usagePopup .popup-box h3').innerText = '• معني السوبر •';
+    document.querySelector('#usagePopup .popup-box p').innerHTML = 'سوبر زون هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.';
+    document.querySelector('#usagePopup .close-btn').innerText = 'إغلاق';
 
 
     document.getElementById("tonBtn").textContent = "💎 جاري تحميل التون...";
-    document.getElementById("timeBtn").textContent = "⏰ جاري التحديث...";
-    document.getElementById("dateBtn").textContent = "📅 جاري التحديث...";
+    
+
+    updateTime(true); 
+    updateDate(true); 
 
 
     const brokers = ['الوسيط تيمو','الوسيط حمو','الوسيط عيد','الوسيط سالك','الوسيط يوسف','الوسيط ايرور','الوسيط ريو'];
@@ -353,22 +359,28 @@ function setLang(lang) {
 
     document.getElementById('mainTitle').innerText = 'Super Zwn - Super Zwn';
     document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
-    document.getElementById('channelBtn').innerText = '• channel suler zwn •';
-    document.getElementById('groupBtn').innerText = '• Grup super zwn •';
+    document.getElementById('channelBtn').innerText = '• Super Zwn Channel •';
+    document.getElementById('groupBtn').innerText = '• Super Zwn Group •';
     document.getElementById('brokersBtn').innerText = '• Super Brokers •';
     document.getElementById('brokersTitle').innerText = 'Super Zwn - Super Zwn';
     document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
     document.querySelector('#brokers button').innerText = '• Back to Main Menu •';
     
 
-    document.querySelector('.popup-box h3').innerText = '• What is a Broker •';
-    document.querySelector('.popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
-    document.querySelector('.close-btn').innerText = 'Close';
+    document.querySelector('#popup .popup-box h3').innerText = '• What is a Broker •';
+    document.querySelector('#popup .popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
+    document.querySelector('#popup .close-btn').innerText = 'Close';
+    
+    document.querySelector('#usagePopup .popup-box h3').innerText = '• Meaning of Super •';
+    document.querySelector('#usagePopup .popup-box p').innerHTML = 'Super Zwn is a store for buying and selling groups, channels, stars, gifts, and more...<br>We facilitate fast sales for users to sell their possessions quickly<br>Dealing in the Super is with a broker to ensure the rights of both parties.';
+    document.querySelector('#usagePopup .close-btn').innerText = 'Close';
     
 
     document.getElementById("tonBtn").textContent = "💎 Loading TON...";
-    document.getElementById("timeBtn").textContent = "⏰ Updating...";
-    document.getElementById("dateBtn").textContent = "📅 Updating...";
+    
+
+    updateTime(true); 
+    updateDate(true); 
 
 
 
@@ -388,40 +400,52 @@ function setLang(lang) {
   }
 
 
-  updateTime();
-  updateDate();
   updateTonPrice();
 }
 
 
-function updateTime() {
+function updateTime(forceUpdateLabel = false) {
   const now = new Date();
 
-  const timeText = now.toLocaleTimeString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { hour12: true });
-  const label = currentLang === 'ar' ? 'جاري التحديث...' : 'Updating...';
+
+  const timeText = now.toLocaleTimeString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit', 
+      hour12: true 
+  });
   
+  const labelAr = 'جاري التحديث...';
+  const labelEn = 'Updating...';
+  const label = currentLang === 'ar' ? labelAr : labelEn;
 
   const timeBtn = document.getElementById("timeBtn");
-  if (timeBtn.textContent.includes(label) || !timeBtn.textContent.includes("⏰")) {
+  
+
+  if (forceUpdateLabel || timeBtn.textContent.includes(label) || !timeBtn.textContent.includes("⏰")) {
      timeBtn.textContent = "⏰ " + timeText;
   }
 }
-setInterval(updateTime, 1000); updateTime();
 
 
-function updateDate() {
+setInterval(updateTime, 1000); 
+
+ 
+function updateDate(forceUpdateLabel = false) {
   const today = new Date();
 
   const dateText = today.toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  const label = currentLang === 'ar' ? 'جاري التحديث...' : 'Updating...';
   
-
+  const labelAr = 'جاري التحديث...';
+  const labelEn = 'Updating...';
+  const label = currentLang === 'ar' ? labelAr : labelEn;
+  
   const dateBtn = document.getElementById("dateBtn");
-  if (dateBtn.textContent.includes(label) || !dateBtn.textContent.includes("📅")) {
+  
+  if (forceUpdateLabel || dateBtn.textContent.includes(label) || !dateBtn.textContent.includes("📅")) {
      dateBtn.textContent = "📅 " + dateText;
   }
 }
-updateDate();
 
 
 async function updateTonPrice() {
@@ -436,14 +460,29 @@ async function updateTonPrice() {
         tonBtn.textContent = `💎 ${loadingText}`;
     }
 
-    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
-    const data = await res.json();
-    tonBtn.textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
-  } catch {
+
+    const response = await google.search({queries: ['TONUSDT price binance']});
+    const result = response.results[0]; 
+    
+    let priceMatch = result.snippet.match(/\$([\d\.]+)/);
+    let price = priceMatch ? parseFloat(priceMatch[1]).toFixed(2) : null;
+
+
+    if (price) {
+        tonBtn.textContent = "💎 TON: " + price + " $";
+    } else {
+
+        const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
+        const data = await res.json();
+        tonBtn.textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
+    }
+
+  } catch (e) {
     document.getElementById("tonBtn").textContent = `💎 ${errorText}`;
+    console.error("Error fetching TON price:", e);
   }
 }
-setInterval(updateTonPrice, 60000); updateTonPrice(); 
+setInterval(updateTonPrice, 60000); 
 
 
 function createSnowflake() {
@@ -471,8 +510,10 @@ document.addEventListener('click', function(event) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
     setLang('ar');
+    updateTime();
+    updateDate();
+    updateTonPrice();
 });
 </script>
 </body>
