@@ -328,7 +328,7 @@ function setLang(lang) {
 
     document.getElementById("tonBtn").textContent = "💎 جاري تحميل التون...";
     
-    // عند تغيير اللغة، تحديث الساعة والتاريخ بالنص الجديد
+
     updateTime(true); 
     updateDate(true); 
 
@@ -378,7 +378,7 @@ function setLang(lang) {
 
     document.getElementById("tonBtn").textContent = "💎 Loading TON...";
     
-    // عند تغيير اللغة، تحديث الساعة والتاريخ بالنص الجديد
+
     updateTime(true); 
     updateDate(true); 
 
@@ -402,15 +402,13 @@ function setLang(lang) {
   updateTonPrice();
 }
 
-/**
- * دالة لتحديث زر الساعة كل ثانية.
- * تم تعديل التنسيق لضمان ظهور الثواني والدقائق بشكل دائم وبتنسيق 24 ساعة.
+
  * @param {boolean} forceUpdateLabel إذا كان True، يتم تحديث الزر حتى لو كان النص الحالي لا يحتوي على نص التحميل.
  */
 function updateTime(forceUpdateLabel = false) {
   const now = new Date();
   
-  // الحصول على الساعة بتنسيق 24 ساعة (0-23)
+
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   const seconds = String(now.getSeconds()).padStart(2, '0');
@@ -420,17 +418,16 @@ function updateTime(forceUpdateLabel = false) {
   
   const timeBtn = document.getElementById("timeBtn");
   
-  // تحديث النص في الزر ليعرض الوقت الحالي المتضمن للثواني
+
   timeBtn.textContent = "⏰ " + timeText;
 }
 
-// تشغيل دالة تحديث الوقت كل 1000 مللي ثانية (ثانية واحدة)
+
 setInterval(updateTime, 1000); 
 
-/**
- * دالة لتحديث زر التاريخ.
+
  * @param {boolean} forceUpdateLabel إذا كان True، يتم تحديث الزر حتى لو كان النص الحالي لا يحتوي على نص التحميل.
- */
+
 function updateDate(forceUpdateLabel = false) {
   const today = new Date();
 
@@ -497,11 +494,11 @@ document.addEventListener('click', function(event) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // تشغيل الدالة لأول مرة لضبط الساعة والتاريخ وسعر التون عند تحميل الصفحة
+
     setLang('ar');
-    updateTime(); // مهم لضبط الوقت فوراً
-    updateDate(); // مهم لضبط التاريخ فوراً
-    updateTonPrice(); // مهم لضبط سعر التون فوراً
+    updateTime(); 
+    updateDate(); 
+    updateTonPrice(); 
 });
 </script>
 </body>
