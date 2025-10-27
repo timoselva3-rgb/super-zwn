@@ -1,492 +1,181 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سوبر زون | اكبر سوبر عربي على تيليجرام</title>
-<meta name="description" content="سوبر زون - اول سوبر عربي على تيليجرام 💪 اكبر المبيعات واعلى درجات الثقة">
-<meta name="keywords" content="سوبر زون, تيليجرام, وسطاء, مبيعات, عربي">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Tajawal', sans-serif;
-  color: white;
-  text-align: center;
-  overflow-x: hidden;
-  background: #000;
-  transition: background 0.5s, color 0.5s;
-}
-body.dark-mode { background: #111; color: #ddd; }
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url("https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg") center/cover no-repeat;
-  filter: brightness(0.4);
-  z-index: -1;
-  transition: filter 0.5s;
-}
-body.dark-mode::before { filter: brightness(0.15); }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تداول خبراء توقع - شركة الاستثمار</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@700;900&display=swap');
 
-.content { display: none; margin-top: 20px; }
-.content.active { display: block; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0d1117;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
 
-h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
-h2 { font-size: 1.2em; margin-top: 10px; text-shadow: 0 0 6px #ff0000; }
-p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 0 15px;
+            box-sizing: border-box;
+            margin-top: 0;
+        }
 
-.logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
+        .hero-image-container {
+            width: 100%;
+            max-width: 100%;
+            height: 250px; 
+            overflow: hidden;
+            position: relative;
+            background: #1f2731;
+        }
 
-a, button {
-  display: block;
-  background-color: rgba(15,15,15,0.8);
-  color: #fff;
-  text-decoration: none;
-  margin: 6px auto;
-  padding: 10px;
-  border-radius: 12px;
-  width: 220px;
-  font-weight: bold;
-  border: 1px solid red;
-  box-shadow: 0 0 10px red;
-  transition: 0.3s;
-  font-size: 0.95em;
-  cursor: pointer;
-}
-a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
+        .hero-image-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, #0d1117 0%, rgba(13, 17, 23, 0.01) 100%);
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.9);
+        }
 
-.menu-btn { position: fixed; top: 15px; left: 15px; font-size: 20px; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 8px; cursor: pointer; z-index: 1002; }
+        h1 {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.5;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
 
+        .highlight-text {
+            color: #4CAF50;
+        }
 
-.sidebar {
-  width: 240px;
-  height: 100%;
-  background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(5px);
-  position: fixed;
-  top: 0;
-  left: -240px; 
-  transition: 0.4s;
-  padding-top: 70px;
-  z-index: 1001;
-  border-right: 2px solid #ff0000;
-  box-shadow: 0 0 15px rgba(255,0,0,0.4);
-}
-.sidebar a, .sidebar button {
-  width: 85%;
-  margin: 10px auto;
-  background: rgba(20,20,20,0.8);
-  border: 1px solid #ff0000;
-  border-radius: 10px;
-  box-shadow: 0 0 8px #ff0000;
-}
+        .status-message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+        .status-message span {
+            margin-right: 8px;
+            font-size: 1.4em;
+        }
 
+        .instruction-text {
+            font-size: 1em;
+            font-weight: 700;
+            color: #c9d1d9;
+            margin-bottom: 30px;
+        }
+        .instruction-text span {
+            color: #e34c4c;
+            font-size: 1.4em;
+            margin-left: 8px;
+        }
 
-.popup-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  animation: fadeIn 0.4s;
-}
-.popup-box {
-  background: rgba(20,20,20,0.95);
-  border: 2px solid #ff0000;
-  border-radius: 15px;
-  padding: 20px;
-  width: 85%;
-  max-width: 400px;
-  box-shadow: 0 0 20px rgba(255,0,0,0.5);
-  text-align: center;
-  animation: fadeInUp 0.4s;
-}
-.popup-box h3 {
-  color: #ff0000;
-  margin-bottom: 10px;
-}
-.popup-box p {
-  color: #ddd;
-  font-size: 1em;
-  line-height: 1.6em;
-}
-.close-btn {
-  background: #ff0000;
-  color: #fff;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 10px;
-  margin-top: 15px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-.close-btn:hover {
-  background: #cc0000;
-  transform: scale(1.05);
-}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes fadeInUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .join-button {
+            display: block;
+            background: linear-gradient(135deg, #1e90ff 0%, #4682b4 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 900;
+            margin: 20px auto 40px auto;
+            width: 80%;
+            max-width: 300px;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
 
-.snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
-@keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
-.language-buttons { display: none; margin-top: 5px; flex-direction: column; }
-.language-buttons button { width: 80%; margin: 4px auto; }
+        .join-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 144, 255, 0.6);
+        }
 
-.fixed-buttons a, .fixed-buttons button {
-  width: 220px;
-  font-size: 0.95em;
-  box-shadow: 0 0 8px red;
-}
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 10px 0;
-  background: rgba(0,0,0,0.8);
-  font-size: 0.8em;
-  color: #ff0000;
-  z-index: 10;
-  box-shadow: 0 0 10px rgba(255,0,0,0.5);
-}
-</style>
+        .browser-header {
+            width: 100%;
+            background-color: #0d1117;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #c9d1d9;
+            font-size: 0.9em;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .browser-header .title {
+            font-weight: 700;
+        }
+        .browser-header .close-btn {
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-<audio id="clickSound" src="https://files.catbox.moe/opzbli.mp3"></audio>
-
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-<div class="sidebar" id="sidebar">
-  <a href="#" id="usageBtn" onclick="playSound(); openUsagePopup()">• معني السوبر •</a>
-  <a href="#" id="brokerQstBtn" onclick="playSound(); openPopup()">• يعني اي وسيط •</a>  
-  <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
-  <button id="langToggleBtn" onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
-  <div class="language-buttons" id="langBtns">
-    <button onclick="setLang('ar'); playSound()">عربي</button>
-    <button onclick="setLang('en'); playSound()">English</button>
-  </div>
-</div>
-
-<div class="popup-overlay" id="popup">
-  <div class="popup-box">
-    <h3>• يعني اي وسيط •</h3>
-    <p>
-      الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>
-      مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>
-      التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.
-    </p>
-    <button class="close-btn" onclick="closePopup(); playSound()">إغلاق</button>
-  </div>
-</div>
-
-<div class="popup-overlay" id="usagePopup">
-  <div class="popup-box">
-    <h3>• معني السوبر •</h3>
-    <p>
-سوبر زون هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>
-نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>
-والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.
-    </p>
-    <button class="close-btn" onclick="closeUsagePopup(); playSound()">إغلاق</button>
-  </div>
-</div>
-
-<div class="wrapper">
-  <section class="content active" id="main">
-    <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
-    <h1 id="mainTitle">سوبر زون - Super Zwn</h1>
-    <p id="mainDesc">اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
-
-    <div class="fixed-buttons">
-      <a id="channelBtn" href="https://t.me/superrzwn" target="_blank" onclick="playSound()">• قناه سوبر زون •</a>
-      <a id="groupBtn" href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">• جروب سوبر زون •</a>
-      <button id="brokersBtn" onclick="playSound(); show('brokers')">• وسطاء السوبر •</button>
-
-      <button id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</button>
-      <button id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</button>
-      <button id="dateBtn" onclick="playSound()">📅 جاري التحديث...</button>
+    <div class="browser-header">
+        <span class="close-btn">✕</span>
+        <div>
+            <div class="title">تداول خبراء توقع - شركة الاستثمار</div>
+            </div>
+        <span>⋮</span>
     </div>
-  </section>
-
-  <section class="content" id="brokers">
-    <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
-    <h1 id="brokersTitle">سوبر زون - Super Zwn</h1>
-    <h2 id="brokersDesc">الوسطاء المعتمدون</h2>
-    <div id="brokersList">
-      <a class="btn" href="https://t.me/vwvvxv" target="_blank" onclick="playSound()">• الوسيط تيمو •</a>
-      <a class="btn" href="https://t.me/vrwvw" target="_blank" onclick="playSound()">• الوسيط حمو •</a>
-      <a class="btn" href="https://t.me/GreaTeeid" target="_blank" onclick="playSound()">• الوسيط عيد •</a>
-      <a class="btn" href="https://t.me/x_o_z" target="_blank" onclick="playSound()">• الوسيط سالك •</a>
-      <a class="btn" href="https://t.me/j_e_o" target="_blank" onclick="playSound()">• الوسيط يوسف •</a>
-      <a class="btn" href="https://t.me/mrtrgm" target="_blank" onclick="playSound()">• الوسيط ايرور •</a>
-      <a class="btn" href="https://t.me/ahmedrio" target="_blank" onclick="playSound()">• الوسيط ريو •</a>
+    
+    <div class="hero-image-container">
+        <img src="https://i.ibb.co/6P0Y288/trading-room.jpg" alt="Trading Room" class="hero-image">
     </div>
-    <button class="btn" onclick="playSound(); show('main')">• العودة للقائمة الرئيسية •</button>
-  </section>
-</div>
 
-<footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
+    <div class="container">
+        
+        <h1>
+            <span style="font-size: 1.2em;">🏦</span> شركة استثمار وتداول 
+            <br>
+            وتسليم <span class="highlight-text">أرباح</span> <span style="font-size: 1.2em;">💰</span>
+        </h1>
 
-<script>
-let currentLang = 'ar'; 
+        <p class="status-message">
+            <span>✅</span> اطمئن وأنت معانا لكسب المزيد
+        </p>
 
-function toggleMenu() {
-  const s = document.getElementById("sidebar");
-  s.style.left = (s.style.left === "0px") ? "-240px" : "0px";
-}
+        <p class="instruction-text">
+            <span>📢</span> يرجى اتباع التعليمات داخل القناة
+        </p>
 
-function playSound() {
-  const audio = document.getElementById("clickSound");
-  audio.currentTime = 0;
-  audio.play();
-}
+        <a href="https://t.me/your_telegram_link" target="_blank" class="join-button">
+            انضم الآن على تيليجرام
+        </a>
 
-function openPopup() {
-  document.getElementById('popup').style.display = 'flex';
-}
+    </div>
 
-function closePopup() {
-  document.getElementById('popup').style.display = 'none';
-}
-
-function openUsagePopup() {
-  document.getElementById('usagePopup').style.display = 'flex';
-}
-
-function closeUsagePopup() {
-  document.getElementById('usagePopup').style.display = 'none';
-}
-
-function show(id){
-  document.querySelectorAll('.content').forEach(sec => sec.classList.remove('active'));
-  const target = document.getElementById(id);
-  if(target) target.classList.add('active');
-}
-
-function toggleDarkModeFunc() {
-  const body = document.body;
-  const btn = document.getElementById('darkModeBtn');
-  body.classList.toggle('dark-mode');
-
-  if (currentLang === 'ar') {
-    btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
-  } else {
-    btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 Light Mode" : "🌓 Dark Mode";
-  }
-}
-
-
-function toggleLangBtns() {
-  const div = document.getElementById('langBtns');
-  div.style.display = (div.style.display === 'flex') ? 'none' : 'flex';
-}
-
-function setLang(lang) {
-  currentLang = lang; 
-
-  const body = document.body;
-  const darkModeBtn = document.getElementById('darkModeBtn');
-  const isDarkMode = body.classList.contains('dark-mode');
-
-  if(lang === 'ar') {
-    document.documentElement.setAttribute('lang', 'ar');
-    document.documentElement.setAttribute('dir', 'rtl');
-
-
-    document.getElementById('usageBtn').innerText = '• معني السوبر •';
-    document.getElementById('brokerQstBtn').innerText = '• يعني اي وسيط •';
-    document.getElementById('langToggleBtn').innerText = '🌐 اللغة';
-
-    darkModeBtn.innerHTML = isDarkMode ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
-
-
-
-    document.getElementById('mainTitle').innerText = 'سوبر زون - Super Zwn';
-    document.getElementById('mainDesc').innerHTML = 'اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة';
-    document.getElementById('channelBtn').innerText = '• قناه سوبر زون •';
-    document.getElementById('groupBtn').innerText = '• جروب سوبر زون •';
-    document.getElementById('brokersBtn').innerText = '• وسطاء السوبر •';
-    document.getElementById('brokersTitle').innerText = 'سوبر زون - Super Zwn';
-    document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
-    document.querySelector('#brokers button').innerText = '• العودة للقائمة الرئيسية •';
-    
-
-    document.querySelector('#popup .popup-box h3').innerText = '• يعني اي وسيط •';
-    document.querySelector('#popup .popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
-    document.querySelector('#popup .close-btn').innerText = 'إغلاق';
-    
-    document.querySelector('#usagePopup .popup-box h3').innerText = '• معني السوبر •';
-    document.querySelector('#usagePopup .popup-box p').innerHTML = 'سوبر زون هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.';
-    document.querySelector('#usagePopup .close-btn').innerText = 'إغلاق';
-
-
-    document.getElementById("tonBtn").textContent = "💎 جاري تحميل التون...";
-    
-    updateTime(true); 
-    updateDate(true); 
-
-
-    const brokers = ['الوسيط تيمو','الوسيط حمو','الوسيط عيد','الوسيط سالك','الوسيط يوسف','الوسيط ايرور','الوسيط ريو'];
-    const brokersLinks = ['https://t.me/vwvvxv','https://t.me/vrwvw','https://t.me/GreaTeeid','https://t.me/x_o_z','https://t.me/j_e_o','https://t.me/mrtrgm','https://t.me/ahmedrio'];
-    const brokersList = document.getElementById('brokersList');
-    brokersList.innerHTML = '';
-    for(let i=0;i<brokers.length;i++){
-      let a = document.createElement('a');
-      a.className = 'btn';
-      a.href = brokersLinks[i];
-      a.target = '_blank';
-      a.innerText = '• ' + brokers[i];
-      a.onclick = playSound;
-      brokersList.appendChild(a);
-    }
-  } else if(lang === 'en') {
-    document.documentElement.setAttribute('lang', 'en');
-    document.documentElement.setAttribute('dir', 'ltr');
-
-    document.getElementById('usageBtn').innerText = '• Meaning of Super •';
-    document.getElementById('brokerQstBtn').innerText = '• What is a Broker •';
-    document.getElementById('langToggleBtn').innerText = '🌐 Language';
-
-    darkModeBtn.innerHTML = isDarkMode ? "🌞 Light Mode" : "🌓 Dark Mode";
-
-
-    document.getElementById('mainTitle').innerText = 'Super Zwn - Super Zwn';
-    document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
-    document.getElementById('channelBtn').innerText = '• Super Zwn Channel •';
-    document.getElementById('groupBtn').innerText = '• Super Zwn Group •';
-    document.getElementById('brokersBtn').innerText = '• Super Brokers •';
-    document.getElementById('brokersTitle').innerText = 'Super Zwn - Super Zwn';
-    document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
-    document.querySelector('#brokers button').innerText = '• Back to Main Menu •';
-    
-
-    document.querySelector('#popup .popup-box h3').innerText = '• What is a Broker •';
-    document.querySelector('#popup .popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
-    document.querySelector('#popup .close-btn').innerText = 'Close';
-    
-    document.querySelector('#usagePopup .popup-box h3').innerText = '• Meaning of Super •';
-    document.querySelector('#usagePopup .popup-box p').innerHTML = 'Super Zwn is a store for buying and selling groups, channels, stars, gifts, and more...<br>We facilitate fast sales for users to sell their possessions quickly<br>Dealing in the Super is with a broker to ensure the rights of both parties.';
-    document.querySelector('#usagePopup .close-btn').innerText = 'Close';
-    
-
-    document.getElementById("tonBtn").textContent = "💎 Loading TON...";
-    
-    updateTime(true); 
-    updateDate(true); 
-
-
-    const brokers = ['Broker Timo','Broker Hamo','Broker Eid','Broker Salk','Broker Yousef','Broker Error','Broker Rio'];
-    const brokersLinks = ['https://t.me/vwvvxv','https://t.me/vrwvw','https://t.me/GreaTeeid','https://t.me/x_o_z','https://t.me/j_e_o','https://t.me/mrtrgm','https://t.me/ahmedrio'];
-    const brokersList = document.getElementById('brokersList');
-    brokersList.innerHTML = '';
-    for(let i=0;i<brokers.length;i++){
-      let a = document.createElement('a');
-      a.className = 'btn';
-      a.href = brokersLinks[i];
-      a.target = '_blank';
-      a.innerText = '• ' + brokers[i];
-      a.onclick = playSound;
-      brokersList.appendChild(a);
-    }
-  }
-
-
-  updateTonPrice();
-}
-
-function updateTime(forceUpdateLabel = false) {
-  const now = new Date();
-  
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-  
-  const timeText = `${hours}:${minutes}:${seconds}`; 
-  
-  const timeBtn = document.getElementById("timeBtn");
-  
-  timeBtn.textContent = "⏰ " + timeText;
-}
-
-setInterval(updateTime, 1000); 
-
-function updateDate(forceUpdateLabel = false) {
-  const today = new Date();
-
-  const dateText = today.toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  
-  const labelAr = 'جاري التحديث...';
-  const labelEn = 'Updating...';
-  const label = currentLang === 'ar' ? labelAr : labelEn;
-  
-  const dateBtn = document.getElementById("dateBtn");
-  
-  if (forceUpdateLabel || dateBtn.textContent.includes(label) || !dateBtn.textContent.includes("📅")) {
-     dateBtn.textContent = "📅 " + dateText;
-  }
-}
-
-
-async function updateTonPrice() {
-  const loadingText = currentLang === 'ar' ? "جاري تحميل التون..." : "Loading TON...";
-  const errorText = currentLang === 'ar' ? "تعذر جلب سعر التون" : "Failed to fetch TON price";
-
-  try {
-    const tonBtn = document.getElementById("tonBtn");
-    
-
-    if (!tonBtn.textContent.includes("TON:") && !tonBtn.textContent.includes(loadingText) && !tonBtn.textContent.includes(errorText)) {
-        tonBtn.textContent = `💎 ${loadingText}`;
-    }
-
-    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
-    const data = await res.json();
-    tonBtn.textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
-    
-
-  } catch (e) {
-    document.getElementById("tonBtn").textContent = `💎 ${errorText}`;
-  }
-}
-setInterval(updateTonPrice, 60000); 
-
-
-function createSnowflake() {
-  const snow = document.createElement('div');
-  snow.classList.add('snowflake');
-  const size = Math.random() * 4 + 2;
-  snow.style.width = `${size}px`;
-  snow.style.height = `${size}px`;
-  snow.style.left = `${Math.random() * window.innerWidth}px`;
-  snow.style.animationDuration = `${Math.random() * 5 + 5}s`;
-  snow.style.opacity = Math.random();
-  document.body.appendChild(snow);
-  setTimeout(() => snow.remove(), 10000);
-}
-setInterval(createSnowflake, 200);
-
-
-document.addEventListener('click', function(event) {
-  const sidebar = document.getElementById('sidebar');
-  const menuBtn = document.querySelector('.menu-btn');
-  if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
-    sidebar.style.left = "-240px";
-  }
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    setLang('ar');
-    updateTime(); 
-    updateDate(); 
-    updateTonPrice(); 
-});
-</script>
 </body>
 </html>
