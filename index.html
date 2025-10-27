@@ -57,7 +57,23 @@ a, button {
 }
 a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
-.menu-btn { position: fixed; top: 15px; left: 15px; font-size: 20px; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 8px; cursor: pointer; z-index: 1002; }
+/* تنسيق شريط التحكم العلوي الجديد */
+.top-bar-controls {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1002;
+  display: flex; /* لترتيب الزرين بجوار بعضهما */
+  gap: 10px; /* مسافة بين الزرين */
+}
+
+.menu-btn, .search-btn { 
+  font-size: 20px; 
+  background: rgba(255,255,255,0.15); 
+  padding: 5px 10px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+}
 
 
 .sidebar {
@@ -95,6 +111,83 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   z-index: 2000;
   animation: fadeIn 0.4s;
 }
+
+/* تنسيق شريط البحث المنبثق */
+.search-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: none; /* إخفاؤه في البداية */
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  z-index: 3000;
+  animation: fadeIn 0.3s;
+}
+
+.search-input-container {
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+}
+
+#search-input {
+  flex-grow: 1;
+  padding: 12px;
+  border-radius: 10px 0 0 10px;
+  border: 2px solid #ff0000;
+  background: rgba(20, 20, 20, 0.9);
+  color: #fff;
+  font-size: 1.1em;
+  font-family: 'Tajawal', sans-serif;
+  text-align: right; /* لتناسب اللغة العربية */
+}
+
+.search-close-btn {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 0 15px;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.search-results {
+  width: 90%;
+  max-width: 500px;
+  max-height: 60%;
+  overflow-y: auto;
+  margin-top: 15px;
+  text-align: right;
+}
+
+.search-results a {
+  display: block;
+  background: rgba(20, 20, 20, 0.9);
+  color: #ddd;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  text-decoration: none;
+  border-right: 3px solid #ff0000;
+  transition: background 0.2s;
+  width: 100%; /* يجب أن يأخذ العرض بالكامل داخل الـ results */
+  box-shadow: none; /* إلغاء الظل الخاص بزر الرابط العادي */
+  margin: 0 0 5px 0; /* إلغاء الهامش التلقائي */
+}
+
+.search-results a:hover {
+  background: rgba(40, 40, 40, 0.9);
+  transform: none;
+}
+
+
 .popup-box {
   background: rgba(20,20,20,0.95);
   border: 2px solid #ff0000;
@@ -160,7 +253,10 @@ footer {
 
 <audio id="clickSound" src="https://files.catbox.moe/opzbli.mp3"></audio>
 
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
+<div class="top-bar-controls">
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="search-btn" onclick="toggleSearch()">🔍</div>
+</div>
 
 <div class="sidebar" id="sidebar">
   <a href="#" id="usageBtn" onclick="playSound(); openUsagePopup()">• معني السوبر •</a>
@@ -171,6 +267,15 @@ footer {
     <button onclick="setLang('ar'); playSound()">عربي</button>
     <button onclick="setLang('en'); playSound()">English</button>
   </div>
+</div>
+
+<div class="search-popup" id="searchPopup">
+  <div class="search-input-container">
+    <input type="text" id="search-input" placeholder="اكتب كلمة البحث هنا..." onkeyup="searchContent()">
+    <button class="search-close-btn" onclick="closeSearch()">❌</button>
+  </div>
+  <div class="search-results" id="searchResults">
+    </div>
 </div>
 
 <div class="popup-overlay" id="popup">
@@ -317,9 +422,9 @@ function setLang(lang) {
     document.querySelector('#brokers button').innerText = '⬅️ العودة للقائمة الرئيسية';
     
 
-    document.querySelector('.popup-box h3').innerText = '• يعني اي وسيط •';
-    document.querySelector('.popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
-    document.querySelector('.close-btn').innerText = 'إغلاق';
+    document.querySelector('#popup .popup-box h3').innerText = '• يعني اي وسيط •';
+    document.querySelector('#popup .popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
+    document.querySelector('#popup .close-btn').innerText = 'إغلاق';
 
 
     document.getElementById("tonBtn").textContent = "💎 جاري تحميل التون...";
@@ -351,7 +456,7 @@ function setLang(lang) {
     darkModeBtn.innerHTML = isDarkMode ? "🌞 Light Mode" : "🌓 Dark Mode";
 
 
-    document.getElementById('mainTitle').innerText = 'Super Zone - Super Zwn';
+    document.getElementById('mainTitle').innerText = 'Super Zwn - Super Zwn';
     document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
     document.getElementById('channelBtn').innerText = '• channel suler zwn •';
     document.getElementById('groupBtn').innerText = '• Grup super zwn •';
@@ -361,9 +466,9 @@ function setLang(lang) {
     document.querySelector('#brokers button').innerText = '• Back to Main Menu •';
     
 
-    document.querySelector('.popup-box h3').innerText = '• What is a Broker •';
-    document.querySelector('.popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
-    document.querySelector('.close-btn').innerText = 'Close';
+    document.querySelector('#popup .popup-box h3').innerText = '• What is a Broker •';
+    document.querySelector('#popup .popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
+    document.querySelector('#popup .close-btn').innerText = 'Close';
     
 
     document.getElementById("tonBtn").textContent = "💎 Loading TON...";
@@ -461,11 +566,119 @@ function createSnowflake() {
 setInterval(createSnowflake, 200);
 
 
+// دوال البحث الجديدة
+
+function toggleSearch() {
+  const popup = document.getElementById('searchPopup');
+  const input = document.getElementById('search-input');
+  if (popup.style.display === 'flex') {
+    popup.style.display = 'none';
+  } else {
+    popup.style.display = 'flex';
+    input.focus(); 
+    // عرض جميع الروابط المتاحة عند فتح النافذة لأول مرة
+    if (document.getElementById('searchResults').innerHTML === '') {
+        searchContent(); 
+    }
+  }
+}
+
+function closeSearch() {
+  document.getElementById('searchPopup').style.display = 'none';
+  document.getElementById('search-input').value = ''; 
+  document.getElementById('searchResults').innerHTML = ''; 
+}
+
+
+function searchContent() {
+  const query = document.getElementById('search-input').value.toLowerCase().trim();
+  const resultsDiv = document.getElementById('searchResults');
+  resultsDiv.innerHTML = ''; 
+
+  const searchableElements = [];
+
+  // 1. جمع جميع العناصر التي يمكن البحث فيها
+  document.querySelectorAll('#sidebar a, #sidebar button').forEach(el => {
+    searchableElements.push({
+      text: el.innerText.trim(),
+      action: el.getAttribute('onclick') || el.getAttribute('href')
+    });
+  });
+
+  document.querySelectorAll('#main a, #main button').forEach(el => {
+    searchableElements.push({
+      text: el.innerText.trim(),
+      action: el.getAttribute('onclick') || el.getAttribute('href')
+    });
+  });
+  
+  const brokersContainer = document.getElementById('brokersList');
+  if (brokersContainer) {
+    brokersContainer.querySelectorAll('a').forEach(el => {
+      searchableElements.push({
+        text: el.innerText.trim(),
+        action: el.getAttribute('href')
+      });
+    });
+  }
+
+  // 2. تصفية العناصر
+  const filteredResults = searchableElements.filter(item => {
+    // إذا كان مربع البحث فارغاً، يتم عرض كل شيء
+    if (query === '') return true;
+    // وإلا، يتم التصفية بناءً على النص
+    return item.text.toLowerCase().includes(query);
+  });
+
+  // 3. عرض النتائج
+  if (filteredResults.length === 0 && query !== '') {
+    resultsDiv.innerHTML = `<a href="#" onclick="playSound(); return false;">لا توجد نتائج مطابقة لـ "${query}"</a>`;
+  } else {
+    filteredResults.forEach(item => {
+      const resultLink = document.createElement('a');
+      resultLink.href = '#';
+      
+      // لتسليط الضوء على كلمة البحث في النص
+      let displayText = item.text;
+      if (query !== '') {
+          const regex = new RegExp(query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
+          displayText = item.text.replace(regex, match => `<span style="color: yellow; font-weight: bold;">${match}</span>`);
+      }
+      resultLink.innerHTML = displayText;
+      
+      // تحديد الإجراء عند النقر
+      resultLink.onclick = function(e) {
+        e.preventDefault();
+        playSound();
+        closeSearch();
+        
+        // إذا كان الزر يحتوي على رابط مباشر (قناة، وسيط)
+        if (item.action && (item.action.startsWith('http') || item.action.startsWith('https://t.me'))) {
+             window.open(item.action, '_blank');
+        // إذا كان الزر يحتوي على أمر جافاسكريبت (مثل فتح قائمة الوسطاء، أو وضع ليلي)
+        } else if (item.action && item.action.includes('(')) {
+             eval(item.action); 
+        } 
+      };
+      
+      resultsDiv.appendChild(resultLink);
+    });
+  }
+}
+
+
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
-  const menuBtn = document.querySelector('.menu-btn');
-  if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+  const topBarControls = document.querySelector('.top-bar-controls');
+  
+  if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !topBarControls.contains(event.target)) {
     sidebar.style.left = "-240px";
+  }
+  
+  const searchPopup = document.getElementById('searchPopup');
+  // إذا كانت نافذة البحث مفتوحة والنقرة ليست عليها أو على زر الفتح/الإغلاق
+  if(searchPopup.style.display === 'flex' && !searchPopup.contains(event.target) && !topBarControls.contains(event.target)) {
+      closeSearch();
   }
 });
 
