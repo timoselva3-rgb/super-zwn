@@ -91,40 +91,79 @@ a:hover, button:hover {
     font-size: 0.9em;
 }
 
-/* القائمة الجانبية */
+/* القائمة الجانبية - الشكل الجديد */
 .sidebar {
-  width: 240px;
+  width: 280px; /* عرض أوسع للقائمة */
   height: 100%;
-  background: rgba(0,0,0,0.95); /* خلفية سوداء شبه شفافة تماماً */
-  backdrop-filter: blur(8px); /* تأثير ضبابي قوي */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.98), rgba(20,0,0,0.98)); /* تدرج لوني داكن جداً */
+  backdrop-filter: blur(10px); /* تأثير ضبابي أقوى */
   position: fixed;
   top: 0;
-  left: -240px;
-  transition: 0.4s;
-  padding-top: 70px;
+  left: -280px; /* عرض القائمة الجديد */
+  transition: 0.5s ease-in-out;
+  padding: 20px; /* زيادة التباعد الداخلي */
   z-index: 1001;
-  border-right: 3px solid #ff0000; /* خط أحمر سميك */
-  box-shadow: 2px 0 20px rgba(255,0,0,0.7); /* ظل أحمر للتأكيد */
+  border-right: 4px solid #ff0000; /* خط أحمر سميك جداً */
+  box-shadow: 3px 0 25px rgba(255,0,0,0.9); /* ظل أحمر قوي جداً */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .sidebar a, .sidebar button {
-  width: 90%;
-  margin: 10px auto;
-  background: rgba(15,15,15,0.9);
-  border: 1px solid #ff3333;
-  box-shadow: 0 0 8px #ff0000;
+  width: 90%; /* عرض الأزرار داخل القائمة */
+  margin: 10px 0; /* مسافة رأسية فقط */
+  background: rgba(10,10,10,0.95); /* خلفية داكنة للأزرار */
+  border: 2px solid #ff3333; /* حدود حمراء بارزة */
+  box-shadow: 0 0 15px rgba(255,0,0,0.8); /* توهج أحمر واضح */
+  border-radius: 15px; /* زوايا مدورة أكثر */
+  font-size: 1.1em; /* حجم خط أكبر */
+  padding: 15px; /* تباعد داخلي أكبر */
+  justify-content: flex-start; /* محاذاة النص والأيقونة لليسار */
+  gap: 10px; /* مسافة بين الأيقونة والنص */
 }
+
+/* الأيقونات داخل أزرار القائمة الجانبية */
+.sidebar a::before, .sidebar button::before {
+    margin-left: 10px; /* مسافة بين الأيقونة والنص في RTL */
+}
+
 .menu-btn {
-  position: fixed; top: 15px; left: 15px; font-size: 24px;
-  background: rgba(255,0,0,0.7); /* زر قائمة أحمر واضح */
+  position: fixed; top: 15px; left: 15px; font-size: 28px; /* حجم أيقونة أكبر */
+  background: rgba(255,0,0,0.8); /* زر قائمة أحمر واضح ومشرق */
   color: #fff;
-  padding: 5px 12px;
-  border-radius: 8px;
+  padding: 8px 15px; /* تباعد أكبر */
+  border-radius: 10px;
   cursor: pointer; z-index: 1002;
-  border: 1px solid #fff;
-  box-shadow: 0 0 10px #ff0000;
-  transition: 0.3s;
+  border: 2px solid #fff; /* حدود بيضاء لجذب الانتباه */
+  box-shadow: 0 0 12px #ff0000, 0 0 25px rgba(255,0,0,0.5); /* توهج مضاعف */
+  transition: all 0.3s ease;
 }
-.menu-btn:hover { background: #ff3333; box-shadow: 0 0 15px #ff0000; }
+.menu-btn:hover { background: #ff3333; transform: scale(1.1); box-shadow: 0 0 20px #ff0000; }
+
+/* أيقونة الإغلاق للقائمة الجانبية */
+.close-sidebar-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    color: #fff;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1003;
+    display: none; /* يتم إظهاره فقط عند فتح القائمة */
+    text-shadow: 0 0 10px #ff0000;
+    transition: transform 0.3s;
+}
+.close-sidebar-btn:hover {
+    transform: rotate(90deg) scale(1.1);
+    color: #ff3333;
+}
+.sidebar.open .close-sidebar-btn {
+    display: block;
+}
+
 
 /* popup */
 .popup-overlay {
@@ -206,7 +245,7 @@ footer {
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="#" id="popupLink" onclick="playSound(); openPopup()">❓ يعني اي وسيط</a>
+  <button class="close-sidebar-btn" onclick="toggleMenu()">✖</button> <a href="#" id="popupLink" onclick="playSound(); openPopup()">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
   <button id="langBtn" onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
   <div class="language-buttons" id="langBtns">
@@ -275,7 +314,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function toggleMenu() {
   const s = document.getElementById("sidebar");
-  s.style.left = (s.style.left === "0px") ? "-240px" : "0px";
+  if (s.style.left === "0px") {
+    s.style.left = "-280px"; // إخفاء القائمة
+    s.classList.remove('open');
+  } else {
+    s.style.left = "0px"; // إظهار القائمة
+    s.classList.add('open');
+  }
 }
 
 function playSound() {
@@ -297,7 +342,8 @@ function show(id){
   const target = document.getElementById(id);
   if(target) target.classList.add('active');
   // إغلاق القائمة الجانبية عند التبديل بين الصفحات
-  document.getElementById("sidebar").style.left = "-240px";
+  document.getElementById("sidebar").style.left = "-280px";
+  document.getElementById("sidebar").classList.remove('open');
 }
 
 function toggleDarkModeFunc() {
@@ -477,8 +523,9 @@ setInterval(createSnowflake, 200);
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
+  // تأكد أن القائمة مفتوحة، وأن الضغطة ليست داخل القائمة وليست على زر الفتح
   if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
-    sidebar.style.left = "-240px";
+    toggleMenu(); // استخدم toggleMenu لإغلاقها بشكل صحيح
   }
 });
 </script>
