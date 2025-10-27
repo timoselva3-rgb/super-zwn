@@ -48,6 +48,12 @@
       border-radius: 20px;
       box-shadow: 0 0 15px #ff0000;
       margin-top: 20px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 15px #ff0000; }
+      100% { box-shadow: 0 0 35px #ff5555; }
     }
 
     a {
@@ -82,6 +88,7 @@
 
     footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 
+    /* ❄️ التلج */
     .snowflake {
       position: fixed;
       top: -10px;
@@ -98,6 +105,7 @@
       100% { transform: translateY(100vh) rotate(360deg); }
     }
 
+    /* زر السعر */
     #tonPrice {
       margin-top: 25px;
       font-size: 1em;
@@ -108,18 +116,38 @@
       width: 240px;
     }
 
-    #members {
-      margin-top: 10px;
-      font-size: 0.95em;
-      color: #aaa;
+    /* زر الساعة */
+    #clockButton {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.4);
+      color: #00ffff;
+      border: 1px solid #00ffff;
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-size: 1em;
+      font-weight: bold;
+      box-shadow: 0 0 15px #00ffff;
+      animation: pulse 2s infinite;
+      cursor: default;
     }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #00ffff; }
+      50% { box-shadow: 0 0 25px #00ffff; }
+      100% { box-shadow: 0 0 10px #00ffff; }
+    }
+
   </style>
 </head>
 <body>
-  <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" alt="Super ZWN Logo" class="logo" id="channelLogo">
-  <h1 id="channelName">. 𝖲𝗎𝖯𝖾𝗋 𝖹𝗐𝗇 .</h1>
-  <p id="channelDesc">اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
-  <div id="members"></div>
+
+  <button id="clockButton">00:00:00</button>
+
+  <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" alt="Super ZWN Logo" class="logo">
+  <h1>. 𝖲𝗎𝖯𝖾𝗋 𝖹𝗐𝗇 .</h1>
+  <p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
 
   <a href="https://t.me/superrzwn" target="_blank">📢 القناة الرسمية</a>
   <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank">💬 جروب سوبر زون</a>
@@ -136,12 +164,20 @@
   </div>
 
   <a href="mediator.html">❓ يعني اي وسيط</a>
+
   <a id="tonPrice" href="#" onclick="event.preventDefault()"> سعر التون: <span id="price">جاري التحميل...</span> </a>
 
   <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
   <script>
-    // 🔊 الصوت
+    // 🎵 صوت ترحيب عند الدخول
+    window.addEventListener('load', () => {
+      const welcome = new Audio('https://files.catbox.moe/7o84xw.m4a');
+      welcome.volume = 0.6;
+      welcome.play().catch(()=>{});
+    });
+
+    // 🎧 صوت عند الضغط على أي زر
     const clickSound = new Audio('https://files.catbox.moe/txfod8.m4a');
     document.querySelectorAll('a').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -150,7 +186,13 @@
       });
     });
 
-    // ❄️ التلج
+    // 🕒 تحديث الساعة في الزرار
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById("clockButton").textContent = now.toLocaleTimeString('ar-EG');
+    }, 1000);
+
+    // ❄️ تأثير التلج
     const colors = ['white','red','cyan'];
     function createSnowflake() {
       const snowflake = document.createElement('div');
@@ -165,7 +207,7 @@
     }
     setInterval(createSnowflake, 200);
 
-    // 💰 سعر التون
+    // 💰 جلب سعر التون
     async function fetchTonPrice() {
       try {
         const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
@@ -177,35 +219,7 @@
     }
     fetchTonPrice();
     setInterval(fetchTonPrice, 60000);
-
-
-    async function fetchChannelData() {
-      const BOT_TOKEN = "8368630135:AAGsLbNv2t4lr6WIw_uLAnJaot1-9ZBBAY0"; 
-      const CHANNEL = "@superrzwn";
-      try {
-        const chatRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChat?chat_id=${CHANNEL}`);
-        const chatData = await chatRes.json();
-        if (chatData.ok) {
-          const chat = chatData.result;
-          document.getElementById('channelName').textContent = chat.title || "بدون اسم";
-          document.getElementById('channelDesc').innerHTML = `${chat.description || "بدون وصف"}<br>@${chat.username}`;
-          if (chat.photo) {
-            const fileRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getFile?file_id=${chat.photo.big_file_id}`);
-            const fileData = await fileRes.json();
-            const filePath = fileData.result.file_path;
-            document.getElementById('channelLogo').src = `https://api.telegram.org/file/bot${BOT_TOKEN}/${filePath}`;
-          }
-        }
-        const memberRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChatMembersCount?chat_id=${CHANNEL}`);
-        const memberData = await memberRes.json();
-        if (memberData.ok) {
-          document.getElementById('members').textContent = `عدد الأعضاء: ${memberData.result.toLocaleString()} 👥`;
-        }
-      } catch (err) {
-        console.error("خطأ في جلب بيانات القناة:", err);
-      }
-    }
-    fetchChannelData();
   </script>
+
 </body>
 </html>
