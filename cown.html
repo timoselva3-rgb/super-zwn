@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أسعار العملات | سوبر زون</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Tajawal', sans-serif;
+  background:black;
+  color:white;
+  text-align:center;
+}
+body::before {
+  content:"";
+  position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  background:url("https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg") center/cover;
+  filter:brightness(0.4);
+  z-index:-1;
+}
+a {
+  display:block;
+  background:rgba(15,15,15,0.8);
+  width:240px;
+  margin:10px auto;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid red;
+  color:white;
+  font-weight:bold;
+  font-size:1em;
+  text-decoration:none;
+  box-shadow:0 0 10px red;
+  transition:0.3s;
+}
+a:hover { transform:scale(1.05); }
+footer { margin-top:40px; font-size:0.9em; color:#ccc; }
+.menu-btn {
+  position:fixed; top:15px; left:15px;
+  font-size:26px;
+  background:rgba(255,255,255,0.12);
+  padding:6px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+.sidebar {
+  width:200px; height:100%; background:rgba(0,0,0,0.9);
+  position:fixed; top:0; left:-220px;
+  border-right:2px solid red;
+  transition:0.4s;
+  padding-top:70px;
+}
+.sidebar a { width:90%; margin:10px auto; }
+</style>
+</head>
+<body>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<div class="sidebar" id="sidebar">
+  <a href="index.html">🏠 الصفحة الرئيسية</a>
+  <a href="mediator.html">❓ يعني اي وسيط</a>
+  <a href="cown.html">💱 أسعار العملات</a>
+</div>
+
+<h1 style="margin-top:60px;text-shadow:0 0 10px red;">💱 أسعار العملات</h1>
+
+<div id="coins"></div>
+
+<footer>© 2025 سوبر زون</footer>
+
+<script>
+function toggleMenu(){
+  const s=document.getElementById("sidebar");
+  s.style.left=(s.style.left==="0px")?"-220px":"0px";
+}
+
+const list = [
+  "TONUSDT","BTCUSDT","ETHUSDT","USDTUSDT","BNBUSDT",
+  "TRXUSDT","DOGEUSDT","LTCUSDT","SOLUSDT","XRPUSDT",
+  "ADAUSDT","DOTUSDT","AVAXUSDT","LINKUSDT","MATICUSDT",
+  "SHIBUSDT","ETCUSDT"
+];
+
+async function load() {
+  document.getElementById("coins").innerHTML = "";
+  for (let c of list) {
+    const r = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${c}`);
+    const d = await r.json();
+    const e = document.createElement("a");
+    e.innerHTML = `💲 ${c.replace("USDT","")} : ${parseFloat(d.price).toFixed(3)} $`;
+    document.getElementById("coins").appendChild(e);
+  }
+}
+load();
+setInterval(load, 60000);
+</script>
+
+</body>
+</html>
