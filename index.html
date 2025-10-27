@@ -67,7 +67,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
-  left: -240px; /* تم تعديل القيمة لتناسب الـ width */
+  left: -240px;
   transition: 0.4s;
   padding-top: 70px;
   z-index: 1001;
@@ -163,24 +163,24 @@ footer {
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="#" onclick="playSound(); openPopup()">❓ يعني اي وسيط</a>
+  <a href="#" id="popupLink" onclick="playSound(); openPopup()">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
-  <button onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
+  <button id="langBtn" onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
   <div class="language-buttons" id="langBtns">
-    <button onclick="setLang('ar'); playSound()">عربي</button>
-    <button onclick="setLang('en'); playSound()">English</button>
+    <button onclick="setLang('ar'); playSound()" id="arLangBtn">عربي</button>
+    <button onclick="setLang('en'); playSound()" id="enLangBtn">English</button>
   </div>
 </div>
 
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
-    <h3>❓ يعني اي وسيط؟</h3>
-    <p>
+    <h3 id="popupTitle">❓ يعني اي وسيط؟</h3>
+    <p id="popupText">
       الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>
       مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>
       التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.
     </p>
-    <button class="close-btn" onclick="closePopup(); playSound()">إغلاق</button>
+    <button class="close-btn" id="closePopupBtn" onclick="closePopup(); playSound()">إغلاق</button>
   </div>
 </div>
 
@@ -214,13 +214,22 @@ footer {
       <a class="btn" href="https://t.me/error_user" target="_blank" onclick="playSound()">• الوسيط ايرور</a>
       <a class="btn" href="https://t.me/rio_user" target="_blank" onclick="playSound()">• الوسيط ريو</a>
     </div>
-    <button class="btn" onclick="playSound(); show('main')">⬅️ العودة للقائمة الرئيسية</button>
+    <button class="btn" id="backToMainBtn" onclick="playSound(); show('main')">⬅️ العودة للقائمة الرئيسية</button>
   </section>
 </div>
 
-<footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
+<footer id="footerText">© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
 <script>
+// تحديد اللغة الافتراضية عند التحميل
+document.addEventListener('DOMContentLoaded', () => {
+    setLang('ar');
+    updateTonPrice();
+    updateTime();
+    updateDate();
+});
+
+
 function toggleMenu() {
   const s = document.getElementById("sidebar");
   s.style.left = (s.style.left === "0px") ? "-240px" : "0px";
@@ -232,7 +241,6 @@ function playSound() {
   audio.play();
 }
 
-// ⚠️ تمت إضافة الدوال المفقودة هنا
 function openPopup() {
   document.getElementById('popup').style.display = 'flex';
 }
@@ -240,7 +248,6 @@ function openPopup() {
 function closePopup() {
   document.getElementById('popup').style.display = 'none';
 }
-// ------------------------------------
 
 function show(id){
   document.querySelectorAll('.content').forEach(sec => sec.classList.remove('active'));
@@ -252,7 +259,13 @@ function toggleDarkModeFunc() {
   const body = document.body;
   const btn = document.getElementById('darkModeBtn');
   body.classList.toggle('dark-mode');
-  btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+  // تعديل نص زر الوضع الليلي بناءً على اللغة الحالية
+  const currentLang = document.documentElement.lang;
+  if (currentLang === 'ar') {
+    btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+  } else {
+    btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 Light Mode" : "🌓 Dark Mode";
+  }
 }
 
 // اللغة
@@ -262,21 +275,41 @@ function toggleLangBtns() {
 }
 
 function setLang(lang) {
+  const body = document.body;
   if(lang === 'ar') {
     document.documentElement.setAttribute('lang', 'ar');
     document.documentElement.setAttribute('dir', 'rtl');
+
+    // القائمة الجانبية والـ Popup
+    document.getElementById('popupLink').innerText = '❓ يعني اي وسيط';
+    document.getElementById('langBtn').innerText = '🌐 اللغة';
+    document.getElementById('arLangBtn').innerText = 'عربي';
+    document.getElementById('enLangBtn').innerText = 'English';
+    document.getElementById('popupTitle').innerText = '❓ يعني اي وسيط؟';
+    document.getElementById('popupText').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
+    document.getElementById('closePopupBtn').innerText = 'إغلاق';
+
+    // الصفحة الرئيسية
     document.getElementById('mainTitle').innerText = 'سوبر زون - Super Zwn';
     document.getElementById('mainDesc').innerHTML = 'اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة';
     document.getElementById('channelBtn').innerText = '📢 القناة الرسمية';
     document.getElementById('groupBtn').innerText = '💬 جروب سوبر زون';
     document.getElementById('brokersBtn').innerText = '🤝 وسطاء السوبر';
+    document.getElementById('tonBtn').textContent = "💎 جاري تحميل التون...";
+    document.getElementById('timeBtn').textContent = "⏰ جاري التحديث...";
+    document.getElementById('dateBtn').textContent = "📅 جاري التحديث...";
+    document.getElementById('footerText').innerHTML = '© 2025 سوبر زون | جميع الحقوق محفوظة 🔥';
+
+
+    // صفحة الوسطاء
     document.getElementById('brokersTitle').innerText = 'سوبر زون - Super Zwn';
     document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
-    document.querySelector('#brokers button').innerText = '⬅️ العودة للقائمة الرئيسية';
-    document.querySelector('.popup-box h3').innerText = '❓ يعني اي وسيط؟';
-    document.querySelector('.popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
-    document.querySelector('.close-btn').innerText = 'إغلاق';
+    document.getElementById('backToMainBtn').innerText = '⬅️ العودة للقائمة الرئيسية';
     
+    // وضع المود
+    document.getElementById('darkModeBtn').innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+
+
     const brokers = ['الوسيط تيمو','الوسيط حمو','الوسيط عيد','الوسيط سالك','الوسيط يوسف','الوسيط ايرور','الوسيط ريو'];
     const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
     const brokersList = document.getElementById('brokersList');
@@ -293,17 +326,34 @@ function setLang(lang) {
   } else if(lang === 'en') {
     document.documentElement.setAttribute('lang', 'en');
     document.documentElement.setAttribute('dir', 'ltr');
+
+    // القائمة الجانبية والـ Popup
+    document.getElementById('popupLink').innerText = '❓ What is a Broker?';
+    document.getElementById('langBtn').innerText = '🌐 Language';
+    document.getElementById('arLangBtn').innerText = 'عربي';
+    document.getElementById('enLangBtn').innerText = 'English';
+    document.getElementById('popupTitle').innerText = '❓ What is a Broker?';
+    document.getElementById('popupText').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
+    document.getElementById('closePopupBtn').innerText = 'Close';
+
+    // الصفحة الرئيسية
     document.getElementById('mainTitle').innerText = 'Super Zone - Super Zwn';
     document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
     document.getElementById('channelBtn').innerText = '📢 Official Channel';
     document.getElementById('groupBtn').innerText = '💬 Super Zone Group';
     document.getElementById('brokersBtn').innerText = '🤝 Super Brokers';
+    document.getElementById('tonBtn').textContent = "💎 Loading TON Price...";
+    document.getElementById('timeBtn').textContent = "⏰ Updating...";
+    document.getElementById('dateBtn').textContent = "📅 Updating...";
+    document.getElementById('footerText').innerHTML = '© 2025 Super Zone | All rights reserved 🔥';
+
+    // صفحة الوسطاء
     document.getElementById('brokersTitle').innerText = 'Super Zone - Super Zwn';
     document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
-    document.querySelector('#brokers button').innerText = '⬅️ Back to Main Menu';
-    document.querySelector('.popup-box h3').innerText = '❓ What is a Broker?';
-    document.querySelector('.popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
-    document.querySelector('.close-btn').innerText = 'Close';
+    document.getElementById('backToMainBtn').innerText = '⬅️ Back to Main Menu';
+
+    // وضع المود
+    document.getElementById('darkModeBtn').innerHTML = body.classList.contains('dark-mode') ? "🌞 Light Mode" : "🌓 Dark Mode";
 
     const brokers = ['Broker Timo','Broker Hamo','Broker Eid','Broker Salk','Broker Yousef','Broker Error','Broker Rio'];
     const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
@@ -319,32 +369,41 @@ function setLang(lang) {
       brokersList.appendChild(a);
     }
   }
+
+  // تحديث الأزرار الثابتة بعد تغيير اللغة
+  updateTonPrice();
+  updateTime();
+  updateDate();
 }
 
 // الوقت و التاريخ
 function updateTime() {
   const now = new Date();
-  document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
+  const currentLang = document.documentElement.lang;
+  const options = { hour12: true, hour: 'numeric', minute: 'numeric', second: 'numeric' };
+  document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString(currentLang === 'ar' ? 'ar-EG' : 'en-US', options);
 }
-setInterval(updateTime, 1000); updateTime();
+setInterval(updateTime, 1000);
 
 function updateDate() {
   const today = new Date();
-  document.getElementById("dateBtn").textContent = "📅 " + today.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+  const currentLang = document.documentElement.lang;
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById("dateBtn").textContent = "📅 " + today.toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US', options);
 }
-updateDate();
 
 // سعر TON (جلب السعر من بينانس)
 async function updateTonPrice() {
+  const currentLang = document.documentElement.lang;
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
     const data = await res.json();
     document.getElementById("tonBtn").textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
   } catch {
-    document.getElementById("tonBtn").textContent = "💎 تعذر جلب سعر التون";
+    document.getElementById("tonBtn").textContent = currentLang === 'ar' ? "💎 تعذر جلب سعر التون" : "💎 Failed to fetch TON Price";
   }
 }
-setInterval(updateTonPrice, 60000); updateTonPrice();
+setInterval(updateTonPrice, 60000); 
 
 // ثلج
 function createSnowflake() {
