@@ -48,12 +48,6 @@
       border-radius: 20px;
       box-shadow: 0 0 15px #ff0000;
       margin-top: 20px;
-      animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-      0% { box-shadow: 0 0 15px #ff0000; }
-      100% { box-shadow: 0 0 35px #ff5555; }
     }
 
     a {
@@ -105,7 +99,7 @@
       100% { transform: translateY(100vh) rotate(360deg); }
     }
 
-    /* زر السعر */
+    /* السعر */
     #tonPrice {
       margin-top: 25px;
       font-size: 1em;
@@ -116,34 +110,21 @@
       width: 240px;
     }
 
-    /* زر الساعة */
-    #clockButton {
-      position: absolute;
-      top: 20px;
+    /* الساعة */
+    #clock {
+      position: fixed;
+      top: 15px;
       right: 20px;
-      background: rgba(0,0,0,0.4);
-      color: #00ffff;
-      border: 1px solid #00ffff;
-      border-radius: 12px;
-      padding: 10px 20px;
-      font-size: 1em;
-      font-weight: bold;
-      box-shadow: 0 0 15px #00ffff;
-      animation: pulse 2s infinite;
-      cursor: default;
+      color: #00ffcc;
+      font-size: 1.2em;
+      font-family: monospace;
+      text-shadow: 0 0 10px #00ffcc;
+      z-index: 1000;
     }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 10px #00ffff; }
-      50% { box-shadow: 0 0 25px #00ffff; }
-      100% { box-shadow: 0 0 10px #00ffff; }
-    }
-
   </style>
 </head>
 <body>
-
-  <button id="clockButton">00:00:00</button>
+  <div id="clock">00:00:00</div>
 
   <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" alt="Super ZWN Logo" class="logo">
   <h1>. 𝖲𝗎𝖯𝖾𝗋 𝖹𝗐𝗇 .</h1>
@@ -170,29 +151,25 @@
   <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
   <script>
-    // 🎵 صوت ترحيب عند الدخول
+    // 🔔 الأصوات
+    const clickSound = new Audio('https://files.catbox.moe/txfod8.m4a');
+    const enterSound = new Audio('https://files.catbox.moe/7nzzh3.mp3');
+    enterSound.volume = 0.5;
+
+    // تشغيل صوت الدخول عند كل تحميل
     window.addEventListener('load', () => {
-      const welcome = new Audio('https://files.catbox.moe/7o84xw.m4a');
-      welcome.volume = 0.6;
-      welcome.play().catch(()=>{});
+      enterSound.play().catch(()=>{});
     });
 
-    // 🎧 صوت عند الضغط على أي زر
-    const clickSound = new Audio('https://files.catbox.moe/txfod8.m4a');
+    // صوت الأزرار
     document.querySelectorAll('a').forEach(btn => {
       btn.addEventListener('click', () => {
         clickSound.currentTime = 0;
-        clickSound.play();
+        clickSound.play().catch(()=>{});
       });
     });
 
-    // 🕒 تحديث الساعة في الزرار
-    setInterval(() => {
-      const now = new Date();
-      document.getElementById("clockButton").textContent = now.toLocaleTimeString('ar-EG');
-    }, 1000);
-
-    // ❄️ تأثير التلج
+    // ❄️ التلج
     const colors = ['white','red','cyan'];
     function createSnowflake() {
       const snowflake = document.createElement('div');
@@ -207,7 +184,7 @@
     }
     setInterval(createSnowflake, 200);
 
-    // 💰 جلب سعر التون
+    // 💲 سعر التون
     async function fetchTonPrice() {
       try {
         const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
@@ -219,7 +196,15 @@
     }
     fetchTonPrice();
     setInterval(fetchTonPrice, 60000);
-  </script>
 
+    // ⏰ الساعة
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', { hour12: false });
+      document.getElementById('clock').textContent = time;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
 </body>
 </html>
