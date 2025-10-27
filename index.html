@@ -73,11 +73,9 @@
       z-index: 1001;
       border-right: 2px solid red;
     }
-    .sidebar a {
-      width: 90%;
-      margin: 10px auto;
-      box-shadow: none;
-    }
+    .sidebar a { width: 90%; margin: 10px auto; box-shadow: none; }
+
+    .spaced { margin-top: 6px; }
   </style>
 </head>
 <body>
@@ -86,7 +84,6 @@
 
 <div class="sidebar" id="sidebar">
   <a href="mediator.html">❓ يعني اي وسيط</a>
-  <a href="cown.html">💱 أسعار العملات</a>
 </div>
 
 <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
@@ -97,10 +94,11 @@
 <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank">💬 جروب سوبر زون</a>
 <a href="mediators.html">🤝 وسطاء السوبر</a>
 
-<!-- زرار سعر التون الجديد -->
-<a href="#" id="tonBtn">💎 جاري تحميل التون...</a>
 
-<a href="#" id="timeBtn">⏰ جاري التحديث...</a>
+<a href="#" id="tonBtn" class="spaced">💎 جاري تحميل التون...</a>
+
+
+<a href="#" id="timeBtn" class="spaced">⏰ جاري التحديث...</a>
 <a href="#" id="dateBtn">📅 جاري التحديث...</a>
 
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
@@ -111,7 +109,7 @@ function toggleMenu() {
   s.style.left = (s.style.left === "0px") ? "-220px" : "0px";
 }
 
-// تحديث الوقت تلقائي
+
 function updateTime() {
   const now = new Date();
   document.getElementById("timeBtn").textContent =
@@ -120,7 +118,7 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
-// تحديث التاريخ تلقائي
+
 function updateDate() {
   const today = new Date();
   document.getElementById("dateBtn").textContent =
@@ -128,12 +126,12 @@ function updateDate() {
 }
 updateDate();
 
-// جلب سعر التون من Binance وتحديث كل دقيقة
+
 async function updateTonPrice() {
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
     const data = await res.json();
-    document.getElementById("tonBtn").textContent = "💎 TON: " + parseFloat(data.price).toFixed(3) + " $";
+    document.getElementById("tonBtn").textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
   } catch {
     document.getElementById("tonBtn").textContent = "💎 تعذر جلب سعر التون";
   }
