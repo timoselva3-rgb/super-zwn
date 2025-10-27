@@ -22,23 +22,26 @@ body::before {
   filter:brightness(0.4);
   z-index:-1;
 }
-a {
+
+.coin {
   display:block;
   background:rgba(15,15,15,0.8);
-  width:240px;
-  margin:10px auto;
-  padding:12px;
+  width:200px;                    /* أصغر */
+  margin:8px auto;                /* أقل */
+  padding:9px;                    /* أصغر */
   border-radius:12px;
   border:1px solid red;
   color:white;
   font-weight:bold;
-  font-size:1em;
+  font-size:0.9em;                /* أصغر */
   text-decoration:none;
-  box-shadow:0 0 10px red;
+  box-shadow:0 0 8px red;         /* أخف */
   transition:0.3s;
 }
-a:hover { transform:scale(1.05); }
+.coin:hover { transform:scale(1.05); }
+
 footer { margin-top:40px; font-size:0.9em; color:#ccc; }
+
 .menu-btn {
   position:fixed; top:15px; left:15px;
   font-size:26px;
@@ -47,6 +50,7 @@ footer { margin-top:40px; font-size:0.9em; color:#ccc; }
   border-radius:10px;
   cursor:pointer;
 }
+
 .sidebar {
   width:200px; height:100%; background:rgba(0,0,0,0.9);
   position:fixed; top:0; left:-220px;
@@ -54,7 +58,19 @@ footer { margin-top:40px; font-size:0.9em; color:#ccc; }
   transition:0.4s;
   padding-top:70px;
 }
-.sidebar a { width:90%; margin:10px auto; }
+.sidebar a {
+  display:block;
+  width:90%; 
+  margin:8px auto;
+  padding:10px;
+  border-radius:12px;
+  background:rgba(15,15,15,0.9);
+  text-decoration:none;
+  color:white;
+  border:1px solid red;
+  font-size:0.95em;
+}
+.sidebar a:hover { transform:scale(1.04); }
 </style>
 </head>
 <body>
@@ -76,7 +92,7 @@ footer { margin-top:40px; font-size:0.9em; color:#ccc; }
 <script>
 function toggleMenu(){
   const s=document.getElementById("sidebar");
-  s.style.left=(s.style.left==="0px")?"-220px":"0px";
+  s.style.left = (s.style.left==="0px") ? "-220px" : "0px";
 }
 
 const list = [
@@ -87,13 +103,15 @@ const list = [
 ];
 
 async function load() {
-  document.getElementById("coins").innerHTML = "";
+  const box = document.getElementById("coins");
+  box.innerHTML = "";
   for (let c of list) {
     const r = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${c}`);
     const d = await r.json();
-    const e = document.createElement("a");
+    const e = document.createElement("div");
+    e.className = "coin";
     e.innerHTML = `💲 ${c.replace("USDT","")} : ${parseFloat(d.price).toFixed(3)} $`;
-    document.getElementById("coins").appendChild(e);
+    box.appendChild(e);
   }
 }
 load();
