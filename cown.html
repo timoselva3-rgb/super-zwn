@@ -4,118 +4,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أسعار العملات | سوبر زون</title>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
-* { margin:0; padding:0; box-sizing:border-box; }
+* {margin:0;padding:0;box-sizing:border-box}
 body {
   font-family:'Tajawal', sans-serif;
-  background:black;
-  color:white;
-  text-align:center;
+  background:black; color:white; text-align:center;
 }
 body::before {
   content:"";
   position:fixed; top:0; left:0;
   width:100%; height:100%;
   background:url("https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg") center/cover;
-  filter:brightness(0.4);
-  z-index:-1;
+  filter:brightness(0.4); z-index:-1;
 }
-
-.coin {
-  display:block;
+.coin-box {
   background:rgba(15,15,15,0.8);
-  width:200px;                    /* أصغر */
-  margin:8px auto;                /* أقل */
-  padding:9px;                    /* أصغر */
-  border-radius:12px;
-  border:1px solid red;
-  color:white;
-  font-weight:bold;
-  font-size:0.9em;                /* أصغر */
-  text-decoration:none;
-  box-shadow:0 0 8px red;         /* أخف */
+  width:260px; margin:12px auto;
+  padding:10px; border-radius:12px;
+  border:1px solid red; box-shadow:0 0 8px red;
   transition:0.3s;
 }
-.coin:hover { transform:scale(1.05); }
-
-footer { margin-top:40px; font-size:0.9em; color:#ccc; }
-
-.menu-btn {
-  position:fixed; top:15px; left:15px;
-  font-size:26px;
-  background:rgba(255,255,255,0.12);
-  padding:6px 12px;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-.sidebar {
-  width:200px; height:100%; background:rgba(0,0,0,0.9);
-  position:fixed; top:0; left:-220px;
-  border-right:2px solid red;
-  transition:0.4s;
-  padding-top:70px;
-}
-.sidebar a {
-  display:block;
-  width:90%; 
-  margin:8px auto;
-  padding:10px;
-  border-radius:12px;
-  background:rgba(15,15,15,0.9);
-  text-decoration:none;
-  color:white;
-  border:1px solid red;
-  font-size:0.95em;
-}
-.sidebar a:hover { transform:scale(1.04); }
+.coin-box:hover {transform:scale(1.05)}
+.price {margin:5px 0; font-size:0.95em; color:#eee;}
+.icon {width:28px; vertical-align:middle; margin-left:5px;}
+footer {margin:40px 0 10px; font-size:0.9em; color:#ccc}
 </style>
 </head>
 <body>
 
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-<div class="sidebar" id="sidebar">
-  <a href="index.html">🏠 الصفحة الرئيسية</a>
-  <a href="mediator.html">❓ يعني اي وسيط</a>
-  <a href="cown.html">💱 أسعار العملات</a>
-</div>
-
 <h1 style="margin-top:60px;text-shadow:0 0 10px red;">💱 أسعار العملات</h1>
-
 <div id="coins"></div>
-
 <footer>© 2025 سوبر زون</footer>
 
 <script>
-function toggleMenu(){
-  const s=document.getElementById("sidebar");
-  s.style.left = (s.style.left==="0px") ? "-220px" : "0px";
-}
-
 const list = [
-  "TONUSDT","BTCUSDT","ETHUSDT","USDTUSDT","BNBUSDT",
-  "TRXUSDT","DOGEUSDT","LTCUSDT","SOLUSDT","XRPUSDT",
-  "ADAUSDT","DOTUSDT","AVAXUSDT","LINKUSDT","MATICUSDT",
-  "SHIBUSDT","ETCUSDT"
+  {id:"bitcoin", sym:"BTC", img:"https://cryptoicons.org/api/icon/btc/64"},
+  {id:"ethereum", sym:"ETH", img:"https://cryptoicons.org/api/icon/eth/64"},
+  {id:"tether", sym:"USDT", img:"https://cryptoicons.org/api/icon/usdt/64"},
+  {id:"binancecoin", sym:"BNB", img:"https://cryptoicons.org/api/icon/bnb/64"},
+  {id:"solana", sym:"SOL", img:"https://cryptoicons.org/api/icon/sol/64"},
+  {id:"toncoin", sym:"TON", img:"https://cryptoicons.org/api/icon/ton/64"},
+  {id:"ripple", sym:"XRP", img:"https://cryptoicons.org/api/icon/xrp/64"},
+  {id:"dogecoin", sym:"DOGE", img:"https://cryptoicons.org/api/icon/doge/64"},
+  {id:"cardano", sym:"ADA", img:"https://cryptoicons.org/api/icon/ada/64"},
+  {id:"tron", sym:"TRX", img:"https://cryptoicons.org/api/icon/trx/64"}
 ];
 
-async function load() {
-  const box = document.getElementById("coins");
-  box.innerHTML = "";
+async function loadPrices() {
+  const div = document.getElementById("coins");
+  div.innerHTML = `🔄 جاري تحميل الأسعار...`;
+
+  const usdEgp = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=EGP")
+      .then(r => r.json()).then(j => j.rates.EGP);
+
+  div.innerHTML = "";
+
   for (let c of list) {
-    const r = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${c}`);
+    const r = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${c.id}&vs_currencies=usd`);
     const d = await r.json();
-    const e = document.createElement("div");
-    e.className = "coin";
-    e.innerHTML = `💲 ${c.replace("USDT","")} : ${parseFloat(d.price).toFixed(3)} $`;
-    box.appendChild(e);
+    const usd = d[c.id].usd;
+    const egp = usd * usdEgp;
+    const ton = usd / (await getTonPrice());
+
+    div.innerHTML += `
+      <div class="coin-box">
+        <b><img class="icon" src="${c.img}"> ${c.sym}</b>
+        <div class="price">💵 بالدولار: ${usd.toFixed(2)} $</div>
+        <div class="price">🇪🇬 بالجنيه: ${egp.toFixed(2)} ج.م</div>
+        <div class="price">💠 بالـ TON: ${ton.toFixed(4)}</div>
+      </div>
+    `;
   }
 }
-load();
-setInterval(load, 60000);
+
+async function getTonPrice() {
+  const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=toncoin&vs_currencies=usd");
+  const d = await r.json();
+  return d.toncoin.usd;
+}
+
+loadPrices();
+setInterval(loadPrices, 60000);
 </script>
 
 </body>
