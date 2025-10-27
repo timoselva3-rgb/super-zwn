@@ -25,21 +25,12 @@ body::before {
   filter: brightness(0.4);
   z-index: -1;
 }
-h1 {
-  font-size: 1.8em; 
-  margin-top: 10px; 
-  text-shadow: 0 0 8px #ff0000;
-}
-p {
-  font-size: 1em; 
-  color: #ddd; 
-  margin-top: 5px; 
-  margin-bottom: 15px;
-}
+h1 { font-size: 1.8em; text-shadow:0 0 10px #ff0000; margin: 10px 0; }
+p { font-size: 1.1em; color: #ddd; margin: 5px 0 15px; }
 .logo {
   width: 100px;
   border-radius: 50%;
-  box-shadow: 0 0 12px #ff0000;
+  box-shadow: 0 0 15px #ff0000;
   margin-top: 20px;
 }
 a {
@@ -47,7 +38,7 @@ a {
   background-color: rgba(15,15,15,0.8);
   color: #fff;
   text-decoration: none;
-  margin: 6px auto;
+  margin: 8px auto;
   padding: 10px;
   border-radius: 12px;
   width: 220px;
@@ -58,7 +49,7 @@ a {
   font-size: 0.95em;
 }
 a:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
-footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
+footer { margin-top: 30px; color: #bbb; font-size: 0.9em; }
 .menu-btn {
   position: fixed;
   top: 15px;
@@ -119,11 +110,12 @@ function toggleMenu() {
 
 // تشغيل الصوت عند الضغط على أي زرار
 function playSound() {
-  document.getElementById("clickSound").currentTime = 0;
-  document.getElementById("clickSound").play();
+  const audio = document.getElementById("clickSound");
+  audio.currentTime = 0;
+  audio.play();
 }
 
-// تحديث الوقت
+// تحديث الوقت تلقائي
 function updateTime() {
   const now = new Date();
   document.getElementById("timeBtn").textContent =
@@ -132,7 +124,7 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
-// تحديث التاريخ
+// تحديث التاريخ تلقائي
 function updateDate() {
   const today = new Date();
   document.getElementById("dateBtn").textContent =
