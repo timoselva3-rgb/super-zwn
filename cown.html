@@ -10,35 +10,36 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family:'Tajawal', sans-serif;
-  background:black;
-  color:white;
+  background:#000;
+  color:#fff;
   text-align:center;
 }
 body::before {
   content:"";
-  position:fixed; top:0; left:0;
-  width:100%; height:100%;
+  position:fixed;
+  width:100%;
+  height:100%;
   background:url("https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg") center/cover;
   filter:brightness(0.4);
   z-index:-1;
 }
+h1 { margin-top:70px; text-shadow:0 0 10px red; }
 a {
   display:block;
-  background:rgba(15,15,15,0.85);
+  background:rgba(10,10,10,0.85);
+  color:white;
   width:200px;
   margin:8px auto;
-  padding:10px;
+  padding:8px;
+  font-size:0.9em;
   border-radius:12px;
   border:1px solid red;
-  color:white;
-  font-weight:bold;
-  font-size:0.9em;
   text-decoration:none;
+  font-weight:bold;
   box-shadow:0 0 10px red;
   transition:0.3s;
 }
 a:hover { transform:scale(1.05); }
-footer { margin-top:40px; font-size:0.85em; color:#ccc; }
 .menu-btn {
   position:fixed; top:15px; left:15px;
   font-size:26px;
@@ -48,14 +49,23 @@ footer { margin-top:40px; font-size:0.85em; color:#ccc; }
   cursor:pointer;
 }
 .sidebar {
-  width:200px; height:100%; background:rgba(0,0,0,0.9);
-  position:fixed; top:0; left:-220px;
+  width:200px;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  position:fixed;
+  top:0;
+  left:-220px;
   border-right:2px solid red;
   transition:0.4s;
   padding-top:70px;
 }
-.sidebar a { width:90%; margin:10px auto; }
+.sidebar a {
+  width:90%;
+  margin:10px auto;
+}
+footer { margin-top:30px; font-size:0.85em; color:#bbb; }
 </style>
+
 </head>
 <body>
 
@@ -66,65 +76,43 @@ footer { margin-top:40px; font-size:0.85em; color:#ccc; }
   <a href="mediator.html">❓ يعني اي وسيط</a>
 </div>
 
-<h1 style="margin-top:60px;text-shadow:0 0 10px red;">💱 أسعار العملات</h1>
+<h1>💱 أسعار العملات</h1>
 
-<div id="coins"></div>
+<div id="coins"><p>⏳ جاري تحميل الأسعار...</p></div>
 
-<footer>© 2025 سوبر زون</footer>
+<footer>© 2025 سوبر زون 🔥</footer>
 
 <script>
 function toggleMenu(){
   const s=document.getElementById("sidebar");
-  s.style.left=(s.style.left==="0px")?"-220px":"0px";
+  s.style.left = (s.style.left==="0px")?"-220px":"0px";
 }
 
-const cryptoList = [
-  {symbol:"TON", api_id:"11419"},
-  {symbol:"BTC", api_id:"1"},
-  {symbol:"ETH", api_id:"1027"},
-  {symbol:"USDT", api_id:"825"},
-  {symbol:"BNB", api_id:"1839"},
-  {symbol:"SOL", api_id:"5426"},
-  {symbol:"XRP", api_id:"52"},
-  {symbol:"DOGE", api_id:"74"},
-  {symbol:"ADA", api_id:"2010"},
-  {symbol:"TRX", api_id:"1958"}
+const list = [
+  "TONUSDT","BTCUSDT","ETHUSDT","USDTUSDT","BNBUSDT",
+  "SOLUSDT","XRPUSDT","DOGEUSDT","ADAUSDT","TRXUSDT"
 ];
 
-// دالة لجلب أسعار الدولار مقابل الجنيه
-async function getUSDToEGP() {
-  try {
-    const api_key = "44c217c22b184eb6a63c8de519ff9472";
-    const res = await fetch(`https://api.currencyfreaks.com/v2.0/rates/latest?apikey=${api_key}`);
-    const data = await res.json();
-    return parseFloat(data.rates.EGP);
-  } catch {
-    return 50.0;
-  }
-}
-
-// جلب أسعار العملات من CoinMarketCap
 async function load() {
-  const usdToEgp = await getUSDToEGP();
   document.getElementById("coins").innerHTML = "";
-  const ids = cryptoList.map(c=>c.api_id).join(",");
-  const url = `https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?id=${ids}&convert=USD`;
-  const headers = {"X-CMC_PRO_API_KEY":"322dce46-f22f-4013-8d60-b5f968740628"};
-  const res = await fetch(url, {headers});
-  const data = await res.json();
-  for(let coin of cryptoList){
-    const price_usd = data.data[coin.api_id].quote.USD.price;
-    const price_egp = price_usd * usdToEgp;
-    const price_ton = price_usd / data.data["11419"].quote.USD.price; // TON كنسبة
-    const a = document.createElement("a");
-    a.innerHTML = `💠 ${coin.symbol} <br>💵 ${price_usd.toFixed(2)} $ | 🇪🇬 ${price_egp.toFixed(2)} | 💎 ${price_ton.toFixed(4)} TON`;
-    document.getElementById("coins").appendChild(a);
+  for (let c of list) {
+    try {
+      const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${c}`);
+      const d = await res.json();
+      const symbol = c.replace("USDT","");
+
+      const btn = document.createElement("a");
+      btn.innerHTML = `💲 ${symbol} : ${(parseFloat(d.price)).toFixed(3)} $`;
+      document.getElementById("coins").appendChild(btn);
+
+    } catch(e){
+      console.log(e);
+    }
   }
 }
 
 load();
-setInterval(load, 60000);
-
+setInterval(load, 50000);
 </script>
 
 </body>
