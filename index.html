@@ -9,13 +9,20 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
   font-family: 'Tajawal', sans-serif;
   color: white;
   text-align: center;
   overflow-x: hidden;
   background: #000;
+  transition: background 0.5s, color 0.5s;
 }
+body.dark-mode {
+  background: #111;
+  color: #ddd;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -24,21 +31,22 @@ body::before {
   background: url("https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg") center/cover no-repeat;
   filter: brightness(0.4);
   z-index: -1;
+  transition: filter 0.5s;
 }
-h1 { font-size: 1.8em; text-shadow:0 0 10px #ff0000; margin: 10px 0; }
-p { font-size: 1.1em; color: #ddd; margin: 5px 0 15px; }
-.logo {
-  width: 100px;
-  border-radius: 50%;
-  box-shadow: 0 0 15px #ff0000;
-  margin-top: 20px;
+body.dark-mode::before {
+  filter: brightness(0.15);
 }
+
+h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
+p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
+.logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
+
 a {
   display: block;
   background-color: rgba(15,15,15,0.8);
   color: #fff;
   text-decoration: none;
-  margin: 8px auto;
+  margin: 6px auto;
   padding: 10px;
   border-radius: 12px;
   width: 220px;
@@ -49,11 +57,12 @@ a {
   font-size: 0.95em;
 }
 a:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
-footer { margin-top: 30px; color: #bbb; font-size: 0.9em; }
+
+footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
+
 .menu-btn {
   position: fixed;
-  top: 15px;
-  left: 15px;
+  top: 15px; left: 15px;
   font-size: 26px;
   background: rgba(255,255,255,0.12);
   padding: 6px 12px;
@@ -61,13 +70,11 @@ footer { margin-top: 30px; color: #bbb; font-size: 0.9em; }
   cursor: pointer;
   z-index: 1002;
 }
+
 .sidebar {
-  width: 200px;
-  height: 100%;
+  width: 200px; height: 100%;
   background: rgba(0,0,0,0.9);
-  position: fixed;
-  top: 0;
-  left: -220px;
+  position: fixed; top: 0; left: -220px;
   transition: 0.4s;
   padding-top: 70px;
   z-index: 1001;
@@ -75,26 +82,39 @@ footer { margin-top: 30px; color: #bbb; font-size: 0.9em; }
 }
 .sidebar a { width: 90%; margin: 10px auto; box-shadow: none; }
 .spaced { margin-top: 6px; }
+
+/* الثلج */
+.snowflake {
+  position: fixed; top: -10px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 1000;
+  animation-name: fall;
+  animation-timing-function: linear;
+}
+@keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
 </style>
 </head>
 <body>
 
-<!-- عنصر الصوت -->
 <audio id="clickSound" src="https://files.catbox.moe/opzbli.mp3"></audio>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
-
 <div class="sidebar" id="sidebar">
-  <a href="mediator.html" onclick="playSound()">❓ يعني اي وسيط</a>
+  <a href="#" onclick="showMediator(); playSound()">❓ يعني اي وسيط</a>
+  <a href="#" onclick="toggleDarkMode(); playSound()">🌓 الوضع الليلي</a>
+  <a href="#" onclick="toggleLanguage(); playSound()">🌐 اللغة</a>
 </div>
 
 <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
-<h1>سوبر زون - Super Zwn</h1>
-<p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
+<h1 id="mainTitle">سوبر زون - Super Zwn</h1>
+<p id="mainDesc">اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
 
 <a href="https://t.me/superrzwn" target="_blank" onclick="playSound()">📢 القناة الرسمية</a>
 <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
-<a href="mediators.html" onclick="playSound()">🤝 وسطاء السوبر</a>
+<a href="#" onclick="showMediator(); playSound()">🤝 وسطاء السوبر</a>
 
 <a href="#" id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</a>
 <a href="#" id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</a>
@@ -107,43 +127,75 @@ function toggleMenu() {
   const s = document.getElementById("sidebar");
   s.style.left = (s.style.left === "0px") ? "-220px" : "0px";
 }
-
-// تشغيل الصوت عند الضغط على أي زرار
 function playSound() {
   const audio = document.getElementById("clickSound");
   audio.currentTime = 0;
   audio.play();
 }
 
-// تحديث الوقت تلقائي
+// تحديث الوقت
 function updateTime() {
   const now = new Date();
-  document.getElementById("timeBtn").textContent =
-    "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
+  document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
 }
 setInterval(updateTime, 1000);
 updateTime();
 
-// تحديث التاريخ تلقائي
+// تحديث التاريخ
 function updateDate() {
   const today = new Date();
-  document.getElementById("dateBtn").textContent =
-    "📅 " + today.toLocaleDateString('ar-EG');
+  document.getElementById("dateBtn").textContent = "📅 " + today.toLocaleDateString('ar-EG');
 }
 updateDate();
 
-// جلب سعر التون من Binance وتحديث كل دقيقة
+// سعر TON
 async function updateTonPrice() {
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
     const data = await res.json();
     document.getElementById("tonBtn").textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
-  } catch {
-    document.getElementById("tonBtn").textContent = "💎 تعذر جلب سعر التون";
-  }
+  } catch { document.getElementById("tonBtn").textContent = "💎 تعذر جلب سعر التون"; }
 }
 setInterval(updateTonPrice, 60000); 
 updateTonPrice();
+
+// ثلج
+function createSnowflake() {
+  const snow = document.createElement('div');
+  snow.classList.add('snowflake');
+  snow.style.width = `${Math.random() * 4 + 2}px`;
+  snow.style.height = snow.style.width;
+  snow.style.left = `${Math.random() * window.innerWidth}px`;
+  snow.style.animationDuration = `${Math.random() * 5 + 5}s`;
+  snow.style.opacity = Math.random();
+  document.body.appendChild(snow);
+  setTimeout(() => snow.remove(), 10000);
+}
+setInterval(createSnowflake, 200);
+
+// الوضع الليلي
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+}
+
+// تغيير اللغة
+let lang = 'ar';
+function toggleLanguage() {
+  if(lang === 'ar') {
+    document.getElementById("mainTitle").textContent = "Super Zwn - Super Zone";
+    document.getElementById("mainDesc").innerHTML = "The first super Arabic Telegram 💪<br>Biggest sales and highest trust";
+    lang = 'en';
+  } else {
+    document.getElementById("mainTitle").textContent = "سوبر زون - Super Zwn";
+    document.getElementById("mainDesc").innerHTML = "اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة";
+    lang = 'ar';
+  }
+}
+
+// عرض معلومات الوسيط
+function showMediator() {
+  alert("الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حقوق الجميع.\nمهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.\nالتعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.");
+}
 </script>
 
 </body>
