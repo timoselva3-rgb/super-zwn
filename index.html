@@ -29,8 +29,13 @@ body::before {
   transition: filter 0.5s;
 }
 body.dark-mode::before { filter: brightness(0.15); }
+
+.content { display: none; margin-top: 20px; }
+.content.active { display: block; }
+
 h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
 p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
+
 .logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
 
 a, button {
@@ -51,8 +56,6 @@ a, button {
 }
 a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
-footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
-
 .menu-btn { position: fixed; top: 15px; left: 15px; font-size: 26px; background: rgba(255,255,255,0.12); padding: 6px 12px; border-radius: 10px; cursor: pointer; z-index: 1002; }
 .sidebar {
   width: 200px; height: 100%;
@@ -69,9 +72,6 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 
 .snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
-
-.content { display: none; margin-top: 20px; }
-.content.active { display: block; }
 </style>
 </head>
 <body>
@@ -79,7 +79,6 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 <audio id="clickSound" src="https://files.catbox.moe/opzbli.mp3"></audio>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
-
 <div class="sidebar" id="sidebar">
   <a href="#" onclick="playSound(); show('info')">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
@@ -101,9 +100,11 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
     <a href="#" id="dateBtn" onclick="playSound()">📅 جاري التحديث...</a>
   </section>
 
-  <!-- قسم الوسطاء -->
+  <!-- صفحة الوسطاء -->
   <section class="content" id="brokers">
-    <h1>الوسطاء المعتمدون</h1>
+    <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
+    <h1>سوبر زون - Super Zwn</h1>
+    <h2>الوسطاء المعتمدون</h2>
     <a class="btn" href="https://t.me/vwvvxv" target="_blank">• الوسيط تيمو</a>
     <a class="btn" href="https://t.me/hamo_user" target="_blank">• الوسيط حمو</a>
     <a class="btn" href="https://t.me/eid_user" target="_blank">• الوسيط عيد</a>
@@ -118,35 +119,29 @@ footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
 <script>
-// toggle sidebar
 function toggleMenu() {
   const s = document.getElementById("sidebar");
   s.style.left = (s.style.left === "0px") ? "-220px" : "0px";
 }
 
-// play click sound
 function playSound() {
   const audio = document.getElementById("clickSound");
   audio.currentTime = 0;
   audio.play();
 }
 
-// show section
 function show(id){
-  document.querySelectorAll('.content').forEach(sec => {
-    sec.classList.remove('active');
-  });
+  document.querySelectorAll('.content').forEach(sec => sec.classList.remove('active'));
   const target = document.getElementById(id);
   if(target) target.classList.add('active');
 }
 
-// update time & date
+// الوقت و التاريخ
 function updateTime() {
   const now = new Date();
   document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
 }
-setInterval(updateTime, 1000);
-updateTime();
+setInterval(updateTime, 1000); updateTime();
 
 function updateDate() {
   const today = new Date();
@@ -154,7 +149,7 @@ function updateDate() {
 }
 updateDate();
 
-// fetch TON price
+// سعر TON
 async function updateTonPrice() {
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
@@ -164,10 +159,9 @@ async function updateTonPrice() {
     document.getElementById("tonBtn").textContent = "💎 تعذر جلب سعر التون";
   }
 }
-setInterval(updateTonPrice, 60000);
-updateTonPrice();
+setInterval(updateTonPrice, 60000); updateTonPrice();
 
-// create snow
+// ثلج
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
@@ -182,7 +176,7 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-// dark mode
+// الوضع الليلي
 function toggleDarkModeFunc() {
   const body = document.body;
   const btn = document.getElementById('darkModeBtn');
@@ -190,7 +184,7 @@ function toggleDarkModeFunc() {
   btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
 }
 
-// close sidebar when click outside
+// غلق sidebar عند الضغط خارجها
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
@@ -199,6 +193,5 @@ document.addEventListener('click', function(event) {
   }
 });
 </script>
-
 </body>
 </html>
