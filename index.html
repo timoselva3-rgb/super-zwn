@@ -164,6 +164,7 @@ footer {
 
 <div class="sidebar" id="sidebar">
   <a href="#" id="brokerQstBtn" onclick="playSound(); openPopup()">• يعني اي وسيط •</a>
+  <a href="#" id="termsBtn" onclick="playSound(); openTermsPopup()">• شروط الاستخدام •</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
   <button id="langToggleBtn" onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
   <div class="language-buttons" id="langBtns">
@@ -181,6 +182,16 @@ footer {
       التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.
     </p>
     <button class="close-btn" onclick="closePopup(); playSound()">إغلاق</button>
+  </div>
+</div>
+
+<div class="popup-overlay" id="termsPopup">
+  <div class="popup-box">
+    <h3>• شروط الاستخدام •</h3>
+    <p>
+      هنا تكتب كل الشروط والأحكام اللي عايز تعرضها للمستخدمين.
+    </p>
+    <button class="close-btn" onclick="closeTermsPopup(); playSound()">إغلاق</button>
   </div>
 </div>
 
