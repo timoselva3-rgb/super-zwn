@@ -328,7 +328,7 @@ function setLang(lang) {
 
     document.getElementById("tonBtn").textContent = "💎 جاري تحميل التون...";
     
-
+    // عند تغيير اللغة، تحديث الساعة والتاريخ بالنص الجديد
     updateTime(true); 
     updateDate(true); 
 
@@ -378,10 +378,9 @@ function setLang(lang) {
 
     document.getElementById("tonBtn").textContent = "💎 Loading TON...";
     
-
+    // عند تغيير اللغة، تحديث الساعة والتاريخ بالنص الجديد
     updateTime(true); 
     updateDate(true); 
-
 
 
     const brokers = ['Broker Timo','Broker Hamo','Broker Eid','Broker Salk','Broker Yousef','Broker Error','Broker Rio'];
@@ -403,17 +402,21 @@ function setLang(lang) {
   updateTonPrice();
 }
 
-
+/**
+ * دالة لتحديث زر الساعة كل ثانية.
+ * تم تعديل التنسيق لضمان ظهور الثواني والدقائق بشكل دائم.
+ * @param {boolean} forceUpdateLabel إذا كان True، يتم تحديث الزر حتى لو كان النص الحالي لا يحتوي على نص التحميل.
+ */
 function updateTime(forceUpdateLabel = false) {
   const now = new Date();
-
-
-  const timeText = now.toLocaleTimeString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { 
-      hour: '2-digit', 
-      minute: '2-digit', 
-      second: '2-digit', 
-      hour12: true 
-  });
+  
+  // استخدام تنسيق محدد لضمان ظهور HH:MM:SS
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  
+  // تنسيق الوقت (HH:MM:SS) 
+  const timeText = `${hours}:${minutes}:${seconds}`; 
   
   const labelAr = 'جاري التحديث...';
   const labelEn = 'Updating...';
@@ -421,16 +424,17 @@ function updateTime(forceUpdateLabel = false) {
 
   const timeBtn = document.getElementById("timeBtn");
   
-
-  if (forceUpdateLabel || timeBtn.textContent.includes(label) || !timeBtn.textContent.includes("⏰")) {
-     timeBtn.textContent = "⏰ " + timeText;
-  }
+  // تحديث النص في الزر ليعرض الوقت الحالي المتضمن للثواني
+  timeBtn.textContent = "⏰ " + timeText;
 }
 
-
+// تشغيل دالة تحديث الوقت كل 1000 مللي ثانية (ثانية واحدة)
 setInterval(updateTime, 1000); 
 
- 
+/**
+ * دالة لتحديث زر التاريخ.
+ * @param {boolean} forceUpdateLabel إذا كان True، يتم تحديث الزر حتى لو كان النص الحالي لا يحتوي على نص التحميل.
+ */
 function updateDate(forceUpdateLabel = false) {
   const today = new Date();
 
@@ -460,26 +464,13 @@ async function updateTonPrice() {
         tonBtn.textContent = `💎 ${loadingText}`;
     }
 
-
-    const response = await google.search({queries: ['TONUSDT price binance']});
-    const result = response.results[0]; 
+    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
+    const data = await res.json();
+    tonBtn.textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
     
-    let priceMatch = result.snippet.match(/\$([\d\.]+)/);
-    let price = priceMatch ? parseFloat(priceMatch[1]).toFixed(2) : null;
-
-
-    if (price) {
-        tonBtn.textContent = "💎 TON: " + price + " $";
-    } else {
-
-        const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
-        const data = await res.json();
-        tonBtn.textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
-    }
 
   } catch (e) {
     document.getElementById("tonBtn").textContent = `💎 ${errorText}`;
-    console.error("Error fetching TON price:", e);
   }
 }
 setInterval(updateTonPrice, 60000); 
@@ -510,10 +501,11 @@ document.addEventListener('click', function(event) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    // تشغيل الدالة لأول مرة لضبط الساعة والتاريخ وسعر التون عند تحميل الصفحة
     setLang('ar');
-    updateTime();
-    updateDate();
-    updateTonPrice();
+    updateTime(); // مهم لضبط الوقت فوراً
+    updateDate(); // مهم لضبط التاريخ فوراً
+    updateTonPrice(); // مهم لضبط سعر التون فوراً
 });
 </script>
 </body>
