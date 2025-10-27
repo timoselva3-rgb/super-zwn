@@ -6,11 +6,9 @@
   <title>سوبر زون | اكبر سوبر عربي على تيليجرام</title>
   <meta name="description" content="سوبر زون - اول سوبر عربي على تيليجرام 💪 اكبر المبيعات واعلى درجات الثقة">
   <meta name="keywords" content="سوبر زون, تيليجرام, وسطاء, مبيعات, عربي">
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Tajawal', sans-serif;
       color: white;
@@ -18,7 +16,6 @@
       overflow-x: hidden;
       background: #000;
     }
-
     body::before {
       content: "";
       position: fixed;
@@ -28,17 +25,14 @@
       filter: brightness(0.4);
       z-index: -1;
     }
-
-    h1 { font-size: 2.6em; color: #fff; text-shadow: 0 0 10px #ff0000; margin-top: 40px; }
+    h1 { font-size: 2.6em; text-shadow: 0 0 10px #ff0000; margin-top: 40px; }
     p { font-size: 1.1em; color: #ddd; margin: 10px 0 25px; }
-
     .logo {
       width: 130px;
       border-radius: 20px;
       box-shadow: 0 0 15px #ff0000;
       margin-top: 20px;
     }
-
     a {
       display: block;
       background-color: rgba(15,15,15,0.8);
@@ -54,11 +48,8 @@
       transition: 0.3s;
       font-size: 0.95em;
     }
-
     a:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
-
     footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
-
     .menu-btn {
       position: fixed;
       top: 15px;
@@ -70,7 +61,6 @@
       cursor: pointer;
       z-index: 1002;
     }
-
     .sidebar {
       width: 200px;
       height: 100%;
@@ -83,26 +73,11 @@
       z-index: 1001;
       border-right: 2px solid red;
     }
-
     .sidebar a {
       width: 90%;
       margin: 10px auto;
       box-shadow: none;
     }
-
-    .info-box {
-      margin-top: 15px;
-      width: 260px;
-      background: rgba(0,0,0,0.75);
-      padding: 15px;
-      border-radius: 15px;
-      border: 1px solid #111;
-      box-shadow: 0 0 10px #222;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    #tonPrice { border-color: #00ff88; color: #00ff88; box-shadow: 0 0 15px #00ff88; }
   </style>
 </head>
 <body>
@@ -111,6 +86,7 @@
 
 <div class="sidebar" id="sidebar">
   <a href="mediator.html">❓ يعني اي وسيط</a>
+  <a href="currencies.html">💱 أسعار العملات</a>
 </div>
 
 <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
@@ -119,14 +95,10 @@
 
 <a href="https://t.me/superrzwn" target="_blank">📢 القناة الرسمية</a>
 <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank">💬 جروب سوبر زون</a>
-
 <a href="mediators.html">🤝 وسطاء السوبر</a>
 
-<div class="info-box">
-  <a id="tonPrice" href="#" onclick="event.preventDefault()">💎 سعر التون: <span id="price">جاري التحميل...</span></a>
-  <a href="#" onclick="showTime()">⏰ الساعة</a>
-  <a href="#" onclick="showDate()">📅 التاريخ</a>
-</div>
+<a href="#" id="timeBtn">⏰ جاري التحديث...</a>
+<a href="#" id="dateBtn">📅 جاري التحديث...</a>
 
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
@@ -136,28 +108,20 @@ function toggleMenu() {
   s.style.left = (s.style.left === "0px") ? "-220px" : "0px";
 }
 
-function showTime() {
+function updateTime() {
   const now = new Date();
-  alert("⏰ الوقت الحالي: " + now.toLocaleTimeString('en-US', { hour12: true }));
+  document.getElementById("timeBtn").textContent =
+    "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
 }
+setInterval(updateTime, 1000);
+updateTime();
 
-function showDate() {
+function updateDate() {
   const today = new Date();
-  alert("📅 تاريخ اليوم: " + today.toLocaleDateString('ar-EG'));
+  document.getElementById("dateBtn").textContent =
+    "📅 " + today.toLocaleDateString('ar-EG');
 }
-
-async function fetchTonPrice() {
-  try {
-    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
-    const data = await res.json();
-    document.getElementById('price').textContent =
-      parseFloat(data.price).toFixed(2) + " $";
-  } catch {
-    document.getElementById('price').textContent = "تعذر الجلب";
-  }
-}
-fetchTonPrice();
-setInterval(fetchTonPrice, 60000);
+updateDate();
 </script>
 
 </body>
