@@ -24,114 +24,71 @@ body::before {
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: url("https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg") center/cover no-repeat;
-  filter: brightness(0.4) contrast(1.2); /* تعزيز التباين للأسود والأحمر */
-  background-attachment: fixed;
+  filter: brightness(0.4);
   z-index: -1;
   transition: filter 0.5s;
 }
-body.dark-mode::before { filter: brightness(0.15) contrast(1.2); }
+body.dark-mode::before { filter: brightness(0.15); }
 
-.content { display: none; margin-top: 20px; padding-bottom: 70px; /* مسافة للفوتر */ }
+.content { display: none; margin-top: 20px; }
 .content.active { display: block; }
 
-h1 { font-size: 1.8em; margin-top: 10px; color: #fff; text-shadow: 0 0 10px #ff0000; }
-h2 { font-size: 1.2em; margin-top: 10px; color: #ddd; text-shadow: 0 0 6px #cc0000; }
-p { font-size: 1em; color: #ccc; margin: 5px 0 20px 0; }
+h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
+h2 { font-size: 1.2em; margin-top: 10px; text-shadow: 0 0 6px #ff0000; }
+p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
 
-.logo { width: 100px; border-radius: 50%; border: 3px solid #ff0000; box-shadow: 0 0 15px #ff0000; margin-top: 20px; }
+.logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
 
-/* تصميم الأزرار الموحد */
 a, button {
-  display: flex; /* لمركزة الأيقونات والنص */
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(5,5,5,0.85); /* خلفية شبه شفافة داكنة */
+  display: block;
+  background-color: rgba(15,15,15,0.8);
   color: #fff;
   text-decoration: none;
-  margin: 8px auto;
-  padding: 12px;
+  margin: 6px auto;
+  padding: 10px;
   border-radius: 12px;
-  width: 250px; /* زيادة عرض الأزرار قليلاً */
+  width: 220px;
   font-weight: bold;
-  border: 1px solid #cc0000;
-  box-shadow: 0 0 10px rgba(255,0,0,0.7); /* ظل أحمر قوي */
-  transition: all 0.3s ease-in-out;
-  font-size: 1em;
+  border: 1px solid red;
+  box-shadow: 0 0 10px red;
+  transition: 0.3s;
+  font-size: 0.95em;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
 }
-a:hover, button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #ff0000, 0 0 40px rgba(255,0,0,0.3); /* توهج أكبر عند المرور */
-  background-color: rgba(15,15,15,0.95);
-}
+a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
-/* شكل البطاقات الجديدة للصفحة الرئيسية */
-.fixed-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px; /* مسافة أكبر بين الأزرار */
-    margin-top: 30px;
-}
-.fixed-buttons a, .fixed-buttons button {
-    width: 85%; /* عرض أكبر على الشاشات الصغيرة */
-    max-width: 350px; /* حد أقصى للعرض */
-    border-radius: 15px;
-    padding: 15px 10px;
-}
-
-/* لون خاص لأزرار البيانات (السعر، الوقت، التاريخ) */
-#tonBtn, #timeBtn, #dateBtn {
-    background-color: rgba(10,10,10,0.85);
-    color: #ffcccc; /* لون فاتح مميز */
-    border: 1px solid #550000;
-    box-shadow: 0 0 5px rgba(255,0,0,0.4);
-    font-size: 0.9em;
-}
+.menu-btn { position: fixed; top: 15px; left: 15px; font-size: 20px; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 8px; cursor: pointer; z-index: 1002; }
 
 /* القائمة الجانبية */
 .sidebar {
   width: 240px;
   height: 100%;
-  background: rgba(0,0,0,0.95); /* خلفية سوداء شبه شفافة تماماً */
-  backdrop-filter: blur(8px); /* تأثير ضبابي قوي */
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
-  left: -240px;
+  left: -240px; /* تم تعديل القيمة لتناسب الـ width */
   transition: 0.4s;
   padding-top: 70px;
   z-index: 1001;
-  border-right: 3px solid #ff0000; /* خط أحمر سميك */
-  box-shadow: 2px 0 20px rgba(255,0,0,0.7); /* ظل أحمر للتأكيد */
+  border-right: 2px solid #ff0000;
+  box-shadow: 0 0 15px rgba(255,0,0,0.4);
 }
 .sidebar a, .sidebar button {
-  width: 90%;
+  width: 85%;
   margin: 10px auto;
-  background: rgba(15,15,15,0.9);
-  border: 1px solid #ff3333;
+  background: rgba(20,20,20,0.8);
+  border: 1px solid #ff0000;
+  border-radius: 10px;
   box-shadow: 0 0 8px #ff0000;
 }
-.menu-btn {
-  position: fixed; top: 15px; left: 15px; font-size: 24px;
-  background: rgba(255,0,0,0.7); /* زر قائمة أحمر واضح */
-  color: #fff;
-  padding: 5px 12px;
-  border-radius: 8px;
-  cursor: pointer; z-index: 1002;
-  border: 1px solid #fff;
-  box-shadow: 0 0 10px #ff0000;
-  transition: 0.3s;
-}
-.menu-btn:hover { background: #ff3333; box-shadow: 0 0 15px #ff0000; }
 
 /* popup */
 .popup-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.85); /* خلفية داكنة جداً */
+  background: rgba(0,0,0,0.7);
   display: none;
   justify-content: center;
   align-items: center;
@@ -139,38 +96,35 @@ a:hover, button:hover {
   animation: fadeIn 0.4s;
 }
 .popup-box {
-  background: #000;
-  border: 3px solid #ff0000;
+  background: rgba(20,20,20,0.95);
+  border: 2px solid #ff0000;
   border-radius: 15px;
-  padding: 30px;
-  width: 90%;
-  max-width: 450px;
-  box-shadow: 0 0 30px rgba(255,0,0,0.9);
+  padding: 20px;
+  width: 85%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(255,0,0,0.5);
   text-align: center;
   animation: fadeInUp 0.4s;
 }
 .popup-box h3 {
   color: #ff0000;
-  margin-bottom: 15px;
-  text-shadow: 0 0 5px #ff0000;
+  margin-bottom: 10px;
 }
 .popup-box p {
-  color: #eee;
-  font-size: 1.1em;
-  line-height: 1.8em;
+  color: #ddd;
+  font-size: 1em;
+  line-height: 1.6em;
 }
 .close-btn {
   background: #ff0000;
   color: #fff;
-  border: 1px solid #fff;
-  padding: 10px 25px;
-  border-radius: 12px;
-  margin-top: 20px;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  margin-top: 15px;
   cursor: pointer;
   font-weight: bold;
   transition: 0.3s;
-  box-shadow: 0 0 10px #ff0000;
-  width: auto; /* لتجنب العرض الكامل */
 }
 .close-btn:hover {
   background: #cc0000;
@@ -179,23 +133,26 @@ a:hover, button:hover {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes fadeInUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-.snowflake { position: fixed; top: -10px; background: #ff0000; border-radius: 50%; opacity: 0.6; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
+.snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
 .language-buttons { display: none; margin-top: 5px; flex-direction: column; }
-.language-buttons button { width: 90%; margin: 4px auto; }
+.language-buttons button { width: 80%; margin: 4px auto; }
 
-
+.fixed-buttons a, .fixed-buttons button {
+  width: 220px;
+  font-size: 0.95em;
+  box-shadow: 0 0 8px red;
+}
 footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   padding: 10px 0;
-  background: rgba(0,0,0,0.9);
-  font-size: 0.85em;
+  background: rgba(0,0,0,0.8);
+  font-size: 0.8em;
   color: #ff0000;
   z-index: 10;
-  box-shadow: 0 0 15px rgba(255,0,0,0.9);
-  border-top: 2px solid #cc0000;
+  box-shadow: 0 0 10px rgba(255,0,0,0.5);
 }
 </style>
 </head>
@@ -206,24 +163,24 @@ footer {
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="#" id="popupLink" onclick="playSound(); openPopup()">❓ يعني اي وسيط</a>
+  <a href="#" onclick="playSound(); openPopup()">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
-  <button id="langBtn" onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
+  <button onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
   <div class="language-buttons" id="langBtns">
-    <button onclick="setLang('ar'); playSound()" id="arLangBtn">عربي</button>
-    <button onclick="setLang('en'); playSound()" id="enLangBtn">English</button>
+    <button onclick="setLang('ar'); playSound()">عربي</button>
+    <button onclick="setLang('en'); playSound()">English</button>
   </div>
 </div>
 
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
-    <h3 id="popupTitle">❓ يعني اي وسيط؟</h3>
-    <p id="popupText">
+    <h3>❓ يعني اي وسيط؟</h3>
+    <p>
       الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>
       مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>
       التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.
     </p>
-    <button class="close-btn" id="closePopupBtn" onclick="closePopup(); playSound()">إغلاق</button>
+    <button class="close-btn" onclick="closePopup(); playSound()">إغلاق</button>
   </div>
 </div>
 
@@ -238,8 +195,8 @@ footer {
       <a id="groupBtn" href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">💬 جروب سوبر زون</a>
       <button id="brokersBtn" onclick="playSound(); show('brokers')">🤝 وسطاء السوبر</button>
 
-      <button id="tonBtn" onclick="playSound()">💎 جاري تحميل التون...</button>
-      <button id="timeBtn" onclick="playSound()">⏰ جاري التحديث...</button>
+      <button id="tonBtn" class="spaced" onclick="playSound()">💎 جاري تحميل التون...</button>
+      <button id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</button>
       <button id="dateBtn" onclick="playSound()">📅 جاري التحديث...</button>
     </div>
   </section>
@@ -257,22 +214,13 @@ footer {
       <a class="btn" href="https://t.me/error_user" target="_blank" onclick="playSound()">• الوسيط ايرور</a>
       <a class="btn" href="https://t.me/rio_user" target="_blank" onclick="playSound()">• الوسيط ريو</a>
     </div>
-    <button class="btn" id="backToMainBtn" onclick="playSound(); show('main')">⬅️ العودة للقائمة الرئيسية</button>
+    <button class="btn" onclick="playSound(); show('main')">⬅️ العودة للقائمة الرئيسية</button>
   </section>
 </div>
 
-<footer id="footerText">© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
+<footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
 <script>
-// تحديد اللغة الافتراضية عند التحميل
-document.addEventListener('DOMContentLoaded', () => {
-    setLang('ar');
-    updateTonPrice();
-    updateTime();
-    updateDate();
-});
-
-
 function toggleMenu() {
   const s = document.getElementById("sidebar");
   s.style.left = (s.style.left === "0px") ? "-240px" : "0px";
@@ -284,6 +232,7 @@ function playSound() {
   audio.play();
 }
 
+// ⚠️ تمت إضافة الدوال المفقودة هنا
 function openPopup() {
   document.getElementById('popup').style.display = 'flex';
 }
@@ -291,26 +240,19 @@ function openPopup() {
 function closePopup() {
   document.getElementById('popup').style.display = 'none';
 }
+// ------------------------------------
 
 function show(id){
   document.querySelectorAll('.content').forEach(sec => sec.classList.remove('active'));
   const target = document.getElementById(id);
   if(target) target.classList.add('active');
-  // إغلاق القائمة الجانبية عند التبديل بين الصفحات
-  document.getElementById("sidebar").style.left = "-240px";
 }
 
 function toggleDarkModeFunc() {
   const body = document.body;
   const btn = document.getElementById('darkModeBtn');
   body.classList.toggle('dark-mode');
-  // تعديل نص زر الوضع الليلي بناءً على اللغة الحالية
-  const currentLang = document.documentElement.lang;
-  if (currentLang === 'ar') {
-    btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
-  } else {
-    btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 Light Mode" : "🌓 Dark Mode";
-  }
+  btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
 }
 
 // اللغة
@@ -320,41 +262,21 @@ function toggleLangBtns() {
 }
 
 function setLang(lang) {
-  const body = document.body;
   if(lang === 'ar') {
     document.documentElement.setAttribute('lang', 'ar');
     document.documentElement.setAttribute('dir', 'rtl');
-
-    // القائمة الجانبية والـ Popup
-    document.getElementById('popupLink').innerText = '❓ يعني اي وسيط';
-    document.getElementById('langBtn').innerText = '🌐 اللغة';
-    document.getElementById('arLangBtn').innerText = 'عربي';
-    document.getElementById('enLangBtn').innerText = 'English';
-    document.getElementById('popupTitle').innerText = '❓ يعني اي وسيط؟';
-    document.getElementById('popupText').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
-    document.getElementById('closePopupBtn').innerText = 'إغلاق';
-
-    // الصفحة الرئيسية
     document.getElementById('mainTitle').innerText = 'سوبر زون - Super Zwn';
     document.getElementById('mainDesc').innerHTML = 'اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة';
     document.getElementById('channelBtn').innerText = '📢 القناة الرسمية';
     document.getElementById('groupBtn').innerText = '💬 جروب سوبر زون';
     document.getElementById('brokersBtn').innerText = '🤝 وسطاء السوبر';
-    document.getElementById('tonBtn').textContent = "💎 جاري تحميل التون...";
-    document.getElementById('timeBtn').textContent = "⏰ جاري التحديث...";
-    document.getElementById('dateBtn').textContent = "📅 جاري التحديث...";
-    document.getElementById('footerText').innerHTML = '© 2025 سوبر زون | جميع الحقوق محفوظة 🔥';
-
-
-    // صفحة الوسطاء
     document.getElementById('brokersTitle').innerText = 'سوبر زون - Super Zwn';
     document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
-    document.getElementById('backToMainBtn').innerText = '⬅️ العودة للقائمة الرئيسية';
+    document.querySelector('#brokers button').innerText = '⬅️ العودة للقائمة الرئيسية';
+    document.querySelector('.popup-box h3').innerText = '❓ يعني اي وسيط؟';
+    document.querySelector('.popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
+    document.querySelector('.close-btn').innerText = 'إغلاق';
     
-    // وضع المود
-    document.getElementById('darkModeBtn').innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
-
-
     const brokers = ['الوسيط تيمو','الوسيط حمو','الوسيط عيد','الوسيط سالك','الوسيط يوسف','الوسيط ايرور','الوسيط ريو'];
     const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
     const brokersList = document.getElementById('brokersList');
@@ -371,34 +293,17 @@ function setLang(lang) {
   } else if(lang === 'en') {
     document.documentElement.setAttribute('lang', 'en');
     document.documentElement.setAttribute('dir', 'ltr');
-
-    // القائمة الجانبية والـ Popup
-    document.getElementById('popupLink').innerText = '❓ What is a Broker?';
-    document.getElementById('langBtn').innerText = '🌐 Language';
-    document.getElementById('arLangBtn').innerText = 'عربي';
-    document.getElementById('enLangBtn').innerText = 'English';
-    document.getElementById('popupTitle').innerText = '❓ What is a Broker?';
-    document.getElementById('popupText').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
-    document.getElementById('closePopupBtn').innerText = 'Close';
-
-    // الصفحة الرئيسية
     document.getElementById('mainTitle').innerText = 'Super Zone - Super Zwn';
     document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
     document.getElementById('channelBtn').innerText = '📢 Official Channel';
     document.getElementById('groupBtn').innerText = '💬 Super Zone Group';
     document.getElementById('brokersBtn').innerText = '🤝 Super Brokers';
-    document.getElementById('tonBtn').textContent = "💎 Loading TON Price...";
-    document.getElementById('timeBtn').textContent = "⏰ Updating...";
-    document.getElementById('dateBtn').textContent = "📅 Updating...";
-    document.getElementById('footerText').innerHTML = '© 2025 Super Zone | All rights reserved 🔥';
-
-    // صفحة الوسطاء
     document.getElementById('brokersTitle').innerText = 'Super Zone - Super Zwn';
     document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
-    document.getElementById('backToMainBtn').innerText = '⬅️ Back to Main Menu';
-
-    // وضع المود
-    document.getElementById('darkModeBtn').innerHTML = body.classList.contains('dark-mode') ? "🌞 Light Mode" : "🌓 Dark Mode";
+    document.querySelector('#brokers button').innerText = '⬅️ Back to Main Menu';
+    document.querySelector('.popup-box h3').innerText = '❓ What is a Broker?';
+    document.querySelector('.popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
+    document.querySelector('.close-btn').innerText = 'Close';
 
     const brokers = ['Broker Timo','Broker Hamo','Broker Eid','Broker Salk','Broker Yousef','Broker Error','Broker Rio'];
     const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
@@ -414,43 +319,34 @@ function setLang(lang) {
       brokersList.appendChild(a);
     }
   }
-
-  // تحديث الأزرار الثابتة بعد تغيير اللغة
-  updateTonPrice();
-  updateTime();
-  updateDate();
 }
 
 // الوقت و التاريخ
 function updateTime() {
   const now = new Date();
-  const currentLang = document.documentElement.lang;
-  const options = { hour12: true, hour: 'numeric', minute: 'numeric', second: 'numeric' };
-  document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString(currentLang === 'ar' ? 'ar-EG' : 'en-US', options);
+  document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
 }
-setInterval(updateTime, 1000);
+setInterval(updateTime, 1000); updateTime();
 
 function updateDate() {
   const today = new Date();
-  const currentLang = document.documentElement.lang;
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById("dateBtn").textContent = "📅 " + today.toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US', options);
+  document.getElementById("dateBtn").textContent = "📅 " + today.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
 }
+updateDate();
 
 // سعر TON (جلب السعر من بينانس)
 async function updateTonPrice() {
-  const currentLang = document.documentElement.lang;
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
     const data = await res.json();
     document.getElementById("tonBtn").textContent = "💎 TON: " + parseFloat(data.price).toFixed(2) + " $";
   } catch {
-    document.getElementById("tonBtn").textContent = currentLang === 'ar' ? "💎 تعذر جلب سعر التون" : "💎 Failed to fetch TON Price";
+    document.getElementById("tonBtn").textContent = "💎 تعذر جلب سعر التون";
   }
 }
-setInterval(updateTonPrice, 60000); 
+setInterval(updateTonPrice, 60000); updateTonPrice();
 
-// ثلج أحمر (تأثير الجو)
+// ثلج
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
@@ -460,14 +356,6 @@ function createSnowflake() {
   snow.style.left = `${Math.random() * window.innerWidth}px`;
   snow.style.animationDuration = `${Math.random() * 5 + 5}s`;
   snow.style.opacity = Math.random();
-  // التأكد من أن الخلفية سوداء لجعل "الثلج" الأحمر مرئياً
-  if(document.body.classList.contains('dark-mode')){
-      snow.style.backgroundColor = '#cc0000'; // أحمر داكن في الوضع الداكن
-      snow.style.boxShadow = '0 0 5px #ff0000';
-  } else {
-      snow.style.backgroundColor = '#ff0000';
-      snow.style.boxShadow = '0 0 8px #ff0000';
-  }
   document.body.appendChild(snow);
   setTimeout(() => snow.remove(), 10000);
 }
