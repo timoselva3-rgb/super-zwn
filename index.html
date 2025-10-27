@@ -9,7 +9,6 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -30,9 +29,15 @@
       z-index: -1;
     }
 
+    img.logo {
+      width: 130px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px #ff0000;
+      margin-top: 20px;
+    }
+
     h1 {
       font-size: 2.6em;
-      color: #fff;
       text-shadow: 0 0 10px #ff0000;
       margin-top: 40px;
     }
@@ -41,13 +46,6 @@
       font-size: 1.1em;
       color: #ddd;
       margin: 10px 0 25px;
-    }
-
-    .logo {
-      width: 130px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px #ff0000;
-      margin-top: 20px;
     }
 
     a {
@@ -71,92 +69,123 @@
       box-shadow: 0 0 25px #ff0000;
     }
 
-    .users { margin-top: 40px; padding-bottom: 50px; }
-
-    .users h3 {
-      color: white;
-      font-size: 1.4em;
-      text-shadow: 0 0 15px red;
-      margin-bottom: 10px;
+    /* زر سعر التون وأزرار الساعة والتاريخ */
+    #tonPrice, #clockBtn, #dateBtn {
+      background-color: rgba(30,30,30,0.85);
+      border: 1px solid #00ff88;
+      box-shadow: 0 0 15px #00ff88;
+      color: #00ff88;
     }
 
-    footer { margin-top: 40px; color: #bbb; font-size: 0.9em; }
+    .menu-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 26px;
+      background: rgba(255,255,255,0.12);
+      padding: 6px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    .sidebar {
+      width: 200px;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      position: fixed;
+      top: 0;
+      left: -220px;
+      transition: 0.4s;
+      padding-top: 70px;
+      z-index: 1001;
+      border-right: 2px solid red;
+    }
+
+    .sidebar a {
+      width: 90%;
+      margin: 10px auto;
+      box-shadow: none;
+    }
   </style>
 </head>
 <body>
 
-  <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" alt="Super ZWN Logo" class="logo">
-  <h1>. 𝖲𝗎𝖯𝖾𝗋 𝖹𝗐𝗇 .</h1>
-  <p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-  <a href="https://t.me/superrzwn" target="_blank">📢 القناة الرسمية</a>
-  <a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank">💬 جروب سوبر زون</a>
-
-  <div class="users">
-    <h3>• الوسطاء الرسميين •<br>ممنوع التعامل بدون وسيط لضمان حق الطرفين</h3>
-    <a href="timo.html">• الوسيط تيمو •</a>
-    <a href="hamo.html">• الوسيط حمو •</a>
-    <a href="eid.html">• الوسيط عيد •</a>
-    <a href="salk.html">• الوسيط سالك •</a>
-    <a href="yousef.html">• الوسيط يوسف •</a>
-    <a href="error.html">• الوسيط ايرور •</a>
-    <a href="rio.html">• الوسيط ريو •</a>
-  </div>
-
+<div class="sidebar" id="sidebar">
   <a href="mediator.html">❓ يعني اي وسيط</a>
+</div>
 
-  <a id="tonPrice" href="#" onclick="event.preventDefault()"> سعر التون: <span id="price">جاري التحميل...</span> </a>
-  <a id="clockBtn" href="#" onclick="event.preventDefault()">⏰ تحميل الساعة...</a>
-  <a id="dateBtn" href="#" onclick="event.preventDefault()">📅 تحميل التاريخ...</a>
+<img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
+<h1>. 𝖲𝗎𝖯𝖾𝗋 𝖹𝗐𝗇 .</h1>
+<p>اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة</p>
 
-  <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
+<a href="https://t.me/superrzwn" target="_blank">📢 القناة الرسمية</a>
+<a href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank">💬 جروب سوبر زون</a>
 
-  <script>
-    // صوت دخول
-    const enterSound = new Audio('https://files.catbox.moe/7nzzh3.mp3');
-    enterSound.volume = 0.5;
-    window.addEventListener('load', () => enterSound.play().catch(()=>{}));
+<div class="users">
+  <h3>• الوسطاء الرسميين •</h3>
+  <a href="timo.html">• الوسيط تيمو •</a>
+  <a href="hamo.html">• الوسيط حمو •</a>
+  <a href="eid.html">• الوسيط عيد •</a>
+  <a href="salk.html">• الوسيط سالك •</a>
+  <a href="yousef.html">• الوسيط يوسف •</a>
+  <a href="error.html">• الوسيط ايرور •</a>
+  <a href="rio.html">• الوسيط ريو •</a>
+</div>
 
-    // صوت الأزرار
-    const clickSound = new Audio('https://files.catbox.moe/txfod8.m4a');
-    document.querySelectorAll('a').forEach(btn => {
-      btn.addEventListener('click', () => {
-        clickSound.currentTime = 0;
-        clickSound.play().catch(()=>{});
-      });
-    });
+<a id="tonPrice" href="#" onclick="event.preventDefault()">💎 سعر التون: <span id="price">جاري التحميل...</span></a>
+<a id="clockBtn" href="#" onclick="event.preventDefault()">⏰ جاري التحميل...</a>
+<a id="dateBtn" href="#" onclick="event.preventDefault()">📅 جاري التحميل...</a>
 
-    // سعر التون
-    async function fetchTonPrice() {
-      try {
-        const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
-        const data = await res.json();
-        document.getElementById('price').textContent = parseFloat(data.price).toFixed(2) + " $";
-      } catch {
-        document.getElementById('price').textContent = "تعذر";
-      }
-    }
-    fetchTonPrice();
-    setInterval(fetchTonPrice, 60000);
+<footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
-    // تحديث الساعة
-    function updateClock() {
-      const now = new Date();
-      let time = now.toLocaleTimeString('en-US', { hour12: true });
-      document.getElementById('clockBtn').textContent = "⏰ " + time;
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
+<script>
+function toggleMenu() {
+  const s = document.getElementById("sidebar");
+  s.style.left = (s.style.left === "0px") ? "-220px" : "0px";
+}
 
-    // تحديث التاريخ
-    function updateDate() {
-      const now = new Date();
-      const date = now.toLocaleDateString('ar-EG');
-      document.getElementById('dateBtn').textContent = "📅 " + date;
-    }
-    updateDate();
-    setInterval(updateDate, 3600000);
-  </script>
+const clickSound = new Audio('https://files.catbox.moe/txfod8.m4a');
+document.querySelectorAll('a').forEach(btn => {
+  btn.addEventListener('click', () => {
+    clickSound.currentTime = 0;
+    clickSound.play().catch(()=>{});
+  });
+});
+
+// سعر التون
+async function fetchTonPrice() {
+  try {
+    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
+    const data = await res.json();
+    document.getElementById('price').textContent = parseFloat(data.price).toFixed(2) + " $";
+  } catch {
+    document.getElementById('price').textContent = "تعذر الجلب";
+  }
+}
+fetchTonPrice();
+setInterval(fetchTonPrice, 60000);
+
+// تحديث الساعة
+function updateClock() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-US', { hour12: true });
+  document.getElementById('clockBtn').textContent = "⏰ " + time;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// تحديث التاريخ
+function updateDate() {
+  const now = new Date();
+  const date = now.toLocaleDateString('ar-EG');
+  document.getElementById('dateBtn').textContent = "📅 " + date;
+}
+updateDate();
+setInterval(updateDate, 3600000);
+</script>
 
 </body>
 </html>
