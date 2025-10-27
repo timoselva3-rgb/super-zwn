@@ -34,6 +34,7 @@ body.dark-mode::before { filter: brightness(0.15); }
 .content.active { display: block; }
 
 h1 { font-size: 1.8em; margin-top: 10px; text-shadow: 0 0 8px #ff0000; }
+h2 { font-size: 1.2em; margin-top: 10px; text-shadow: 0 0 6px #ff0000; }
 p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
 
 .logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff0000; margin-top: 20px; }
@@ -72,6 +73,25 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
 .snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
 @keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
+
+#languageMenu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 15px;
+  width: 160px;
+  background: rgba(0,0,0,0.9);
+  border: 1px solid red;
+  border-radius: 10px;
+  z-index: 1003;
+  padding: 5px 0;
+}
+#languageMenu button {
+  width: 90%;
+  margin: 4px auto;
+  background: rgba(15,15,15,0.8);
+  border: 1px solid red;
+}
 </style>
 </head>
 <body>
@@ -82,6 +102,12 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 <div class="sidebar" id="sidebar">
   <a href="#" onclick="playSound(); show('info')">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
+  <a href="#" id="languageBtn" onclick="playSound(); toggleLanguageMenu()">🌐 اللغة</a>
+</div>
+
+<div id="languageMenu">
+  <button onclick="playSound(); setLanguage('ar')">عربي</button>
+  <button onclick="playSound(); setLanguage('en')">English</button>
 </div>
 
 <div class="wrapper">
@@ -181,17 +207,74 @@ function toggleDarkModeFunc() {
   const body = document.body;
   const btn = document.getElementById('darkModeBtn');
   body.classList.toggle('dark-mode');
-  btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+  btn.innerHTML = body.classList.contains('dark-mode') ? (body.lang === 'en' ? "🌞 Day Mode" : "🌞 الوضع النهاري") : (body.lang === 'en' ? "🌓 Night Mode" : "🌓 الوضع الليلي");
 }
 
-// غلق sidebar عند الضغط خارجها
+// غلق sidebar وقائمة اللغة عند الضغط خارجها
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
+  const languageMenu = document.getElementById('languageMenu');
+
   if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
     sidebar.style.left = "-220px";
   }
+
+  if(languageMenu.style.display === "block" && !languageMenu.contains(event.target) && event.target.id !== 'languageBtn') {
+    languageMenu.style.display = "none";
+  }
 });
+
+// اللغة
+function toggleLanguageMenu() {
+  const menu = document.getElementById('languageMenu');
+  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+function setLanguage(lang) {
+  const body = document.body;
+  body.setAttribute('lang', lang);
+  
+  if(lang === 'ar') {
+    document.querySelector('h1').textContent = "سوبر زون - Super Zwn";
+    document.querySelector('p').innerHTML = "اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة";
+    document.querySelector('#tonBtn').textContent = "💎 جاري تحميل التون...";
+    document.querySelector('#timeBtn').textContent = "⏰ جاري التحديث...";
+    document.querySelector('#dateBtn').textContent = "📅 جاري التحديث...";
+    document.getElementById('darkModeBtn').innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+    document.querySelector('#languageBtn').textContent = "🌐 اللغة";
+    document.querySelector('#brokers h2').textContent = "الوسطاء المعتمدون";
+    const brokers = document.querySelectorAll('#brokers .btn');
+    brokers[0].textContent = "• الوسيط تيمو";
+    brokers[1].textContent = "• الوسيط حمو";
+    brokers[2].textContent = "• الوسيط عيد";
+    brokers[3].textContent = "• الوسيط سالك";
+    brokers[4].textContent = "• الوسيط يوسف";
+    brokers[5].textContent = "• الوسيط ايرور";
+    brokers[6].textContent = "• الوسيط ريو";
+    brokers[7].textContent = "⬅️ العودة للقائمة الرئيسية";
+  } else if(lang === 'en') {
+    document.querySelector('h1').textContent = "Super Zone - Super Zwn";
+    document.querySelector('p').innerHTML = "First Arab Super on Telegram 💪<br>Highest sales and trust";
+    document.querySelector('#tonBtn').textContent = "💎 Loading TON...";
+    document.querySelector('#timeBtn').textContent = "⏰ Updating...";
+    document.querySelector('#dateBtn').textContent = "📅 Updating...";
+    document.getElementById('darkModeBtn').innerHTML = body.classList.contains('dark-mode') ? "🌞 Day Mode" : "🌓 Night Mode";
+    document.querySelector('#languageBtn').textContent = "🌐 Language";
+    document.querySelector('#brokers h2').textContent = "Certified Brokers";
+    const brokers = document.querySelectorAll('#brokers .btn');
+    brokers[0].textContent = "• Broker Timo";
+    brokers[1].textContent = "• Broker Hamo";
+    brokers[2].textContent = "• Broker Eid";
+    brokers[3].textContent = "• Broker Salk";
+    brokers[4].textContent = "• Broker Yousef";
+    brokers[5].textContent = "• Broker Error";
+    brokers[6].textContent = "• Broker Rio";
+    brokers[7].textContent = "⬅️ Back to Main Menu";
+  }
+
+  document.getElementById('languageMenu').style.display = "none";
+}
 </script>
 </body>
 </html>
