@@ -164,7 +164,7 @@ footer {
 
 <div class="sidebar" id="sidebar">
   <a href="#" id="brokerQstBtn" onclick="playSound(); openPopup()">• يعني اي وسيط •</a>
-  <a href="#" id="termsBtn" onclick="playSound(); openTermsPopup()">• شروط الاستخدام •</a>
+  <a href="#" id="usageBtn" onclick="playSound(); openUsagePopup()">• طريقة الاستخدام •</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
   <button id="langToggleBtn" onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
   <div class="language-buttons" id="langBtns">
@@ -185,13 +185,13 @@ footer {
   </div>
 </div>
 
-<div class="popup-overlay" id="termsPopup">
+<div class="popup-overlay" id="usagePopup">
   <div class="popup-box">
     <h3>• شروط الاستخدام •</h3>
     <p>
       هنا تكتب كل الشروط والأحكام اللي عايز تعرضها للمستخدمين.
     </p>
-    <button class="close-btn" onclick="closeTermsPopup(); playSound()">إغلاق</button>
+    <button class="close-btn" onclick="closeUsagePopup(); playSound()">إغلاق</button>
   </div>
 </div>
 
@@ -251,6 +251,14 @@ function openPopup() {
 
 function closePopup() {
   document.getElementById('popup').style.display = 'none';
+}
+
+function openUsagePopup() {
+  document.getElementById('usagePopup').style.display = 'flex';
+}
+
+function closeUsagePopup() {
+  document.getElementById('usagePopup').style.display = 'none';
 }
 
 function show(id){
