@@ -20,7 +20,6 @@
       background: #000;
     }
 
-
     body::before {
       content: "";
       position: fixed;
@@ -37,69 +36,67 @@
       to { filter: blur(10px) brightness(0.6); }
     }
 
-
     .profile {
-      margin-top: 80px;
+      margin-top: 60px;
     }
 
     .profile-img {
-      width: 180px;
-      height: 180px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 25px #ff0000;
+      box-shadow: 0 0 20px #ff0000;
       animation: pulse 3s infinite alternate;
     }
 
     @keyframes pulse {
-      from { box-shadow: 0 0 15px #ff0000; }
-      to { box-shadow: 0 0 35px #ff0000; }
+      from { box-shadow: 0 0 10px #ff0000; }
+      to { box-shadow: 0 0 30px #ff0000; }
     }
 
     h1 {
-      margin-top: 25px;
-      font-size: 1.8em;
+      margin-top: 20px;
+      font-size: 1.6em;
       color: #fff;
       text-shadow: 0 0 10px #ff0000;
     }
 
     .info {
-      font-size: 1.1em;
+      font-size: 1em;
       color: #ddd;
-      margin: 20px auto;
-      line-height: 1.8em;
+      margin: 15px auto;
+      line-height: 1.6em;
       background-color: rgba(0, 0, 0, 0.6);
       border: 1px solid #ff0000;
-      box-shadow: 0 0 15px #ff0000;
-      width: 320px;
-      padding: 20px;
-      border-radius: 15px;
+      box-shadow: 0 0 12px #ff0000;
+      width: 280px;
+      padding: 15px;
+      border-radius: 12px;
     }
-
 
     .button {
       display: block;
       background-color: rgba(15,15,15,0.8);
       color: #fff;
       text-decoration: none;
-      margin: 15px auto;
-      padding: 15px;
-      border-radius: 15px;
-      width: 270px;
+      margin: 10px auto;
+      padding: 12px;
+      border-radius: 12px;
+      width: 240px;
       font-weight: bold;
       border: 1px solid #ff0000;
-      box-shadow: 0 0 10px #ff0000;
+      box-shadow: 0 0 8px #ff0000;
       transition: 0.3s;
     }
 
     .button:hover {
       background-color: #ff0000;
       transform: scale(1.05);
-      box-shadow: 0 0 25px #ff0000;
+      box-shadow: 0 0 20px #ff0000;
     }
 
     footer {
-      margin-top: 40px;
+      margin-top: 30px;
       color: #bbb;
       font-size: 0.9em;
     }
@@ -126,9 +123,10 @@
   <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
   <script>
+    const clickAudio = new Audio('https://files.catbox.moe/opzbli.mp3'); // الصوت الجديد
     function playClickSound() {
-      var audio = new Audio('https://files.catbox.moe/txfod8.m4a'); 
-      audio.play();
+      clickAudio.currentTime = 0;
+      clickAudio.play();
     }
   </script>
 

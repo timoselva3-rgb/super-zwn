@@ -9,9 +9,7 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Tajawal', sans-serif;
       color: white;
@@ -19,8 +17,6 @@
       overflow-x: hidden;
       background: #000;
     }
-
-
     body::before {
       content: "";
       position: fixed;
@@ -31,88 +27,55 @@
       animation: glow 6s ease-in-out infinite alternate;
       z-index: -1;
     }
+    @keyframes glow { from { filter: blur(8px) brightness(0.35); } to { filter: blur(10px) brightness(0.6); } }
 
-    @keyframes glow {
-      from { filter: blur(8px) brightness(0.35); }
-      to { filter: blur(10px) brightness(0.6); }
-    }
-
-
-    .profile {
-      margin-top: 80px;
-    }
-
+    .profile { margin-top: 60px; }
     .profile-img {
-      width: 180px;
-      height: 180px;
+      width: 140px; height: 140px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 25px #ff0000;
+      box-shadow: 0 0 20px #ff0000;
       animation: pulse 3s infinite alternate;
     }
+    @keyframes pulse { from { box-shadow: 0 0 10px #ff0000; } to { box-shadow: 0 0 30px #ff0000; } }
 
-    @keyframes pulse {
-      from { box-shadow: 0 0 15px #ff0000; }
-      to { box-shadow: 0 0 35px #ff0000; }
-    }
-
-    h1 {
-      margin-top: 25px;
-      font-size: 1.8em;
-      color: #fff;
-      text-shadow: 0 0 10px #ff0000;
-    }
-
+    h1 { margin-top: 20px; font-size: 1.5em; color: #fff; text-shadow: 0 0 8px #ff0000; }
     .info {
-      font-size: 1.1em;
+      font-size: 1em;
       color: #ddd;
-      margin: 20px auto;
-      line-height: 1.8em;
-      background-color: rgba(0, 0, 0, 0.6);
+      margin: 15px auto;
+      line-height: 1.6em;
+      background-color: rgba(0,0,0,0.6);
       border: 1px solid #ff0000;
-      box-shadow: 0 0 15px #ff0000;
-      width: 320px;
-      padding: 20px;
-      border-radius: 15px;
+      box-shadow: 0 0 12px #ff0000;
+      width: 280px;
+      padding: 15px;
+      border-radius: 12px;
     }
-
-
     .button {
       display: block;
       background-color: rgba(15,15,15,0.8);
       color: #fff;
       text-decoration: none;
-      margin: 15px auto;
-      padding: 15px;
-      border-radius: 15px;
-      width: 270px;
+      margin: 10px auto;
+      padding: 12px;
+      border-radius: 12px;
+      width: 220px;
       font-weight: bold;
       border: 1px solid #ff0000;
-      box-shadow: 0 0 10px #ff0000;
+      box-shadow: 0 0 8px #ff0000;
       transition: 0.3s;
+      font-size: 0.95em;
     }
-
-    .button:hover {
-      background-color: #ff0000;
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #ff0000;
-    }
-
-    footer {
-      margin-top: 40px;
-      color: #bbb;
-      font-size: 0.9em;
-    }
+    .button:hover { background-color: #ff0000; transform: scale(1.05); box-shadow: 0 0 20px #ff0000; }
+    footer { margin-top: 30px; color: #bbb; font-size: 0.85em; }
   </style>
 </head>
 <body>
 
   <div class="profile">
-
     <img src="https://i.ibb.co/wr6GDMXH/IMG-20251023-153254-014.jpg" alt="الوسيط سالك" class="profile-img">
-
     <h1>• معلومات حساب الوسيط سالك ..⤹</h1>
-
     <div class="info">
       • اسم الحساب ⋮ 𝗲𝗹𝘀𝗮𝗹𝗲𝗸 مـ ـم ـول ㅤ <br>
       • رقم الوسيط ⋮ 01007220759 <br>
@@ -127,7 +90,7 @@
 
   <script>
     function playClickSound() {
-      var audio = new Audio('https://files.catbox.moe/txfod8.m4a'); 
+      var audio = new Audio('https://files.catbox.moe/opzbli.mp3'); 
       audio.play();
     }
   </script>
