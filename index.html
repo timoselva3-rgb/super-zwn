@@ -161,7 +161,6 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   </div>
 </div>
 
-<!-- نافذة popup -->
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
     <h3>❓ يعني اي وسيط؟</h3>
@@ -175,8 +174,6 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 </div>
 
 <div class="wrapper">
-  <!-- باقي كودك الأصلي بالكامل بدون حذف -->
-  <!-- ✅ محتوى الصفحة الرئيسية -->
   <section class="content active" id="main">
     <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
     <h1 id="mainTitle">سوبر زون - Super Zwn</h1>
@@ -193,7 +190,6 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
     </div>
   </section>
 
-  <!-- ✅ وسطاء -->
   <section class="content" id="brokers">
     <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
     <h1 id="brokersTitle">سوبر زون - Super Zwn</h1>
@@ -224,6 +220,16 @@ function playSound() {
   audio.currentTime = 0;
   audio.play();
 }
+
+// ⚠️ تمت إضافة الدوال المفقودة هنا
+function openPopup() {
+  document.getElementById('popup').style.display = 'flex';
+}
+
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+}
+// ------------------------------------
 
 function show(id){
   document.querySelectorAll('.content').forEach(sec => sec.classList.remove('active'));
