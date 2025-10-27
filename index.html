@@ -163,8 +163,8 @@ footer {
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="#" id="brokerQstBtn" onclick="playSound(); openPopup()">• يعني اي وسيط •</a>
-  <a href="#" id="usageBtn" onclick="playSound(); openUsagePopup()">• طريقة الاستخدام •</a>
+  <a href="#" id="usageBtn" onclick="playSound(); openUsagePopup()">• معني السوبر •</a>
+  <a href="#" id="brokerQstBtn" onclick="playSound(); openPopup()">• يعني اي وسيط •</a>  
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
   <button id="langToggleBtn" onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
   <div class="language-buttons" id="langBtns">
@@ -187,9 +187,11 @@ footer {
 
 <div class="popup-overlay" id="usagePopup">
   <div class="popup-box">
-    <h3>• شروط الاستخدام •</h3>
+    <h3>• معني السوبر •</h3>
     <p>
-      هنا تكتب كل الشروط والأحكام اللي عايز تعرضها للمستخدمين.
+سوبر زون هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>
+نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>
+والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.
     </p>
     <button class="close-btn" onclick="closeUsagePopup(); playSound()">إغلاق</button>
   </div>
@@ -297,6 +299,7 @@ function setLang(lang) {
     document.documentElement.setAttribute('dir', 'rtl');
 
 
+    document.getElementById('usageBtn').innerText = '• معني السوبر •';
     document.getElementById('brokerQstBtn').innerText = '• يعني اي وسيط •';
     document.getElementById('langToggleBtn').innerText = '🌐 اللغة';
 
@@ -341,7 +344,7 @@ function setLang(lang) {
     document.documentElement.setAttribute('lang', 'en');
     document.documentElement.setAttribute('dir', 'ltr');
 
-
+    document.getElementById('usageBtn').innerText = '• Meaning of Super •';
     document.getElementById('brokerQstBtn').innerText = '• What is a Broker •';
     document.getElementById('langToggleBtn').innerText = '🌐 Language';
 
