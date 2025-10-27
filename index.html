@@ -59,7 +59,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
 .menu-btn { position: fixed; top: 15px; left: 15px; font-size: 20px; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 8px; cursor: pointer; z-index: 1002; }
 
-/* القائمة الجانبية */
+
 .sidebar {
   width: 240px;
   height: 100%;
@@ -67,7 +67,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
-  left: -240px; /* تم تعديل القيمة لتناسب الـ width */
+  left: -240px; 
   transition: 0.4s;
   padding-top: 70px;
   z-index: 1001;
@@ -83,7 +83,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   box-shadow: 0 0 8px #ff0000;
 }
 
-/* popup */
+
 .popup-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -163,7 +163,7 @@ footer {
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-  <a href="#" id="brokerQstBtn" onclick="playSound(); openPopup()">❓ يعني اي وسيط</a>
+  <a href="#" id="brokerQstBtn" onclick="playSound(); openPopup()">• يعني اي وسيط •</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
   <button id="langToggleBtn" onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
   <div class="language-buttons" id="langBtns">
@@ -174,7 +174,7 @@ footer {
 
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
-    <h3>❓ يعني اي وسيط؟</h3>
+    <h3>• يعني اي وسيط •؟</h3>
     <p>
       الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>
       مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>
@@ -221,7 +221,7 @@ footer {
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
 <script>
-let currentLang = 'ar'; // متغير لتخزين اللغة الحالية
+let currentLang = 'ar'; 
 
 function toggleMenu() {
   const s = document.getElementById("sidebar");
@@ -252,7 +252,7 @@ function toggleDarkModeFunc() {
   const body = document.body;
   const btn = document.getElementById('darkModeBtn');
   body.classList.toggle('dark-mode');
-  // تعديل تحديث نص الزر ليتوافق مع اللغة الحالية
+
   if (currentLang === 'ar') {
     btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
   } else {
@@ -277,14 +277,14 @@ function setLang(lang) {
     document.documentElement.setAttribute('lang', 'ar');
     document.documentElement.setAttribute('dir', 'rtl');
 
-    // تحديث نصوص القائمة الجانبية (Sidebar)
-    document.getElementById('brokerQstBtn').innerText = '❓ يعني اي وسيط';
+
+    document.getElementById('brokerQstBtn').innerText = '• يعني اي وسيط •';
     document.getElementById('langToggleBtn').innerText = '🌐 اللغة';
-    // تحديث زر الوضع الليلي/النهاري بناءً على حالته الحالية
+
     darkModeBtn.innerHTML = isDarkMode ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
 
 
-    // تحديث نصوص الواجهة الرئيسية
+
     document.getElementById('mainTitle').innerText = 'سوبر زون - Super Zwn';
     document.getElementById('mainDesc').innerHTML = 'اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة';
     document.getElementById('channelBtn').innerText = '📢 القناة الرسمية';
@@ -294,17 +294,17 @@ function setLang(lang) {
     document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
     document.querySelector('#brokers button').innerText = '⬅️ العودة للقائمة الرئيسية';
     
-    // تحديث نصوص الـ Popup
-    document.querySelector('.popup-box h3').innerText = '❓ يعني اي وسيط؟';
+
+    document.querySelector('.popup-box h3').innerText = '• يعني اي وسيط •؟';
     document.querySelector('.popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
     document.querySelector('.close-btn').innerText = 'إغلاق';
 
-    // تحديث أزرار الوقت والتاريخ والتون بالنصوص العربية قبل التحديثات التلقائية
+
     document.getElementById("tonBtn").textContent = "💎 جاري تحميل التون...";
     document.getElementById("timeBtn").textContent = "⏰ جاري التحديث...";
     document.getElementById("dateBtn").textContent = "📅 جاري التحديث...";
 
-    // تحديث نصوص الوسطاء
+
     const brokers = ['الوسيط تيمو','الوسيط حمو','الوسيط عيد','الوسيط سالك','الوسيط يوسف','الوسيط ايرور','الوسيط ريو'];
     const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
     const brokersList = document.getElementById('brokersList');
@@ -322,13 +322,13 @@ function setLang(lang) {
     document.documentElement.setAttribute('lang', 'en');
     document.documentElement.setAttribute('dir', 'ltr');
 
-    // تحديث نصوص القائمة الجانبية (Sidebar)
+
     document.getElementById('brokerQstBtn').innerText = '❓ What is a Broker';
     document.getElementById('langToggleBtn').innerText = '🌐 Language';
-    // تحديث زر الوضع الليلي/النهاري بناءً على حالته الحالية
+
     darkModeBtn.innerHTML = isDarkMode ? "🌞 Light Mode" : "🌓 Dark Mode";
 
-    // تحديث نصوص الواجهة الرئيسية
+
     document.getElementById('mainTitle').innerText = 'Super Zone - Super Zwn';
     document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
     document.getElementById('channelBtn').innerText = '📢 Official Channel';
@@ -338,18 +338,18 @@ function setLang(lang) {
     document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
     document.querySelector('#brokers button').innerText = '⬅️ Back to Main Menu';
     
-    // تحديث نصوص الـ Popup
+
     document.querySelector('.popup-box h3').innerText = '❓ What is a Broker?';
     document.querySelector('.popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
     document.querySelector('.close-btn').innerText = 'Close';
     
-    // تحديث أزرار الوقت والتاريخ والتون بالنصوص الإنجليزية قبل التحديثات التلقائية
+
     document.getElementById("tonBtn").textContent = "💎 Loading TON...";
     document.getElementById("timeBtn").textContent = "⏰ Updating...";
     document.getElementById("dateBtn").textContent = "📅 Updating...";
 
 
-    // تحديث نصوص الوسطاء
+
     const brokers = ['Broker Timo','Broker Hamo','Broker Eid','Broker Salk','Broker Yousef','Broker Error','Broker Rio'];
     const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
     const brokersList = document.getElementById('brokersList');
@@ -365,20 +365,20 @@ function setLang(lang) {
     }
   }
 
-  // إعادة تشغيل تحديثات الوقت والسعر لضمان استخدام اللغة الجديدة فوراً
+
   updateTime();
   updateDate();
   updateTonPrice();
 }
 
-// الوقت
+
 function updateTime() {
   const now = new Date();
-  // استخدام 'ar-EG' للعربية و 'en-US' للإنجليزية
+
   const timeText = now.toLocaleTimeString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { hour12: true });
   const label = currentLang === 'ar' ? 'جاري التحديث...' : 'Updating...';
   
-  // تحديث الزر مباشرة بالنص إذا كان يحمل نص "جاري التحديث..." أو "Updating..."
+
   const timeBtn = document.getElementById("timeBtn");
   if (timeBtn.textContent.includes(label) || !timeBtn.textContent.includes("⏰")) {
      timeBtn.textContent = "⏰ " + timeText;
@@ -386,14 +386,14 @@ function updateTime() {
 }
 setInterval(updateTime, 1000); updateTime();
 
-// التاريخ
+
 function updateDate() {
   const today = new Date();
-  // استخدام 'ar-EG' للعربية و 'en-US' للإنجليزية
+
   const dateText = today.toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   const label = currentLang === 'ar' ? 'جاري التحديث...' : 'Updating...';
   
-  // تحديث الزر مباشرة بالنص إذا كان يحمل نص "جاري التحديث..." أو "Updating..."
+
   const dateBtn = document.getElementById("dateBtn");
   if (dateBtn.textContent.includes(label) || !dateBtn.textContent.includes("📅")) {
      dateBtn.textContent = "📅 " + dateText;
@@ -401,7 +401,7 @@ function updateDate() {
 }
 updateDate();
 
-// سعر TON (جلب السعر من بينانس)
+
 async function updateTonPrice() {
   const loadingText = currentLang === 'ar' ? "جاري تحميل التون..." : "Loading TON...";
   const errorText = currentLang === 'ar' ? "تعذر جلب سعر التون" : "Failed to fetch TON price";
@@ -409,7 +409,7 @@ async function updateTonPrice() {
   try {
     const tonBtn = document.getElementById("tonBtn");
     
-    // تعيين نص التحميل إذا لم يكن قد تم تعيينه بالفعل أو إذا كانت اللغة قد تغيرت
+
     if (!tonBtn.textContent.includes("TON:") && !tonBtn.textContent.includes(loadingText) && !tonBtn.textContent.includes(errorText)) {
         tonBtn.textContent = `💎 ${loadingText}`;
     }
@@ -423,7 +423,7 @@ async function updateTonPrice() {
 }
 setInterval(updateTonPrice, 60000); updateTonPrice(); // ابدأ مع اللغة الافتراضية
 
-// ثلج
+
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
@@ -438,7 +438,7 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-// غلق sidebar عند الضغط خارجها
+
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
@@ -447,9 +447,9 @@ document.addEventListener('click', function(event) {
   }
 });
 
-// تأكد من تهيئة اللغة عند التحميل
+
 document.addEventListener('DOMContentLoaded', () => {
-    // استخدم setLang('ar') لتهيئة اللغة والنصوص لأول مرة
+
     setLang('ar');
 });
 </script>
