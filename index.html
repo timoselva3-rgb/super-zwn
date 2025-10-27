@@ -57,100 +57,86 @@ a, button {
 }
 a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
-/* الزر الرئيسي للقائمة */
-.menu-btn {
-  position: fixed;
-  top: 15px; left: 15px;
-  font-size: 22px;
-  background: rgba(255, 0, 0, 0.15);
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  z-index: 1002;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 0 8px rgba(255,0,0,0.6);
-  transition: 0.3s;
-}
-.menu-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px red;
-}
+.menu-btn { position: fixed; top: 15px; left: 15px; font-size: 20px; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 8px; cursor: pointer; z-index: 1002; }
 
 /* القائمة الجانبية */
 .sidebar {
   width: 240px;
-  background: rgba(20, 20, 20, 0.92);
+  height: 100%;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(5px);
   position: fixed;
-  top: 70px; left: -260px;
-  border-radius: 14px;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  transition: 0.4s ease;
+  top: 0;
+  left: -260px;
+  transition: 0.4s;
+  padding-top: 70px;
   z-index: 1001;
-  overflow: hidden;
-  padding: 15px 0;
-  border: 1px solid rgba(255,0,0,0.4);
+  border-right: 2px solid #ff0000;
+  box-shadow: 0 0 15px rgba(255,0,0,0.4);
 }
-.sidebar.show {
-  left: 15px;
-}
-
-/* عناصر القائمة */
 .sidebar a, .sidebar button {
   width: 85%;
-  margin: 8px auto;
-  border: none;
-  background: rgba(30, 30, 30, 0.8);
-  color: #fff;
-  border-radius: 12px;
-  font-size: 1em;
-  border: 1px solid rgba(255,0,0,0.5);
-  box-shadow: 0 0 6px rgba(255,0,0,0.5);
-  transition: 0.3s;
-}
-.sidebar a:hover, .sidebar button:hover {
-  transform: scale(1.05);
-  background: rgba(255,0,0,0.2);
-  box-shadow: 0 0 12px red;
-}
-
-/* أزرار اللغة */
-.language-buttons {
-  display: none;
-  flex-direction: column;
-  margin-top: 5px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(255,0,0,0.3);
-}
-.language-buttons button {
-  width: 80%;
-  margin: 4px auto;
-  background: rgba(40,40,40,0.9);
-  border: 1px solid rgba(255,0,0,0.4);
+  margin: 10px auto;
+  background: rgba(20,20,20,0.8);
+  border: 1px solid #ff0000;
   border-radius: 10px;
-  transition: 0.3s;
-}
-.language-buttons button:hover {
-  background: rgba(255,0,0,0.25);
+  box-shadow: 0 0 8px #ff0000;
 }
 
-/* الثلج */
-.snowflake {
+/* popup */
+.popup-overlay {
   position: fixed;
-  top: -10px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.8;
-  pointer-events: none;
-  z-index: 1000;
-  animation-name: fall;
-  animation-timing-function: linear;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.4s;
 }
-@keyframes fall {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(110vh); opacity: 0.5; }
+.popup-box {
+  background: rgba(20,20,20,0.95);
+  border: 2px solid #ff0000;
+  border-radius: 15px;
+  padding: 20px;
+  width: 85%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(255,0,0,0.5);
+  text-align: center;
+  animation: fadeInUp 0.4s;
 }
+.popup-box h3 {
+  color: #ff0000;
+  margin-bottom: 10px;
+}
+.popup-box p {
+  color: #ddd;
+  font-size: 1em;
+  line-height: 1.6em;
+}
+.close-btn {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.close-btn:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.snowflake { position: fixed; top: -10px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; z-index: 1000; animation-name: fall; animation-timing-function: linear; }
+@keyframes fall { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0.5; } }
+.language-buttons { display: none; margin-top: 5px; flex-direction: column; }
+.language-buttons button { width: 80%; margin: 4px auto; }
 
 .fixed-buttons a, .fixed-buttons button {
   width: 220px;
@@ -164,17 +150,33 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 <audio id="clickSound" src="https://files.catbox.moe/opzbli.mp3"></audio>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
 <div class="sidebar" id="sidebar">
-  <a href="#" onclick="playSound(); show('info')">❓ يعني اي وسيط</a>
+  <a href="#" onclick="playSound(); openPopup()">❓ يعني اي وسيط</a>
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
   <button onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
   <div class="language-buttons" id="langBtns">
-    <button onclick="setLang('ar'); playSound()">🇪🇬 العربية</button>
-    <button onclick="setLang('en'); playSound()">🇺🇸 English</button>
+    <button onclick="setLang('ar'); playSound()">عربي</button>
+    <button onclick="setLang('en'); playSound()">English</button>
+  </div>
+</div>
+
+<!-- نافذة popup -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <h3>❓ يعني اي وسيط؟</h3>
+    <p>
+      الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>
+      مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>
+      التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.
+    </p>
+    <button class="close-btn" onclick="closePopup(); playSound()">إغلاق</button>
   </div>
 </div>
 
 <div class="wrapper">
+  <!-- باقي كودك الأصلي بالكامل بدون حذف -->
+  <!-- ✅ محتوى الصفحة الرئيسية -->
   <section class="content active" id="main">
     <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
     <h1 id="mainTitle">سوبر زون - Super Zwn</h1>
@@ -191,6 +193,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
     </div>
   </section>
 
+  <!-- ✅ وسطاء -->
   <section class="content" id="brokers">
     <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
     <h1 id="brokersTitle">سوبر زون - Super Zwn</h1>
@@ -213,7 +216,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 <script>
 function toggleMenu() {
   const s = document.getElementById("sidebar");
-  s.classList.toggle("show");
+  s.style.left = (s.style.left === "0px") ? "-240px" : "0px";
 }
 
 function playSound() {
@@ -250,6 +253,19 @@ function setLang(lang) {
     document.getElementById('brokersBtn').innerText = '🤝 وسطاء السوبر';
     document.getElementById('brokersTitle').innerText = 'سوبر زون - Super Zwn';
     document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
+    const brokers = ['الوسيط تيمو','الوسيط حمو','الوسيط عيد','الوسيط سالك','الوسيط يوسف','الوسيط ايرور','الوسيط ريو'];
+    const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
+    const brokersList = document.getElementById('brokersList');
+    brokersList.innerHTML = '';
+    for(let i=0;i<brokers.length;i++){
+      let a = document.createElement('a');
+      a.className = 'btn';
+      a.href = brokersLinks[i];
+      a.target = '_blank';
+      a.innerText = '• ' + brokers[i];
+      a.onclick = playSound;
+      brokersList.appendChild(a);
+    }
   } else if(lang === 'en') {
     document.getElementById('mainTitle').innerText = 'Super Zone - Biggest Arabic Super on Telegram';
     document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
@@ -258,10 +274,23 @@ function setLang(lang) {
     document.getElementById('brokersBtn').innerText = '🤝 Super Brokers';
     document.getElementById('brokersTitle').innerText = 'Super Zone - Super Zwn';
     document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
+    const brokers = ['Broker Timo','Broker Hamo','Broker Eid','Broker Salk','Broker Yousef','Broker Error','Broker Rio'];
+    const brokersLinks = ['https://t.me/vwvvxv','https://t.me/hamo_user','https://t.me/eid_user','https://t.me/salk_user','https://t.me/yousef_user','https://t.me/error_user','https://t.me/rio_user'];
+    const brokersList = document.getElementById('brokersList');
+    brokersList.innerHTML = '';
+    for(let i=0;i<brokers.length;i++){
+      let a = document.createElement('a');
+      a.className = 'btn';
+      a.href = brokersLinks[i];
+      a.target = '_blank';
+      a.innerText = '• ' + brokers[i];
+      a.onclick = playSound;
+      brokersList.appendChild(a);
+    }
   }
 }
 
-// الوقت و التاريخ
+// الوقت و التاريخ (ثابتين)
 function updateTime() {
   const now = new Date();
   document.getElementById("timeBtn").textContent = "⏰ " + now.toLocaleTimeString('en-US', { hour12: true });
@@ -274,7 +303,7 @@ function updateDate() {
 }
 updateDate();
 
-// سعر TON
+// سعر TON (ثابت)
 async function updateTonPrice() {
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT');
@@ -301,12 +330,12 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-// غلق القائمة عند الضغط خارجها
+// غلق sidebar عند الضغط خارجها
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
-  if (sidebar.classList.contains("show") && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
-    sidebar.classList.remove("show");
+  if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+    sidebar.style.left = "-240px";
   }
 });
 </script>
