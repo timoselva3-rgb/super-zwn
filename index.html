@@ -40,46 +40,53 @@ body.dark-mode::before { filter: brightness(0.15); }
 .content { display: none; margin-top: 20px; }
 .content.active { display: block; }
 
+/* زيادة المسافة العلوية لتنزيل المحتوى */
+#main { padding-top: 30px; } 
+#superAssets { padding-top: 30px; }
+#brokers { padding-top: 30px; }
+
 /* تصغير الخطوط وتوهج خفيف وواقعي */
 h1 { 
-  font-size: 1.7em; /* أصغر قليلاً */
+  font-size: 1.7em; 
   margin-top: 10px; 
   color: #fff; 
-  text-shadow: 0 0 6px var(--light-glow); /* توهج خفيف باللون الأحمر الجديد */
+  text-shadow: 0 0 6px var(--light-glow); 
 }
 h2 { 
-  font-size: 1.1em; /* أصغر قليلاً */
+  font-size: 1.1em; 
   margin-top: 10px; 
   color: #ccc; 
-  text-shadow: 0 0 4px var(--light-glow); /* توهج خفيف باللون الأحمر الجديد */
+  text-shadow: 0 0 4px var(--light-glow); 
 }
 p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
 
+/* تعديل شكل الصورة لتكون مربعة */
 .logo { 
-  width: 90px; /* أصغر قليلاً */
-  border-radius: 50%; 
-  box-shadow: 0 0 10px var(--real-red); /* توهج واقعي حول اللوجو */
+  width: 100px; /* تم زيادته قليلاً ليتناسب مع المربع */
+  height: 100px; /* لضمان الشكل المربع */
+  border-radius: 10px; /* مربع بحواف مستديرة قليلاً */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* تقليل الظل لواقعية أكثر */
   margin-top: 20px; 
 }
 
 /* 3D Button Style */
 .btn-3d {
   display: block;
-  background-color: rgba(30, 30, 30, 0.85); /* خلفية رمادية مع شفافية خفيفة */
+  background-color: rgba(30, 30, 30, 0.85); 
   color: #fff;
   text-decoration: none;
-  margin: 7px auto; /* أصغر قليلاً */
-  padding: 10px; /* أصغر قليلاً */
-  border-radius: 10px; /* أصغر قليلاً */
-  width: 240px; /* أصغر قليلاً */
+  margin: 7px auto; 
+  padding: 10px; 
+  border-radius: 10px; 
+  width: 240px; 
   font-weight: bold;
   border: none;
-  font-size: 0.9em; /* أصغر قليلاً */
+  font-size: 0.9em; 
   cursor: pointer;
   
   /* 3D Effect - استخدام الألوان الجديدة */
-  box-shadow: 0 4px 0 var(--shadow-color); /* ظل داكن للعمق */
-  border-bottom: 2px solid var(--real-red); /* حدود واقعية */
+  box-shadow: 0 4px 0 var(--shadow-color); 
+  border-bottom: 2px solid var(--real-red); 
   transition: all 0.1s ease-out;
   /* توهج خفيف للأزرار */
   filter: drop-shadow(0 0 3px rgba(255, 85, 85, 0.5));
@@ -87,11 +94,11 @@ p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
 
 .btn-3d:hover {
   background-color: rgba(40, 40, 40, 0.9); 
-  transform: translateY(1px); /* رفع خفيف */
+  transform: translateY(1px); 
   box-shadow: 0 3px 0 var(--shadow-color);
 }
 .btn-3d:active {
-  transform: translateY(4px); /* ضغط لأسفل */
+  transform: translateY(4px); 
   box-shadow: 0 0px 0 var(--shadow-color); 
 }
 
@@ -117,18 +124,18 @@ p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
   display: block;
   height: 3px;
   width: 100%;
-  background: var(--real-red); /* اللون الأحمر الواقعي */
+  background: var(--real-red); 
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 2px var(--light-glow); /* توهج خفيف لخطوط القائمة */
+  box-shadow: 0 0 2px var(--light-glow); 
   transform-origin: left center;
 }
 
 /* Sidebar - 3D Look وشفافية خفيفة */
 .sidebar {
-  width: 250px; /* أصغر قليلاً */
+  width: 250px; 
   height: 100%;
-  background: rgba(15, 15, 15, 0.9); /* خلفية داكنة جداً مع شفافية بسيطة */
+  background: rgba(15, 15, 15, 0.9); 
   backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
@@ -136,9 +143,9 @@ p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
   transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   padding-top: 70px;
   z-index: 1001;
-  border-right: 2px solid var(--real-red); /* حدود أرق */
-  box-shadow: 3px 0 10px rgba(204,0,0,0.3); /* توهج أحمر خفيف وواقعي */
-  transform: rotateY(10deg); /* تدوير أقل */
+  border-right: 2px solid var(--real-red); 
+  box-shadow: 3px 0 10px rgba(204,0,0,0.3); 
+  transform: rotateY(10deg); 
   transform-origin: right;
 }
 
@@ -148,7 +155,7 @@ p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
 }
 
 .sidebar .btn-3d {
-  width: 85%; /* أصغر قليلاً */
+  width: 85%; 
 }
 
 
@@ -157,7 +164,7 @@ p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.85); /* شفافية بسيطة */
+  background: rgba(0,0,0,0.85); 
   display: none;
   justify-content: center;
   align-items: center;
@@ -165,20 +172,20 @@ p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
   animation: fadeIn 0.4s;
 }
 .popup-box {
-  background: rgba(30, 30, 30, 0.9); /* خلفية رمادية داكنة مع شفافية خفيفة */
-  border: 1px solid var(--real-red); /* حدود أرق */
+  background: rgba(30, 30, 30, 0.9); 
+  border: 1px solid var(--real-red); 
   border-radius: 12px;
-  padding: 18px; /* أصغر قليلاً */
+  padding: 18px; 
   width: 85%;
-  max-width: 380px; /* أصغر قليلاً */
-  box-shadow: 0 0 20px rgba(204,0,0,0.5); /* توهج أحمر خفيف وواقعي */
+  max-width: 380px; 
+  box-shadow: 0 0 20px rgba(204,0,0,0.5); 
   text-align: center;
   animation: fadeInUp 0.4s;
 }
 .popup-box h3 {
   color: var(--real-red);
   margin-bottom: 12px;
-  text-shadow: 0 0 3px var(--light-glow); /* توهج خفيف */
+  text-shadow: 0 0 3px var(--light-glow); 
 }
 .popup-box p {
   color: #ccc;
@@ -189,8 +196,8 @@ p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
   background: var(--real-red);
   color: #fff;
   border: none;
-  padding: 8px 20px; /* أصغر قليلاً */
-  border-radius: 8px; /* أصغر قليلاً */
+  padding: 8px 20px; 
+  border-radius: 8px; 
   margin-top: 15px;
   cursor: pointer;
   font-weight: bold;
@@ -220,8 +227,8 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding: 8px 0; /* أصغر قليلاً */
-  background: rgba(15, 15, 15, 0.9); /* خلفية داكنة مع شفافية بسيطة */
+  padding: 8px 0; 
+  background: rgba(15, 15, 15, 0.9); 
   font-size: 0.75em;
   color: var(--real-red);
   z-index: 10;
@@ -240,11 +247,11 @@ footer {
 /* Snowflakes for better realistic glow effect - adjusted */
 .snowflake {
   position: fixed;
-  background-color: rgba(255, 255, 255, 0.8); /* لون أبيض مائل للشفافية */
+  background-color: rgba(255, 255, 255, 0.8); 
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  box-shadow: 0 0 5px rgba(255, 85, 85, 0.7); /* توهج خفيف باللون الأحمر */
+  box-shadow: 0 0 5px rgba(255, 85, 85, 0.7); 
   animation: fall linear infinite;
 }
 
@@ -280,7 +287,7 @@ footer {
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
     <h3>• يعني اي وسيط •</h3>
-    <p>
+    <p id="broker-popup-text">
       الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>
       مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>
       التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.
@@ -292,7 +299,7 @@ footer {
 <div class="popup-overlay" id="usagePopup">
   <div class="popup-box">
     <h3>• معني السوبر •</h3>
-    <p>
+    <p id="usage-popup-text">
 سوبر ميكس هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>
 نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>
 والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.
@@ -311,8 +318,10 @@ footer {
       <button id="superAssetsBtn" onclick="playSound(); show('superAssets')" class="btn-3d">• ممتلكات سوبر ميكس •</button>
       
       <button id="brokersBtn" onclick="playSound(); show('brokers')" class="btn-3d">• وسطاء السوبر •</button>
+      
+      <a id="trustChannelBtn" href="https://t.me/superrzwn" target="_blank" onclick="playSound()" class="btn-3d">• قناة الثقة •</a> 
 
-      </div>
+    </div>
   </section>
 
   <section class="content" id="superAssets">
@@ -322,9 +331,8 @@ footer {
     <div id="assetsList">
       <a class="btn-3d" href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">• جروب السوبر •</a>
       <a class="btn-3d" href="https://t.me/superrzwn" target="_blank" onclick="playSound()">• قناة السوبر •</a>
-      <a class="btn-3d" href="#" target="_blank" onclick="playSound()">• ثقة السوبر •</a>
-    </div>
-    <button class="btn-3d" onclick="playSound(); show('main')">• العودة للقائمة الرئيسية •</button>
+      </div>
+    <button class="btn-3d" onclick="playSound(); show('main')" id="assetsBackBtn">• العودة للقائمة الرئيسية •</button>
   </section>
 
   <section class="content" id="brokers">
@@ -340,7 +348,7 @@ footer {
       <a id="broker-error" class="btn-3d" href="https://t.me/mrtrgm" target="_blank" onclick="playSound()">• الوسيط ايرور •</a>
       <a id="broker-rio" class="btn-3d" href="https://t.me/ahmedrio" target="_blank" onclick="playSound()">• الوسيط ريو •</a>
     </div>
-    <button class="btn-3d" onclick="playSound(); show('main')">• العودة للقائمة الرئيسية •</button>
+    <button class="btn-3d" onclick="playSound(); show('main')" id="brokersBackBtn">• العودة للقائمة الرئيسية •</button>
   </section>
 </div>
 
@@ -422,14 +430,14 @@ function setLang(lang) {
     document.getElementById('mainDesc').innerHTML = 'اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة';
     document.getElementById('superAssetsBtn').innerText = '• ممتلكات سوبر ميكس •';
     document.getElementById('brokersBtn').innerText = '• وسطاء السوبر •';
+    document.getElementById('trustChannelBtn').innerText = '• قناة الثقة •'; // الزر الجديد
 
     // Super Assets Section
     document.getElementById('assetsTitle').innerText = 'سوبر ميكس - Super Mix';
     document.getElementById('assetsDesc').innerText = 'ممتلكات سوبر ميكس';
     document.querySelector('#assetsList a:nth-child(1)').innerText = '• جروب السوبر •';
     document.querySelector('#assetsList a:nth-child(2)').innerText = '• قناة السوبر •';
-    document.querySelector('#assetsList a:nth-child(3)').innerText = '• ثقة السوبر •';
-    document.querySelector('#superAssets button').innerText = '• العودة للقائمة الرئيسية •';
+    document.getElementById('assetsBackBtn').innerText = '• العودة للقائمة الرئيسية •';
 
     // Brokers Section
     document.getElementById('brokersTitle').innerText = 'سوبر ميكس - Super Mix';
@@ -441,16 +449,16 @@ function setLang(lang) {
     document.getElementById('broker-youssef').innerText = '• الوسيط يوسف •';
     document.getElementById('broker-error').innerText = '• الوسيط ايرور •';
     document.getElementById('broker-rio').innerText = '• الوسيط ريو •';
-    document.querySelector('#brokers button').innerText = '• العودة للقائمة الرئيسية •';
+    document.getElementById('brokersBackBtn').innerText = '• العودة للقائمة الرئيسية •';
     
 
     // Popups
     document.querySelector('#popup .popup-box h3').innerText = '• يعني اي وسيط •';
-    document.querySelector('#popup .popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
+    document.getElementById('broker-popup-text').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
     document.querySelector('#popup .close-btn').innerText = 'إغلاق';
     
     document.querySelector('#usagePopup .popup-box h3').innerText = '• معني السوبر •';
-    document.querySelector('#usagePopup .popup-box p').innerHTML = 'سوبر ميكس هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.';
+    document.getElementById('usage-popup-text').innerHTML = 'سوبر ميكس هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.';
     document.querySelector('#usagePopup .close-btn').innerText = 'إغلاق';
 
     document.querySelector('footer').innerHTML = '© 2025 سوبر ميكس | جميع الحقوق محفوظة 🔥';
@@ -469,14 +477,14 @@ function setLang(lang) {
     document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
     document.getElementById('superAssetsBtn').innerText = '• Super Mix Assets •';
     document.getElementById('brokersBtn').innerText = '• Super Brokers •';
+    document.getElementById('trustChannelBtn').innerText = '• Trust Channel •'; // الزر الجديد
 
     // Super Assets Section
     document.getElementById('assetsTitle').innerText = 'Super Mix - Super Mix';
     document.getElementById('assetsDesc').innerText = 'Super Mix Assets';
     document.querySelector('#assetsList a:nth-child(1)').innerText = '• Super Group •';
     document.querySelector('#assetsList a:nth-child(2)').innerText = '• Super Channel •';
-    document.querySelector('#assetsList a:nth-child(3)').innerText = '• Super Trust •';
-    document.querySelector('#superAssets button').innerText = '• Back to Main Menu •';
+    document.getElementById('assetsBackBtn').innerText = '• Back to Main Menu •';
 
     // Brokers Section - تم تعديل الوسطاء هنا لقلبها للانجليزية
     document.getElementById('brokersTitle').innerText = 'Super Mix - Super Mix';
@@ -488,15 +496,15 @@ function setLang(lang) {
     document.getElementById('broker-youssef').innerText = '• Broker Youssef •';
     document.getElementById('broker-error').innerText = '• Broker Error •';
     document.getElementById('broker-rio').innerText = '• Broker Rio •';
-    document.querySelector('#brokers button').innerText = '• Back to Main Menu •';
+    document.getElementById('brokersBackBtn').innerText = '• Back to Main Menu •';
 
     // Popups
     document.querySelector('#popup .popup-box h3').innerText = '• What is a Broker •';
-    document.querySelector('#popup .popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
+    document.getElementById('broker-popup-text').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
     document.querySelector('#popup .close-btn').innerText = 'Close';
     
     document.querySelector('#usagePopup .popup-box h3').innerText = '• Meaning of Super •';
-    document.querySelector('#usagePopup .popup-box p').innerHTML = 'Super Mix is a store for buying and selling groups, channels, stars, gifts, and more...<br>We facilitate fast sales for users to sell their possessions quickly<br>Dealing in the Super is with a broker to ensure the rights of both parties.';
+    document.getElementById('usage-popup-text').innerHTML = 'Super Mix is a store for buying and selling groups, channels, stars, gifts, and more...<br>We facilitate fast sales for users to sell their possessions quickly<br>Dealing in the Super is with a broker to ensure the rights of both parties.';
     document.querySelector('#usagePopup .close-btn').innerText = 'Close';
 
     document.querySelector('footer').innerHTML = '© 2025 Super Mix | All Rights Reserved 🔥';
@@ -517,20 +525,20 @@ document.addEventListener('DOMContentLoaded', () => {
     setLang('ar');
 });
 
-// Small script for the snowflake effect (kept from original)
+// Small script for the snowflake effect 
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
-  const size = Math.random() * 3 + 1; /* أصغر قليلاً */
+  const size = Math.random() * 3 + 1; 
   snow.style.width = `${size}px`;
   snow.style.height = `${size}px`;
   snow.style.left = `${Math.random() * window.innerWidth}px`;
-  snow.style.animationDuration = `${Math.random() * 4 + 4}s`; /* أسرع قليلاً */
-  snow.style.opacity = Math.random() * 0.7 + 0.3; /* شفافية وواقعية أكبر */
+  snow.style.animationDuration = `${Math.random() * 4 + 4}s`; 
+  snow.style.opacity = Math.random() * 0.7 + 0.3; 
   document.body.appendChild(snow);
   setTimeout(() => snow.remove(), 10000);
 }
-setInterval(createSnowflake, 300); /* معدل أقل لخلق كرات الثلج لواقعية أكثر */
+setInterval(createSnowflake, 300); 
 </script>
 </body>
 </html>
