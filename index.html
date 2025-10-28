@@ -57,7 +57,21 @@ a, button {
 }
 a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
-.menu-btn { position: fixed; top: 15px; left: 15px; font-size: 20px; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 8px; cursor: pointer; z-index: 1002; }
+.menu-btn, .calc-btn { 
+  position: fixed; 
+  top: 15px; 
+  font-size: 18px; 
+  background: rgba(255,255,255,0.15); 
+  padding: 5px 10px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  z-index: 1002; 
+  border: 1px solid red; /* إضافة إطار للزر */
+  transition: 0.3s;
+}
+.menu-btn { left: 15px; }
+.calc-btn { right: 15px; width: auto; font-weight: bold; }
+.calc-btn:hover { background: rgba(255,0,0,0.5); }
 
 
 .sidebar {
@@ -189,6 +203,50 @@ footer {
     box-shadow: 0 0 10px red;
     /* تأكد من أن الأزرار السابقة لم تعد موجودة هنا */
 }
+
+/* تنسيقات حاسبة العملات الجديدة */
+#crypto-calc-popup .popup-box {
+  max-width: 320px;
+  padding: 15px;
+}
+.calc-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  direction: ltr; /* لتثبيت ترتيب العناصر */
+}
+.calc-controls input {
+  width: 40%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ff0000;
+  background: rgba(10,10,10,0.8);
+  color: #fff;
+  text-align: center;
+  font-size: 1.1em;
+}
+.calc-controls select {
+  width: 55%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ff0000;
+  background: rgba(10,10,10,0.8);
+  color: #fff;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+#calc-result {
+  min-height: 40px;
+  background: rgba(50,50,50,0.6);
+  border: 1px solid #00ff00;
+  border-radius: 10px;
+  padding: 10px;
+  color: #00ff00;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-top: 15px;
+}
 </style>
 </head>
 <body>
@@ -196,6 +254,7 @@ footer {
 <audio id="clickSound" src="https://files.catbox.moe/opzbli.mp3"></audio>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
+<div class="calc-btn" id="calcBtn" onclick="openCryptoCalcPopup(); playSound()">احسب سعر العملة</div>
 
 <div class="sidebar" id="sidebar">
   <a href="#" id="usageBtn" onclick="playSound(); openUsagePopup()">• معني السوبر •</a>
@@ -206,6 +265,21 @@ footer {
   <div class="language-buttons" id="langBtns">
     <button onclick="setLang('ar'); playSound()">عربي</button>
     <button onclick="setLang('en'); playSound()">English</button>
+  </div>
+</div>
+
+<div class="popup-overlay" id="crypto-calc-popup">
+  <div class="popup-box">
+    <h3 id="calcTitle">حاسبة العملات المشفرة</h3>
+    
+    <div class="calc-controls" dir="ltr">
+        <input type="number" id="crypto-amount" value="1" min="0.01" step="any" oninput="calculateCryptoValue()">
+        <select id="crypto-select" onchange="calculateCryptoValue()"></select>
+    </div>
+    
+    <div id="calc-result">النتيجة: 0.00 USD</div>
+    
+    <button class="close-btn" onclick="closeCryptoCalcPopup(); playSound()">إغلاق</button>
   </div>
 </div>
 
@@ -279,10 +353,9 @@ footer {
   </section>
 </div>
 
-<footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
-
 <script>
 let currentLang = 'ar'; 
+let cryptoPricesData = []; // لتخزين بيانات العملات للآلة الحاسبة
 
 function toggleMenu() {
   const s = document.getElementById("sidebar");
@@ -309,6 +382,68 @@ function openUsagePopup() {
 
 function closeUsagePopup() {
   document.getElementById('usagePopup').style.display = 'none';
+}
+
+// دوال الحاسبة الجديدة
+function openCryptoCalcPopup() {
+  document.getElementById('crypto-calc-popup').style.display = 'flex';
+  populateCryptoSelect(); // تعبئة قائمة العملات عند الفتح
+  calculateCryptoValue(); // حساب القيمة الافتراضية
+}
+
+function closeCryptoCalcPopup() {
+  document.getElementById('crypto-calc-popup').style.display = 'none';
+}
+
+function populateCryptoSelect() {
+    const select = document.getElementById('crypto-select');
+    select.innerHTML = ''; // تفريغ القائمة
+
+    if (cryptoPricesData.length === 0) {
+        // إذا لم يتم جلب البيانات بعد، جلبها أولاً
+        fetchCryptoPrices(true, true);
+        return; 
+    }
+
+    // تعبئة القائمة بناءً على البيانات المخزنة
+    cryptoPricesData.forEach(coin => {
+        let option = document.createElement('option');
+        // استخدام اسم العملة ورمزها كقيمة
+        option.value = coin.current_price; 
+        option.setAttribute('data-id', coin.id);
+        option.innerText = `${coin.name} (${coin.symbol.toUpperCase()})`;
+        select.appendChild(option);
+    });
+}
+
+function calculateCryptoValue() {
+    const amountInput = document.getElementById('crypto-amount');
+    const select = document.getElementById('crypto-select');
+    const resultDiv = document.getElementById('calc-result');
+
+    const amount = parseFloat(amountInput.value);
+    const price = parseFloat(select.value);
+
+    // التحقق من صحة الإدخالات
+    if (isNaN(amount) || amount <= 0 || isNaN(price) || price <= 0) {
+        resultDiv.innerText = currentLang === 'ar' ? 'الرجاء إدخال كمية صحيحة واختيار عملة.' : 'Please enter a valid amount and select a coin.';
+        return;
+    }
+
+    const totalValue = amount * price;
+
+    // تنسيق النتيجة
+    const formattedResult = totalValue.toLocaleString('en-US', { 
+        style: 'currency', 
+        currency: 'USD', 
+        minimumFractionDigits: 2,
+        maximumFractionDigits: totalValue < 1 ? 6 : 2 
+    });
+    
+    // الحصول على اسم العملة المختارة
+    const selectedCoinName = select.options[select.selectedIndex] ? select.options[select.selectedIndex].text : '';
+
+    resultDiv.innerText = `${amount} ${selectedCoinName} ≈ ${formattedResult}`;
 }
 
 function show(id){
@@ -346,6 +481,10 @@ function setLang(lang) {
     document.documentElement.setAttribute('lang', 'ar');
     document.documentElement.setAttribute('dir', 'rtl');
 
+    // تحديث الحاسبة
+    document.getElementById('calcBtn').innerText = 'احسب سعر العملة';
+    document.getElementById('calcTitle').innerText = 'حاسبة العملات المشفرة';
+    document.querySelector('#crypto-calc-popup .close-btn').innerText = 'إغلاق';
 
     document.getElementById('usageBtn').innerText = '• معني السوبر •';
     document.getElementById('brokerQstBtn').innerText = '• يعني اي وسيط •';
@@ -385,6 +524,9 @@ function setLang(lang) {
     
     updateTime(true); 
     updateDate(true); 
+    
+    // تحديث النتيجة في الحاسبة عند تغيير اللغة
+    calculateCryptoValue();
 
 
     const brokers = ['الوسيط تيمو','الوسيط حمو','الوسيط عيد','الوسيط سالك','الوسيط يوسف','الوسيط ايرور','الوسيط ريو'];
@@ -403,6 +545,11 @@ function setLang(lang) {
   } else if(lang === 'en') {
     document.documentElement.setAttribute('lang', 'en');
     document.documentElement.setAttribute('dir', 'ltr');
+
+    // تحديث الحاسبة
+    document.getElementById('calcBtn').innerText = 'Calculate Coin Price';
+    document.getElementById('calcTitle').innerText = 'Crypto Calculator';
+    document.querySelector('#crypto-calc-popup .close-btn').innerText = 'Close';
 
     document.getElementById('usageBtn').innerText = '• Meaning of Super •';
     document.getElementById('brokerQstBtn').innerText = '• What is a Broker •';
@@ -442,6 +589,9 @@ function setLang(lang) {
     
     updateTime(true); 
     updateDate(true); 
+    
+    // تحديث النتيجة في الحاسبة عند تغيير اللغة
+    calculateCryptoValue();
 
 
     const brokers = ['Broker Timo','Broker Hamo','Broker Eid','Broker Salk','Broker Yousef','Broker Error','Broker Rio'];
@@ -523,9 +673,9 @@ setInterval(updateTonPriceInMainSection, 60000);
 
 
 // الوظيفة لجلب أسعار العملات المشفرة لقسم "أفضل 15 عملة"
-async function fetchCryptoPrices(forceRefresh = false) {
+// تمت إضافة معلمة جديدة toPopulateCalc لتحديد ما إذا كان يجب تعبئة الحاسبة أم لا
+async function fetchCryptoPrices(forceRefresh = false, toPopulateCalc = false) {
   const cryptoListDiv = document.getElementById('cryptoList');
-  const statusP = document.getElementById('cryptoStatus');
   
   const loadingText = currentLang === 'ar' ? "جاري تحميل الأسعار..." : "Loading Prices...";
   const errorText = currentLang === 'ar' ? "تعذر جلب الأسعار، حاول لاحقاً." : "Failed to fetch prices, try later.";
@@ -547,16 +697,8 @@ async function fetchCryptoPrices(forceRefresh = false) {
     }
     let data = await response.json();
     
-    // التأكد من وجود عملة TON (the-open-network) في القائمة
-    const tonCoin = data.find(coin => coin.id === 'the-open-network' || coin.symbol === 'ton');
-    if (!tonCoin && data.length < 15) {
-        // إذا لم تكن موجودة وعدد العملات أقل من 15، يمكن محاولة جلب بياناتها بشكل منفصل وإضافتها
-        // (هذه خطوة متقدمة، لكن لغرض الالتزام بالطلب، سنفترض أنها عادةً ما تكون في المراكز الـ 15 الأولى)
-    } else if (!tonCoin) {
-        // إذا لم تكن موجودة وعدد العملات 15، سنقوم باستبدال العملة الأخيرة بـ TON لضمان وجودها
-        // (هذا تعديل يدوي لضمان الطلب، يُفضل جلبها بشكل منفصل وإضافتها بذكاء)
-        
-        // سنحاول جلب بيانات TON بشكل منفصل ونضيفها في نهاية القائمة إذا لم تكن موجودة بالفعل.
+    // محاولة جلب بيانات TON بشكل منفصل إذا لم تكن موجودة بالفعل.
+    if (!data.find(coin => coin.id === 'the-open-network')) {
         try {
             const tonRes = await fetch('https://api.coingecko.com/api/v3/coins/the-open-network?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false');
             const tonData = await tonRes.json();
@@ -566,21 +708,25 @@ async function fetchCryptoPrices(forceRefresh = false) {
                     symbol: 'TON',
                     name: 'The Open Network',
                     current_price: tonData.market_data.current_price.usd,
-                    market_cap_rank: tonData.market_data.market_cap_rank,
+                    market_cap_rank: tonData.market_data.market_cap_rank || 1000,
                 };
                 
-                // إذا لم تكن موجودة، قم بإضافتها في الترتيب الصحيح أو في النهاية (نضيفها في النهاية لتبسيط الكود)
-                if(!data.find(coin => coin.id === 'the-open-network')) {
-                    data.push(tonCoinData);
-                    data.sort((a, b) => (a.market_cap_rank || 1000) - (b.market_cap_rank || 1000));
-                    data = data.slice(0, 15); // الاحتفاظ بأول 15 فقط
-                }
+                // قم بإضافتها وإعادة ترتيب القائمة
+                data.push(tonCoinData);
+                data.sort((a, b) => (a.market_cap_rank || 1000) - (b.market_cap_rank || 1000));
+                data = data.slice(0, 15); // الاحتفاظ بأول 15 فقط
             }
         } catch(e) {
             console.warn("Failed to fetch TON data separately.");
         }
     }
     
+    // تخزين البيانات في المتغير العام لاستخدامها في الآلة الحاسبة
+    cryptoPricesData = data;
+    if (toPopulateCalc) {
+        populateCryptoSelect();
+    }
+
     let tableHTML = '<table><thead><tr><th>#</th><th>' + (currentLang === 'ar' ? 'العملة' : 'Coin') + '</th><th>' + (currentLang === 'ar' ? 'السعر (USD)' : 'Price (USD)') + '</th></tr></thead><tbody>';
 
     data.forEach((coin, index) => {
@@ -624,8 +770,16 @@ setInterval(createSnowflake, 200);
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.querySelector('.menu-btn');
+  const calcBtn = document.querySelector('.calc-btn');
+  const calcPopup = document.getElementById('crypto-calc-popup');
+
   if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
     sidebar.style.left = "-240px";
+  }
+  
+  // إغلاق الحاسبة عند الضغط خارجها
+  if(calcPopup.style.display === "flex" && !calcPopup.contains(event.target) && !calcBtn.contains(event.target)) {
+      closeCryptoCalcPopup();
   }
 });
 
@@ -635,6 +789,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTime(); 
     updateDate(); 
     updateTonPriceInMainSection(); 
+    fetchCryptoPrices(true, true); // جلب الأسعار وتعبئة الحاسبة عند التحميل الأولي
 });
 </script>
 </body>
