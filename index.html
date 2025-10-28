@@ -95,6 +95,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   border-radius: 10px;
   box-shadow: 0 0 8px #ff0000;
 }
+
 #cryptoPrices table {
     width: 90%;
     margin: 20px auto;
@@ -122,6 +123,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
     color: #fff;
     font-weight: 500;
 }
+
 
 .crypto-calc-btn-in-section {
     display: block; 
@@ -196,6 +198,8 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   box-shadow: 0 0 8px red;
 }
 
+
+
 #crypto-calc-popup .popup-box {
   max-width: 340px;
   padding: 15px;
@@ -218,6 +222,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
   font-size: 1.1em;
 }
 
+
 #coin-select-btn {
   width: 50%;
   padding: 8px;
@@ -235,6 +240,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
     box-shadow: 0 0 10px red;
 }
 
+
 #coin-buttons-container {
     display: flex;
     flex-wrap: wrap;
@@ -246,6 +252,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
     border: 1px solid rgba(255,0,0,0.3);
     border-radius: 10px;
 }
+
 
 .coin-select-button {
     background-color: rgba(30, 30, 30, 0.9);
@@ -293,9 +300,9 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 <div class="sidebar" id="sidebar">
   <a href="#" id="usageBtn" onclick="playSound(); openUsagePopup()">• معني السوبر •</a>
   <a href="#" id="brokerQstBtn" onclick="playSound(); openPopup()">• يعني اي وسيط •</a>
-  <a href="#" id="cryptoBtn" onclick="playSound(); show('cryptoPrices'); fetchCryptoPrices(false, true); toggleMenu()">📊 أسعار العملات</a>
-  <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">🌓 الوضع الليلي</a>
-  <button id="langToggleBtn" onclick="toggleLangBtns(); playSound()">🌐 اللغة</button>
+  <a href="#" id="cryptoBtn" onclick="playSound(); show('cryptoPrices'); fetchCryptoPrices(false, true); toggleMenu()">• اسعار العملات الرقميه •</a>
+  <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()">• الوضع الليلي •</a>
+  <button id="langToggleBtn" onclick="toggleLangBtns(); playSound()">• اللغه •</button>
   <div class="language-buttons" id="langBtns">
     <button onclick="setLang('ar'); playSound()">عربي</button>
     <button onclick="setLang('en'); playSound()">English</button>
@@ -312,7 +319,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
     </div>
     
     <div id="coin-buttons-container" style="display: none;">
-    </div>
+        </div>
     
     <div id="calc-result">النتيجة: 0.00 USD</div>
     
@@ -423,8 +430,10 @@ function closeUsagePopup() {
   document.getElementById('usagePopup').style.display = 'none';
 }
 
+
 function openCryptoCalcPopup() {
   document.getElementById('crypto-calc-popup').style.display = 'flex';
+
   populateCoinButtons(); 
   
   if (!selectedCoin && cryptoPricesData.length > 0) {
@@ -450,6 +459,7 @@ function populateCoinButtons() {
 
     if (cryptoPricesData.length === 0) {
         container.innerHTML = `<button class="coin-select-button" style="width: 90%; background: #cc0000; cursor: default;">${currentLang === 'ar' ? 'جاري تحميل العملات...' : 'Loading coins...'}</button>`;
+
         fetchCryptoPrices(true, true); 
         return; 
     }
@@ -535,7 +545,7 @@ function toggleDarkModeFunc() {
   body.classList.toggle('dark-mode');
 
   if (currentLang === 'ar') {
-    btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+    btn.innerHTML = body.classList.contains('dark-mode') ? "• الوضع النهاري •" : "• الوضع الليلي •";
   } else {
     btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 Light Mode" : "🌓 Dark Mode";
   }
@@ -558,6 +568,7 @@ function setLang(lang) {
     document.documentElement.setAttribute('lang', 'ar');
     document.documentElement.setAttribute('dir', 'rtl');
 
+    // تحديث الحاسبة
     document.querySelector('.crypto-calc-btn-in-section').innerText = 'احسب سعر العملة';
     document.getElementById('calcTitle').innerText = 'حاسبة العملات المشفرة';
     document.getElementById('coin-select-btn').innerText = selectedCoin ? `${selectedCoin.name} (${selectedCoin.symbol})` : 'اختر عملة';
@@ -565,10 +576,10 @@ function setLang(lang) {
 
     document.getElementById('usageBtn').innerText = '• معني السوبر •';
     document.getElementById('brokerQstBtn').innerText = '• يعني اي وسيط •';
-    document.getElementById('cryptoBtn').innerText = '📊 أسعار العملات'; 
-    document.getElementById('langToggleBtn').innerText = '🌐 اللغة';
+    document.getElementById('cryptoBtn').innerText = '• اسعار العملات الرقميه •'; 
+    document.getElementById('langToggleBtn').innerText = '• اللغه •';
 
-    darkModeBtn.innerHTML = isDarkMode ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
+    darkModeBtn.innerHTML = isDarkMode ? "• الوضع النهاري •" : "• الوضع الليلي •";
 
 
     document.getElementById('mainTitle').innerText = 'سوبر زون - Super Zwn';
@@ -580,9 +591,11 @@ function setLang(lang) {
     document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
     document.querySelector('#brokers button').innerText = '• العودة للقائمة الرئيسية •';
     
+    // تحديث قسم العملات لـ 15
     document.getElementById('cryptoTitle').innerText = 'سوبر زون - Super Zwn';
     document.getElementById('cryptoDesc').innerText = 'أفضل 15 عملة رقمية';
     
+    // تحديث أزرار قسم العملات
     const cryptoButtons = document.querySelectorAll('#cryptoPrices .btn');
     if (cryptoButtons.length >= 2) {
         cryptoButtons[0].innerText = '• العودة للقائمة الرئيسية •';
@@ -625,6 +638,7 @@ function setLang(lang) {
     document.documentElement.setAttribute('lang', 'en');
     document.documentElement.setAttribute('dir', 'ltr');
 
+    // تحديث الحاسبة
     document.querySelector('.crypto-calc-btn-in-section').innerText = 'Calculate Coin Price';
     document.getElementById('calcTitle').innerText = 'Crypto Calculator';
     document.getElementById('coin-select-btn').innerText = selectedCoin ? `${selectedCoin.name} (${selectedCoin.symbol})` : 'Select Coin';
@@ -632,10 +646,10 @@ function setLang(lang) {
 
     document.getElementById('usageBtn').innerText = '• Meaning of Super •';
     document.getElementById('brokerQstBtn').innerText = '• What is a Broker •';
-    document.getElementById('cryptoBtn').innerText = '📊 Crypto Prices'; 
-    document.getElementById('langToggleBtn').innerText = '🌐 Language';
+    document.getElementById('cryptoBtn').innerText = '• Crypto Prices •'; 
+    document.getElementById('langToggleBtn').innerText = '• Language •';
 
-    darkModeBtn.innerHTML = isDarkMode ? "🌞 Light Mode" : "🌓 Dark Mode";
+    darkModeBtn.innerHTML = isDarkMode ? "• Light Mode •" : "• Dark Mode •";
 
 
     document.getElementById('mainTitle').innerText = 'Super Zwn - Super Zwn';
@@ -647,13 +661,15 @@ function setLang(lang) {
     document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
     document.querySelector('#brokers button').innerText = '• Back to Main Menu •';
 
+
     document.getElementById('cryptoTitle').innerText = 'Super Zwn - Super Zwn';
     document.getElementById('cryptoDesc').innerText = 'Top 15 Cryptocurrencies';
     
+
     const cryptoButtons = document.querySelectorAll('#cryptoPrices .btn');
     if (cryptoButtons.length >= 2) {
         cryptoButtons[0].innerText = '• Back to Main Menu •';
-        cryptoButtons[1].innerText = '🔁 Refresh Prices';
+        cryptoButtons[1].innerText = '• Refresh Prices •';
     }
     document.getElementById('cryptoStatus').innerText = 'Loading Prices...';
     
@@ -726,6 +742,7 @@ function updateDate(forceUpdateLabel = false) {
   }
 }
 
+
 async function updateTonPriceInMainSection() {
     const symbol = 'TONUSDT';
     const btn = document.getElementById("tonBtn");
@@ -751,6 +768,7 @@ async function updateTonPriceInMainSection() {
 setInterval(updateTonPriceInMainSection, 60000); 
 
 
+
 async function fetchCryptoPrices(forceRefresh = false, toPopulateCalc = false) {
   const cryptoListDiv = document.getElementById('cryptoList');
   
@@ -763,6 +781,7 @@ async function fetchCryptoPrices(forceRefresh = false, toPopulateCalc = false) {
      if (!newStatusP) cryptoListDiv.querySelector('p').id = 'cryptoStatus';
   }
 
+
   const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=1&sparkline=false&locale=en';
   
   let tonCoinData = null; 
@@ -774,6 +793,7 @@ async function fetchCryptoPrices(forceRefresh = false, toPopulateCalc = false) {
     }
     let data = await response.json();
     
+
     try {
         const tonRes = await fetch('https://api.coingecko.com/api/v3/coins/the-open-network?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false');
         const tonData = await tonRes.json();
@@ -790,6 +810,7 @@ async function fetchCryptoPrices(forceRefresh = false, toPopulateCalc = false) {
         console.warn("Failed to fetch TON data separately.");
     }
     
+
     if (tonCoinData) {
         data = data.filter(coin => coin.id !== 'the-open-network');
         data.push(tonCoinData);
@@ -797,6 +818,7 @@ async function fetchCryptoPrices(forceRefresh = false, toPopulateCalc = false) {
         data = data.slice(0, 15); 
     }
     
+
     cryptoPricesData = data;
     if (toPopulateCalc) {
         populateCoinButtons(); 
