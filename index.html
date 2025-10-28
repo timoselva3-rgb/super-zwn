@@ -13,6 +13,7 @@
   --real-red: #cc0000; /* لون أحمر أغمق وأكثر واقعية */
   --light-glow: #ff5555; /* لون التوهج الخفيف */
   --shadow-color: #990000; /* لون الظل الداكن */
+  --white-glow: rgba(255, 255, 255, 0.6); /* توهج أبيض خفيف للصورة */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,10 +41,10 @@ body.dark-mode::before { filter: brightness(0.15); }
 .content { display: none; margin-top: 20px; }
 .content.active { display: block; }
 
-/* زيادة المسافة العلوية لتنزيل المحتوى */
-#main { padding-top: 30px; } 
-#superAssets { padding-top: 30px; }
-#brokers { padding-top: 30px; }
+/* 1. زيادة المسافة العلوية لتنزيل المحتوى أكثر */
+#main { padding-top: 70px; } 
+#superAssets { padding-top: 70px; }
+#brokers { padding-top: 70px; }
 
 /* تصغير الخطوط وتوهج خفيف وواقعي */
 h1 { 
@@ -60,13 +61,15 @@ h2 {
 }
 p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
 
-/* تعديل شكل الصورة لتكون مربعة */
+/* 2. تعديل شكل الصورة لتكون مربعة مع توهج أبيض وتفتيحها قليلاً */
 .logo { 
-  width: 100px; /* تم زيادته قليلاً ليتناسب مع المربع */
-  height: 100px; /* لضمان الشكل المربع */
-  border-radius: 10px; /* مربع بحواف مستديرة قليلاً */
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* تقليل الظل لواقعية أكثر */
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  /* إضافة توهج أبيض حول الصورة */
+  box-shadow: 0 0 10px 3px var(--white-glow); 
   margin-top: 20px; 
+  filter: brightness(1.2); /* تفتيح الصورة */
 }
 
 /* 3D Button Style */
@@ -223,6 +226,7 @@ p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
 .language-buttons .btn-3d { width: 80%; }
 
 
+/* 3. تعديل الفوتر للون الأبيض */
 footer {
   position: fixed;
   bottom: 0;
@@ -230,10 +234,10 @@ footer {
   padding: 8px 0; 
   background: rgba(15, 15, 15, 0.9); 
   font-size: 0.75em;
-  color: var(--real-red);
+  color: #FFFFFF; /* اللون الأبيض النقي */
   z-index: 10;
-  box-shadow: 0 0 8px rgba(204,0,0,0.4);
-  border-top: 1px solid var(--real-red);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4); /* توهج أبيض خفيف */
+  border-top: 1px solid #FFFFFF; /* حدود بيضاء */
 }
 
 /* New Section for Super Assets */
@@ -274,8 +278,6 @@ footer {
 </div>
 
 <div class="sidebar" id="sidebar">
-  <a href="#" id="usageBtn" onclick="playSound(); openUsagePopup()" class="btn-3d">• معني السوبر •</a>
-  <a href="#" id="brokerQstBtn" onclick="playSound(); openPopup()" class="btn-3d">• يعني اي وسيط •</a>  
   <a href="#" id="darkModeBtn" onclick="toggleDarkModeFunc(); playSound()" class="btn-3d">🌓 الوضع الليلي</a>
   <button id="langToggleBtn" onclick="toggleLangBtns(); playSound()" class="btn-3d">🌐 اللغة</button>
   <div class="language-buttons" id="langBtns">
@@ -320,6 +322,9 @@ footer {
       <button id="brokersBtn" onclick="playSound(); show('brokers')" class="btn-3d">• وسطاء السوبر •</button>
       
       <a id="trustChannelBtn" href="https://t.me/superrzwn" target="_blank" onclick="playSound()" class="btn-3d">• قناة الثقة •</a> 
+      
+      <a href="#" id="usageBtn" onclick="playSound(); openUsagePopup()" class="btn-3d">• معني السوبر •</a>
+
 
     </div>
   </section>
@@ -340,13 +345,16 @@ footer {
     <h1 id="brokersTitle">سوبر ميكس - Super Mix</h1>
     <h2 id="brokersDesc">الوسطاء المعتمدون</h2>
     <div id="brokersList">
-      <a id="broker-timo" class="btn-3d" href="https://t.me/vwvvxv" target="_blank" onclick="playSound()">• الوسيط تيمو •</a>
-      <a id="broker-hamo" class="btn-3d" href="https://t.me/vrwvw" target="_blank" onclick="playSound()">• الوسيط حمو •</a>
-      <a id="broker-eid" class="btn-3d" href="https://t.me/GreaTeeid" target="_blank" onclick="playSound()">• الوسيط عيد •</a>
-      <a id="broker-salek" class="btn-3d" href="https://t.me/x_o_z" target="_blank" onclick="playSound()">• الوسيط سالك •</a>
-      <a id="broker-youssef" class="btn-3d" href="https://t.me/j_e_o" target="_blank" onclick="playSound()">• الوسيط يوسف •</a>
-      <a id="broker-error" class="btn-3d" href="https://t.me/mrtrgm" target="_blank" onclick="playSound()">• الوسيط ايرور •</a>
-      <a id="broker-rio" class="btn-3d" href="https://t.me/ahmedrio" target="_blank" onclick="playSound()">• الوسيط ريو •</a>
+      <a id="broker-owner" class="btn-3d" href="https://t.me/eyeee" target="_blank" onclick="playSound()">• مالك السوبر •</a>
+      <a id="broker-gemy" class="btn-3d" href="https://t.me/g_m_y" target="_blank" onclick="playSound()">• الوسيط جيمي •</a>
+      <a id="broker-tokyo" class="btn-3d" href="https://t.me/t_k_r" target="_blank" onclick="playSound()">• الوسيط طوكيو •</a>
+      <a id="broker-casper" class="btn-3d" href="https://t.me/k_c_r" target="_blank" onclick="playSound()">• الوسيط كاسبر •</a>
+      <a id="broker-khalil" class="btn-3d" href="https://t.me/a_w_a" target="_blank" onclick="playSound()">• الوسيط خليل •</a>
+      <a id="broker-alamy" class="btn-3d" href="https://t.me/e_t_w" target="_blank" onclick="playSound()">• الوسيط عالمي •</a>
+      <a id="broker-cavio" class="btn-3d" href="https://t.me/x_s_a" target="_blank" onclick="playSound()">• الوسيط كافيو •</a>
+      <a id="broker-mido" class="btn-3d" href="https://t.me/rmrmm" target="_blank" onclick="playSound()">• الوسيط ميدو •</a>
+      <a id="broker-radi" class="btn-3d" href="https://t.me/ccuun" target="_blank" onclick="playSound()">• الوسيط راضي •</a>
+      <a id="broker-speed" class="btn-3d" href="https://t.me/z_c_k" target="_blank" onclick="playSound()">• الوسيط اسبيد •</a>
     </div>
     <button class="btn-3d" onclick="playSound(); show('main')" id="brokersBackBtn">• العودة للقائمة الرئيسية •</button>
   </section>
@@ -369,6 +377,7 @@ function playSound() {
 }
 
 function openPopup() {
+  // تم ترك دالة openPopup موجودة في حال الحاجة إليها لاحقاً بالرغم من حذف الزر
   document.getElementById('popup').style.display = 'flex';
 }
 
@@ -419,9 +428,7 @@ function setLang(lang) {
     document.documentElement.setAttribute('lang', 'ar');
     document.documentElement.setAttribute('dir', 'rtl');
 
-    // Sidebar
-    document.getElementById('usageBtn').innerText = '• معني السوبر •';
-    document.getElementById('brokerQstBtn').innerText = '• يعني اي وسيط •';
+    // Sidebar (تم تحديث ما هو موجود فقط)
     document.getElementById('langToggleBtn').innerText = '🌐 اللغة';
     darkModeBtn.innerHTML = isDarkMode ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
 
@@ -430,7 +437,8 @@ function setLang(lang) {
     document.getElementById('mainDesc').innerHTML = 'اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة';
     document.getElementById('superAssetsBtn').innerText = '• ممتلكات سوبر ميكس •';
     document.getElementById('brokersBtn').innerText = '• وسطاء السوبر •';
-    document.getElementById('trustChannelBtn').innerText = '• قناة الثقة •'; // الزر الجديد
+    document.getElementById('trustChannelBtn').innerText = '• قناة الثقة •';
+    document.getElementById('usageBtn').innerText = '• معني السوبر •'; // الزر الجديد
 
     // Super Assets Section
     document.getElementById('assetsTitle').innerText = 'سوبر ميكس - Super Mix';
@@ -442,13 +450,19 @@ function setLang(lang) {
     // Brokers Section
     document.getElementById('brokersTitle').innerText = 'سوبر ميكس - Super Mix';
     document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
-    document.getElementById('broker-timo').innerText = '• الوسيط تيمو •';
-    document.getElementById('broker-hamo').innerText = '• الوسيط حمو •';
-    document.getElementById('broker-eid').innerText = '• الوسيط عيد •';
-    document.getElementById('broker-salek').innerText = '• الوسيط سالك •';
-    document.getElementById('broker-youssef').innerText = '• الوسيط يوسف •';
-    document.getElementById('broker-error').innerText = '• الوسيط ايرور •';
-    document.getElementById('broker-rio').innerText = '• الوسيط ريو •';
+    
+    // Updated Brokers List AR
+    document.getElementById('broker-owner').innerText = '• مالك السوبر •';
+    document.getElementById('broker-gemy').innerText = '• الوسيط جيمي •';
+    document.getElementById('broker-tokyo').innerText = '• الوسيط طوكيو •';
+    document.getElementById('broker-casper').innerText = '• الوسيط كاسبر •';
+    document.getElementById('broker-khalil').innerText = '• الوسيط خليل •';
+    document.getElementById('broker-alamy').innerText = '• الوسيط عالمي •';
+    document.getElementById('broker-cavio').innerText = '• الوسيط كافيو •';
+    document.getElementById('broker-mido').innerText = '• الوسيط ميدو •';
+    document.getElementById('broker-radi').innerText = '• الوسيط راضي •';
+    document.getElementById('broker-speed').innerText = '• الوسيط اسبيد •';
+
     document.getElementById('brokersBackBtn').innerText = '• العودة للقائمة الرئيسية •';
     
 
@@ -467,8 +481,6 @@ function setLang(lang) {
     document.documentElement.setAttribute('dir', 'ltr');
 
     // Sidebar
-    document.getElementById('usageBtn').innerText = '• Meaning of Super •';
-    document.getElementById('brokerQstBtn').innerText = '• What is a Broker •';
     document.getElementById('langToggleBtn').innerText = '🌐 Language';
     darkModeBtn.innerHTML = isDarkMode ? "🌞 Light Mode" : "🌓 Dark Mode";
 
@@ -477,7 +489,8 @@ function setLang(lang) {
     document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
     document.getElementById('superAssetsBtn').innerText = '• Super Mix Assets •';
     document.getElementById('brokersBtn').innerText = '• Super Brokers •';
-    document.getElementById('trustChannelBtn').innerText = '• Trust Channel •'; // الزر الجديد
+    document.getElementById('trustChannelBtn').innerText = '• Trust Channel •';
+    document.getElementById('usageBtn').innerText = '• Meaning of Super •'; // الزر الجديد
 
     // Super Assets Section
     document.getElementById('assetsTitle').innerText = 'Super Mix - Super Mix';
@@ -486,16 +499,22 @@ function setLang(lang) {
     document.querySelector('#assetsList a:nth-child(2)').innerText = '• Super Channel •';
     document.getElementById('assetsBackBtn').innerText = '• Back to Main Menu •';
 
-    // Brokers Section - تم تعديل الوسطاء هنا لقلبها للانجليزية
+    // Brokers Section 
     document.getElementById('brokersTitle').innerText = 'Super Mix - Super Mix';
     document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
-    document.getElementById('broker-timo').innerText = '• Broker Timo •';
-    document.getElementById('broker-hamo').innerText = '• Broker Hamo •';
-    document.getElementById('broker-eid').innerText = '• Broker Eid •';
-    document.getElementById('broker-salek').innerText = '• Broker Salek •';
-    document.getElementById('broker-youssef').innerText = '• Broker Youssef •';
-    document.getElementById('broker-error').innerText = '• Broker Error •';
-    document.getElementById('broker-rio').innerText = '• Broker Rio •';
+    
+    // Updated Brokers List EN
+    document.getElementById('broker-owner').innerText = '• Super Owner •';
+    document.getElementById('broker-gemy').innerText = '• Broker Gemy •';
+    document.getElementById('broker-tokyo').innerText = '• Broker Tokyo •';
+    document.getElementById('broker-casper').innerText = '• Broker Casper •';
+    document.getElementById('broker-khalil').innerText = '• Broker Khalil •';
+    document.getElementById('broker-alamy').innerText = '• Broker Alamy •';
+    document.getElementById('broker-cavio').innerText = '• Broker Cavio •';
+    document.getElementById('broker-mido').innerText = '• Broker Mido •';
+    document.getElementById('broker-radi').innerText = '• Broker Radi •';
+    document.getElementById('broker-speed').innerText = '• Broker Speed •';
+    
     document.getElementById('brokersBackBtn').innerText = '• Back to Main Menu •';
 
     // Popups
