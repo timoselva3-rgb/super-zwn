@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سوبر زون | اكبر سوبر عربي على تيليجرام</title>
-<meta name="description" content="سوبر زون - اول سوبر عربي على تيليجرام 💪 اكبر المبيعات واعلى درجات الثقة">
-<meta name="keywords" content="سوبر زون, تيليجرام, وسطاء, مبيعات, عربي">
+<title id="metaTitle">سوبر زون | اكبر سوبر عربي على تيليجرام</title>
+<meta name="description" content="سوبر زون - اول سوبر عربي على تيليجرام 💪 اكبر المبيعات واعلى درجات الثقة" id="metaDescription">
+<meta name="keywords" content="سوبر زون, تيليجرام, وسطاء, مبيعات, عربي" id="metaKeywords">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -267,10 +267,6 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
     box-shadow: none;
     transition: 0.2s;
 }
-.coin-select-button:hover {
-    background-color: #ff0000;
-    transform: scale(1.05);
-}
 .coin-select-button.selected {
     background-color: #ff0000;
     border-color: #fff;
@@ -329,25 +325,25 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
-    <h3>• يعني اي وسيط •</h3>
-    <p>
+    <h3 id="brokerPopupTitle">• يعني اي وسيط •</h3>
+    <p id="brokerPopupText">
       الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>
       مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>
       التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.
     </p>
-    <button class="close-btn" onclick="closePopup(); playSound()">إغلاق</button>
+    <button class="close-btn" id="brokerCloseBtn" onclick="closePopup(); playSound()">إغلاق</button>
   </div>
 </div>
 
 <div class="popup-overlay" id="usagePopup">
   <div class="popup-box">
-    <h3>• معني السوبر •</h3>
-    <p>
+    <h3 id="usagePopupTitle">• معني السوبر •</h3>
+    <p id="usagePopupText">
 سوبر زون هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>
 نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>
 والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.
     </p>
-    <button class="close-btn" onclick="closeUsagePopup(); playSound()">إغلاق</button>
+    <button class="close-btn" id="usageCloseBtn" onclick="closeUsagePopup(); playSound()">إغلاق</button>
   </div>
 </div>
 
@@ -382,23 +378,171 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
       <a class="btn" href="https://t.me/mrtrgm" target="_blank" onclick="playSound()">• الوسيط ايرور •</a>
       <a class="btn" href="https://t.me/ahmedrio" target="_blank" onclick="playSound()">• الوسيط ريو •</a>
     </div>
-    <button class="btn" onclick="playSound(); show('main')">• العودة للقائمة الرئيسية •</button>
+    <button class="btn" id="brokersBackBtn" onclick="playSound(); show('main')">• العودة للقائمة الرئيسية •</button>
   </section>
   
   <section class="content" id="cryptoPrices">
     <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
-    <button class="crypto-calc-btn-in-section" onclick="openCryptoCalcPopup(); playSound()">احسب سعر العملة</button>
+    <button class="crypto-calc-btn-in-section" id="cryptoCalcBtnInSec" onclick="openCryptoCalcPopup(); playSound()">احسب سعر العملة</button>
     <h1 id="cryptoTitle">سوبر زون - Super Zwn</h1>
     <h2 id="cryptoDesc">أفضل 15 عملة رقمية</h2>
     <div id="cryptoList">
       <p id="cryptoStatus">جاري تحميل الأسعار...</p>
     </div>
-    <button class="btn" onclick="playSound(); show('main')">• العودة للقائمة الرئيسية •</button>
-    <button class="btn" onclick="playSound(); fetchCryptoPrices(true, true)">🔁 تحديث الأسعار</button>
+    <button class="btn" id="cryptoBackBtn" onclick="playSound(); show('main')">• العودة للقائمة الرئيسية •</button>
+    <button class="btn" id="cryptoRefreshBtn" onclick="playSound(); fetchCryptoPrices(true, true)">🔁 تحديث الأسعار</button>
   </section>
 </div>
 
 <script>
+const LANG_DATA = {
+    'ar': {
+        meta: {
+            title: "سوبر زون | اكبر سوبر عربي على تيليجرام",
+            description: "سوبر زون - اول سوبر عربي على تيليجرام 💪 اكبر المبيعات واعلى درجات الثقة",
+            keywords: "سوبر زون, تيليجرام, وسطاء, مبيعات, عربي",
+        },
+        sidebar: {
+            usageBtn: "• معني السوبر •",
+            brokerQstBtn: "• يعني اي وسيط •",
+            cryptoBtn: "• اسعار العملات الرقميه •",
+            darkModeBtn: ["• الوضع الليلي •", "• الوضع النهاري •"],
+            langToggleBtn: "• اللغه •",
+        },
+        main: {
+            mainTitle: "سوبر زون - Super Zwn",
+            mainDesc: "اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة",
+            channelBtn: "• قناه سوبر زون •",
+            groupBtn: "• جروب سوبر زون •",
+            brokersBtn: "• وسطاء السوبر •",
+            tonLoading: "جاري التحميل...",
+            timeLoading: "جاري التحديث...",
+            dateLoading: "جاري التحديث...",
+        },
+        brokers: {
+            brokersTitle: "سوبر زون - Super Zwn",
+            brokersDesc: "الوسطاء المعتمدون",
+            brokersBackBtn: "• العودة للقائمة الرئيسية •",
+            list: [
+                "• الوسيط تيمو •", "• الوسيط حمو •", "• الوسيط عيد •", "• الوسيط سالك •",
+                "• الوسيط يوسف •", "• الوسيط ايرور •", "• الوسيط ريو •"
+            ]
+        },
+        crypto: {
+            cryptoCalcBtnInSec: "احسب سعر العملة",
+            cryptoTitle: "سوبر زون - Super Zwn",
+            cryptoDesc: "أفضل 15 عملة رقمية",
+            cryptoStatusLoading: "جاري تحميل الأسعار...",
+            cryptoStatusError: "تعذر جلب الأسعار، حاول لاحقاً.",
+            cryptoBackBtn: "• العودة للقائمة الرئيسية •",
+            cryptoRefreshBtn: "🔁 تحديث الأسعار",
+            tableHeaders: ["#", "العملة", "السعر (USD)"],
+        },
+        brokerPopup: {
+            title: "• يعني اي وسيط •",
+            text: "الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.",
+            closeBtn: "إغلاق",
+        },
+        usagePopup: {
+            title: "• معني السوبر •",
+            text: "سوبر زون هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.",
+            closeBtn: "إغلاق",
+        },
+        calc: {
+            calcTitle: "حاسبة العملات المشفرة",
+            selectCoinBtn: "اختر عملة",
+            loadingCoins: "جاري تحميل العملات...",
+            resultDefault: "النتيجة: 0.00 USD",
+            inputError: "الرجاء إدخال كمية صحيحة واختيار عملة.",
+            closeBtn: "إغلاق",
+        },
+        other: {
+            tonError: "خطأ",
+            cryptoNA: "غير متوفر",
+        }
+    },
+    'en': {
+        meta: {
+            title: "Super Zwn | Biggest Arabic Super on Telegram",
+            description: "Super Zwn - The first Arabic Super on Telegram 💪 Biggest sales and highest trust",
+            keywords: "Super Zwn, Telegram, Brokers, Sales, Arabic",
+        },
+        sidebar: {
+            usageBtn: "• Meaning of Super •",
+            brokerQstBtn: "• What is a Broker •",
+            cryptoBtn: "• Crypto Prices •",
+            darkModeBtn: ["• Dark Mode •", "• Light Mode •"],
+            langToggleBtn: "• Language •",
+        },
+        main: {
+            mainTitle: "Super Zwn - Super Zwn",
+            mainDesc: "The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust",
+            channelBtn: "• Super Zwn Channel •",
+            groupBtn: "• Super Zwn Group •",
+            brokersBtn: "• Super Brokers •",
+            tonLoading: "Loading...",
+            timeLoading: "Updating...",
+            dateLoading: "Updating...",
+        },
+        brokers: {
+            brokersTitle: "Super Zwn - Super Zwn",
+            brokersDesc: "Authorized Brokers",
+            list: [
+                "• Broker Timo •", "• Broker Hamo •", "• Broker Eid •", "• Broker Salk •",
+                "• Broker Yousef •", "• Broker Error •", "• Broker Rio •"
+            ],
+            brokersBackBtn: "• Back to Main Menu •",
+
+        },
+        crypto: {
+            cryptoCalcBtnInSec: "Calculate Coin Price",
+            cryptoTitle: "Super Zwn - Super Zwn",
+            cryptoDesc: "Top 15 Cryptocurrencies",
+            cryptoStatusLoading: "Loading Prices...",
+            cryptoStatusError: "Failed to fetch prices, try later.",
+            cryptoBackBtn: "• Back to Main Menu •",
+            cryptoRefreshBtn: "🔁 Refresh Prices",
+            tableHeaders: ["#", "Coin", "Price (USD)"],
+        },
+        brokerPopup: {
+            title: "• What is a Broker •",
+            text: "A broker is a trusted person who facilitates deals between two parties to ensure everyone's rights.<br>Their task is to ensure the transaction's security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.",
+            closeBtn: "Close",
+        },
+        usagePopup: {
+            title: "• Meaning of Super •",
+            text: "Super Zwn is a store for buying and selling groups, channels, stars, gifts, and more...<br>We facilitate fast sales for users to sell their possessions quickly<br>Dealing in the Super is with a broker to ensure the rights of both parties.",
+            closeBtn: "Close",
+        },
+        calc: {
+            calcTitle: "Crypto Calculator",
+            selectCoinBtn: "Select Coin",
+            loadingCoins: "Loading coins...",
+            resultDefault: "Result: 0.00 USD",
+            inputError: "Please enter a valid amount and select a coin.",
+            closeBtn: "Close",
+        },
+        other: {
+            tonError: "Error",
+            cryptoNA: "N/A",
+        }
+    }
+};
+
+const BINANCE_TOP_SYMBOLS = [
+    'BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT', 'XRPUSDT', 
+    'DOGEUSDT', 'ADAUSDT', 'AVAXUSDT', 'TRXUSDT', 'DOTUSDT',
+    'LINKUSDT', 'TONUSDT', 'MATICUSDT', 'SHIBUSDT', 'BCHUSDT'
+];
+const symbolToNameMap = {
+    'BTCUSDT': 'Bitcoin', 'ETHUSDT': 'Ethereum', 'BNBUSDT': 'BNB', 
+    'SOLUSDT': 'Solana', 'XRPUSDT': 'Ripple', 'DOGEUSDT': 'Dogecoin', 
+    'ADAUSDT': 'Cardano', 'AVAXUSDT': 'Avalanche', 'TRXUSDT': 'TRON', 
+    'DOTUSDT': 'Polkadot', 'LINKUSDT': 'Chainlink', 'TONUSDT': 'TON Coin', 
+    'MATICUSDT': 'Polygon', 'SHIBUSDT': 'Shiba Inu', 'BCHUSDT': 'Bitcoin Cash'
+};
+
+
 let currentLang = 'ar'; 
 let cryptoPricesData = []; 
 let selectedCoin = null; 
@@ -456,9 +600,10 @@ function toggleCoinButtons() {
 function populateCoinButtons() {
     const container = document.getElementById('coin-buttons-container');
     container.innerHTML = ''; 
+    const lang = LANG_DATA[currentLang];
 
     if (cryptoPricesData.length === 0) {
-        container.innerHTML = `<button class="coin-select-button" style="width: 90%; background: #cc0000; cursor: default;">${currentLang === 'ar' ? 'جاري تحميل العملات...' : 'Loading coins...'}</button>`;
+        container.innerHTML = `<button class="coin-select-button" style="width: 90%; background: #cc0000; cursor: default;">${lang.calc.loadingCoins}</button>`;
 
         fetchCryptoPrices(true, true); 
         return; 
@@ -467,8 +612,11 @@ function populateCoinButtons() {
     cryptoPricesData.forEach(coin => {
         let button = document.createElement('button');
         button.classList.add('coin-select-button');
-        button.innerText = `${coin.name} (${coin.symbol.toUpperCase()})`;
-        if (selectedCoin && selectedCoin.id === coin.id) {
+        const coinSymbol = coin.symbol.toUpperCase().replace('USDT', '');
+        const coinName = symbolToNameMap[coin.symbol.toUpperCase()] || coinSymbol;
+
+        button.innerText = `${coinName} (${coinSymbol})`;
+        if (selectedCoin && selectedCoin.symbol === coin.symbol) {
             button.classList.add('selected');
         }
         
@@ -483,17 +631,16 @@ function populateCoinButtons() {
 
 function selectCoin(coin) {
     selectedCoin = {
-        id: coin.id,
         symbol: coin.symbol.toUpperCase(),
-        name: coin.name,
-        price: coin.current_price
+        name: symbolToNameMap[coin.symbol.toUpperCase()] || coin.symbol.replace('USDT', ''),
+        price: coin.price
     };
     updateCoinSelectButton();
     calculateCryptoValue();
     
     document.querySelectorAll('.coin-select-button').forEach(btn => btn.classList.remove('selected'));
     document.querySelectorAll('.coin-select-button').forEach(btn => {
-        if (btn.innerText.includes(selectedCoin.symbol)) {
+        if (btn.innerText.includes(selectedCoin.symbol.replace('USDT', ''))) {
             btn.classList.add('selected');
         }
     });
@@ -501,10 +648,12 @@ function selectCoin(coin) {
 
 function updateCoinSelectButton() {
     const button = document.getElementById('coin-select-btn');
+    const lang = LANG_DATA[currentLang];
+
     if (selectedCoin) {
-        button.innerText = `${selectedCoin.name} (${selectedCoin.symbol})`;
+        button.innerText = `${selectedCoin.name} (${selectedCoin.symbol.replace('USDT', '')})`;
     } else {
-        button.innerText = currentLang === 'ar' ? 'اختر عملة' : 'Select Coin';
+        button.innerText = lang.calc.selectCoinBtn;
     }
 }
 
@@ -512,11 +661,12 @@ function updateCoinSelectButton() {
 function calculateCryptoValue() {
     const amountInput = document.getElementById('crypto-amount');
     const resultDiv = document.getElementById('calc-result');
+    const lang = LANG_DATA[currentLang];
 
     const amount = parseFloat(amountInput.value);
 
     if (isNaN(amount) || amount <= 0 || !selectedCoin || isNaN(selectedCoin.price) || selectedCoin.price <= 0) {
-        resultDiv.innerText = currentLang === 'ar' ? 'الرجاء إدخال كمية صحيحة واختيار عملة.' : 'Please enter a valid amount and select a coin.';
+        resultDiv.innerText = lang.calc.inputError;
         return;
     }
 
@@ -530,7 +680,7 @@ function calculateCryptoValue() {
         maximumFractionDigits: totalValue < 1 ? 6 : 2 
     });
     
-    resultDiv.innerText = `${amount} ${selectedCoin.symbol} ≈ ${formattedResult}`;
+    resultDiv.innerText = `${amount} ${selectedCoin.symbol.replace('USDT', '')} ≈ ${formattedResult}`;
 }
 
 function show(id){
@@ -543,12 +693,11 @@ function toggleDarkModeFunc() {
   const body = document.body;
   const btn = document.getElementById('darkModeBtn');
   body.classList.toggle('dark-mode');
+  
+  const isDarkMode = body.classList.contains('dark-mode');
+  const lang = LANG_DATA[currentLang];
 
-  if (currentLang === 'ar') {
-    btn.innerHTML = body.classList.contains('dark-mode') ? "• الوضع النهاري •" : "• الوضع الليلي •";
-  } else {
-    btn.innerHTML = body.classList.contains('dark-mode') ? "🌞 Light Mode" : "🌓 Dark Mode";
-  }
+  btn.innerHTML = isDarkMode ? lang.sidebar.darkModeBtn[1] : lang.sidebar.darkModeBtn[0];
 }
 
 
@@ -560,154 +709,88 @@ function toggleLangBtns() {
 function setLang(lang) {
   currentLang = lang; 
 
+  const data = LANG_DATA[lang];
   const body = document.body;
-  const darkModeBtn = document.getElementById('darkModeBtn');
   const isDarkMode = body.classList.contains('dark-mode');
 
-  if(lang === 'ar') {
-    document.documentElement.setAttribute('lang', 'ar');
-    document.documentElement.setAttribute('dir', 'rtl');
-
-    // تحديث الحاسبة
-    document.querySelector('.crypto-calc-btn-in-section').innerText = 'احسب سعر العملة';
-    document.getElementById('calcTitle').innerText = 'حاسبة العملات المشفرة';
-    document.getElementById('coin-select-btn').innerText = selectedCoin ? `${selectedCoin.name} (${selectedCoin.symbol})` : 'اختر عملة';
-    document.querySelector('#crypto-calc-popup .close-btn').innerText = 'إغلاق';
-
-    document.getElementById('usageBtn').innerText = '• معني السوبر •';
-    document.getElementById('brokerQstBtn').innerText = '• يعني اي وسيط •';
-    document.getElementById('cryptoBtn').innerText = '• اسعار العملات الرقميه •'; 
-    document.getElementById('langToggleBtn').innerText = '• اللغه •';
-
-    darkModeBtn.innerHTML = isDarkMode ? "• الوضع النهاري •" : "• الوضع الليلي •";
+  // 1. تحديث HTML و الاتجاه
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  document.querySelector('#cryptoPrices table') ? document.querySelector('#cryptoPrices table').setAttribute('dir', 'ltr') : null;
+  document.querySelector('.calc-controls') ? document.querySelector('.calc-controls').setAttribute('dir', 'ltr') : null;
 
 
-    document.getElementById('mainTitle').innerText = 'سوبر زون - Super Zwn';
-    document.getElementById('mainDesc').innerHTML = 'اول سوبر عربي على تيليجرام 💪<br>اكبر المبيعات واعلى درجات الثقة';
-    document.getElementById('channelBtn').innerText = '• قناه سوبر زون •';
-    document.getElementById('groupBtn').innerText = '• جروب سوبر زون •';
-    document.getElementById('brokersBtn').innerText = '• وسطاء السوبر •';
-    document.getElementById('brokersTitle').innerText = 'سوبر زون - Super Zwn';
-    document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
-    document.querySelector('#brokers button').innerText = '• العودة للقائمة الرئيسية •';
-    
-    // تحديث قسم العملات لـ 15
-    document.getElementById('cryptoTitle').innerText = 'سوبر زون - Super Zwn';
-    document.getElementById('cryptoDesc').innerText = 'أفضل 15 عملة رقمية';
-    
-    // تحديث أزرار قسم العملات
-    const cryptoButtons = document.querySelectorAll('#cryptoPrices .btn');
-    if (cryptoButtons.length >= 2) {
-        cryptoButtons[0].innerText = '• العودة للقائمة الرئيسية •';
-        cryptoButtons[1].innerText = '🔁 تحديث الأسعار';
-    }
-    document.getElementById('cryptoStatus').innerText = 'جاري تحميل الأسعار...';
+  // 2. تحديث الـ Meta Tags
+  document.getElementById('metaTitle').innerText = data.meta.title;
+  document.getElementById('metaDescription').setAttribute('content', data.meta.description);
+  document.getElementById('metaKeywords').setAttribute('content', data.meta.keywords);
 
+  // 3. تحديث الشريط الجانبي (Sidebar)
+  document.getElementById('usageBtn').innerText = data.sidebar.usageBtn;
+  document.getElementById('brokerQstBtn').innerText = data.sidebar.brokerQstBtn;
+  document.getElementById('cryptoBtn').innerText = data.sidebar.cryptoBtn; 
+  document.getElementById('langToggleBtn').innerText = data.sidebar.langToggleBtn;
+  document.getElementById('darkModeBtn').innerHTML = isDarkMode ? data.sidebar.darkModeBtn[1] : data.sidebar.darkModeBtn[0];
 
-    document.querySelector('#popup .popup-box h3').innerText = '• يعني اي وسيط •';
-    document.querySelector('#popup .popup-box p').innerHTML = 'الوسيط هو شخص موثوق يقوم بتسهيل الصفقات بين طرفين لضمان حق الجميع.<br>مهمته التأكد من أمان المعاملة ومتابعة كل خطوة حتى اكتمال الصفقة.<br>التعامل بدون وسيط قد يؤدي إلى فقدان الحقوق أو سوء التفاهم.';
-    document.querySelector('#popup .close-btn').innerText = 'إغلاق';
-    
-    document.querySelector('#usagePopup .popup-box h3').innerText = '• معني السوبر •';
-    document.querySelector('#usagePopup .popup-box p').innerHTML = 'سوبر زون هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.';
-    document.querySelector('#usagePopup .close-btn').innerText = 'إغلاق';
+  // 4. تحديث القسم الرئيسي (Main)
+  document.getElementById('mainTitle').innerText = data.main.mainTitle;
+  document.getElementById('mainDesc').innerHTML = data.main.mainDesc;
+  document.getElementById('channelBtn').innerText = data.main.channelBtn;
+  document.getElementById('groupBtn').innerText = data.main.groupBtn;
+  document.getElementById('brokersBtn').innerText = data.main.brokersBtn;
+  document.getElementById("tonBtn").textContent = `💎 TON: ${data.main.tonLoading}`;
+  document.getElementById("timeBtn").textContent = `⏰ ${data.main.timeLoading}`;
+  document.getElementById("dateBtn").textContent = `📅 ${data.main.dateLoading}`;
 
-
-    document.getElementById("tonBtn").textContent = "💎 TON: جاري التحميل...";
-    
-    updateTime(true); 
-    updateDate(true); 
-    
-    calculateCryptoValue();
-    if(document.querySelector('#cryptoList table')) fetchCryptoPrices(false, false); 
-
-    const brokers = ['الوسيط تيمو','الوسيط حمو','الوسيط عيد','الوسيط سالك','الوسيط يوسف','الوسيط ايرور','الوسيط ريو'];
-    const brokersLinks = ['https://t.me/vwvvxv','https://t.me/vrwvw','https://t.me/GreaTeeid','https://t.me/x_o_z','https://t.me/j_e_o','https://t.me/mrtrgm','https://t.me/ahmedrio'];
-    const brokersList = document.getElementById('brokersList');
-    brokersList.innerHTML = '';
-    for(let i=0;i<brokers.length;i++){
-      let a = document.createElement('a');
-      a.className = 'btn';
-      a.href = brokersLinks[i];
-      a.target = '_blank';
-      a.innerText = '• ' + brokers[i];
-      a.onclick = playSound;
-      brokersList.appendChild(a);
-    }
-  } else if(lang === 'en') {
-    document.documentElement.setAttribute('lang', 'en');
-    document.documentElement.setAttribute('dir', 'ltr');
-
-    // تحديث الحاسبة
-    document.querySelector('.crypto-calc-btn-in-section').innerText = 'Calculate Coin Price';
-    document.getElementById('calcTitle').innerText = 'Crypto Calculator';
-    document.getElementById('coin-select-btn').innerText = selectedCoin ? `${selectedCoin.name} (${selectedCoin.symbol})` : 'Select Coin';
-    document.querySelector('#crypto-calc-popup .close-btn').innerText = 'Close';
-
-    document.getElementById('usageBtn').innerText = '• Meaning of Super •';
-    document.getElementById('brokerQstBtn').innerText = '• What is a Broker •';
-    document.getElementById('cryptoBtn').innerText = '• Crypto Prices •'; 
-    document.getElementById('langToggleBtn').innerText = '• Language •';
-
-    darkModeBtn.innerHTML = isDarkMode ? "• Light Mode •" : "• Dark Mode •";
-
-
-    document.getElementById('mainTitle').innerText = 'Super Zwn - Super Zwn';
-    document.getElementById('mainDesc').innerHTML = 'The first Arabic Super on Telegram 💪<br>Biggest sales and highest trust';
-    document.getElementById('channelBtn').innerText = '• Super Zwn Channel •';
-    document.getElementById('groupBtn').innerText = '• Super Zwn Group •';
-    document.getElementById('brokersBtn').innerText = '• Super Brokers •';
-    document.getElementById('brokersTitle').innerText = 'Super Zwn - Super Zwn';
-    document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
-    document.querySelector('#brokers button').innerText = '• Back to Main Menu •';
-
-
-    document.getElementById('cryptoTitle').innerText = 'Super Zwn - Super Zwn';
-    document.getElementById('cryptoDesc').innerText = 'Top 15 Cryptocurrencies';
-    
-
-    const cryptoButtons = document.querySelectorAll('#cryptoPrices .btn');
-    if (cryptoButtons.length >= 2) {
-        cryptoButtons[0].innerText = '• Back to Main Menu •';
-        cryptoButtons[1].innerText = '• Refresh Prices •';
-    }
-    document.getElementById('cryptoStatus').innerText = 'Loading Prices...';
-    
-
-    document.querySelector('#popup .popup-box h3').innerText = '• What is a Broker •';
-    document.querySelector('#popup .popup-box p').innerHTML = 'A broker is a trusted person who facilitates deals between two parties to ensure everyone\'s rights.<br>Their task is to ensure the transaction\'s security and follow every step until the deal is completed.<br>Dealing without a broker may lead to loss of rights or misunderstanding.';
-    document.querySelector('#popup .close-btn').innerText = 'Close';
-    
-    document.querySelector('#usagePopup .popup-box h3').innerText = '• Meaning of Super •';
-    document.querySelector('#usagePopup .popup-box p').innerHTML = 'Super Zwn is a store for buying and selling groups, channels, stars, gifts, and more...<br>We facilitate fast sales for users to sell their possessions quickly<br>Dealing in the Super is with a broker to ensure the rights of both parties.';
-    document.querySelector('#usagePopup .close-btn').innerText = 'Close';
-    
-
-    document.getElementById("tonBtn").textContent = "💎 TON: Loading...";
-    
-    updateTime(true); 
-    updateDate(true); 
-    
-    calculateCryptoValue();
-    if(document.querySelector('#cryptoList table')) fetchCryptoPrices(false, false); 
-
-    const brokers = ['Broker Timo','Broker Hamo','Broker Eid','Broker Salk','Broker Yousef','Broker Error','Broker Rio'];
-    const brokersLinks = ['https://t.me/vwvvxv','https://t.me/vrwvw','https://t.me/GreaTeeid','https://t.me/x_o_z','https://t.me/j_e_o','https://t.me/mrtrgm','https://t.me/ahmedrio'];
-    const brokersList = document.getElementById('brokersList');
-    brokersList.innerHTML = '';
-    for(let i=0;i<brokers.length;i++){
-      let a = document.createElement('a');
-      a.className = 'btn';
-      a.href = brokersLinks[i];
-      a.target = '_blank';
-      a.innerText = '• ' + brokers[i];
-      a.onclick = playSound;
-      brokersList.appendChild(a);
-    }
+  // 5. تحديث قسم الوسطاء (Brokers)
+  document.getElementById('brokersTitle').innerText = data.brokers.brokersTitle;
+  document.getElementById('brokersDesc').innerText = data.brokers.brokersDesc;
+  document.getElementById('brokersBackBtn').innerText = data.brokers.brokersBackBtn;
+  const brokersLinks = ['https://t.me/vwvvxv','https://t.me/vrwvw','https://t.me/GreaTeeid','https://t.me/x_o_z','https://t.me/j_e_o','https://t.me/mrtrgm','https://t.me/ahmedrio'];
+  const brokersList = document.getElementById('brokersList');
+  brokersList.innerHTML = '';
+  for(let i=0;i<data.brokers.list.length;i++){
+    let a = document.createElement('a');
+    a.className = 'btn';
+    a.href = brokersLinks[i];
+    a.target = '_blank';
+    a.innerText = data.brokers.list[i];
+    a.onclick = playSound;
+    brokersList.appendChild(a);
   }
 
+  // 6. تحديث قسم العملات (Crypto Prices)
+  document.getElementById('cryptoCalcBtnInSec').innerText = data.crypto.cryptoCalcBtnInSec;
+  document.getElementById('cryptoTitle').innerText = data.crypto.cryptoTitle;
+  document.getElementById('cryptoDesc').innerText = data.crypto.cryptoDesc;
+  document.getElementById('cryptoBackBtn').innerText = data.crypto.cryptoBackBtn;
+  document.getElementById('cryptoRefreshBtn').innerText = data.crypto.cryptoRefreshBtn;
+  const cryptoStatusElement = document.getElementById('cryptoStatus');
+  if (cryptoStatusElement) {
+    cryptoStatusElement.innerText = data.crypto.cryptoStatusLoading; 
+  }
 
+  // 7. تحديث النوافذ المنبثقة (Popups)
+  document.getElementById('brokerPopupTitle').innerText = data.brokerPopup.title;
+  document.getElementById('brokerPopupText').innerHTML = data.brokerPopup.text;
+  document.getElementById('brokerCloseBtn').innerText = data.brokerPopup.closeBtn;
+  
+  document.getElementById('usagePopupTitle').innerText = data.usagePopup.title;
+  document.getElementById('usagePopupText').innerHTML = data.usagePopup.text;
+  document.getElementById('usageCloseBtn').innerText = data.usagePopup.closeBtn;
+
+  // 8. تحديث حاسبة العملات (Calculator Popup)
+  document.getElementById('calcTitle').innerText = data.calc.calcTitle;
+  document.getElementById('coin-select-btn').innerText = selectedCoin ? `${selectedCoin.name} (${selectedCoin.symbol.replace('USDT', '')})` : data.calc.selectCoinBtn;
+  document.querySelector('#crypto-calc-popup .close-btn').innerText = data.calc.closeBtn;
+  document.getElementById('calc-result').innerText = document.getElementById('crypto-amount').value === '1' && !selectedCoin ? data.calc.resultDefault : document.getElementById('calc-result').innerText;
+
+  // 9. إعادة تشغيل الوظائف المعتمدة على اللغة
+  updateTime(true); 
+  updateDate(true); 
   updateTonPriceInMainSection();
+  calculateCryptoValue();
+  if(document.querySelector('#cryptoList table')) fetchCryptoPrices(false, false); 
 }
 
 function updateTime(forceUpdateLabel = false) {
@@ -728,27 +811,30 @@ setInterval(updateTime, 1000);
 
 function updateDate(forceUpdateLabel = false) {
   const today = new Date();
+  const lang = currentLang === 'ar' ? 'ar-EG' : 'en-US';
 
-  const dateText = today.toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  
-  const labelAr = 'جاري التحديث...';
-  const labelEn = 'Updating...';
-  const label = currentLang === 'ar' ? labelAr : labelEn;
+  const dateText = today.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' });
   
   const dateBtn = document.getElementById("dateBtn");
   
-  if (forceUpdateLabel || dateBtn.textContent.includes(label) || !dateBtn.textContent.includes("📅")) {
-     dateBtn.textContent = "📅 " + dateText;
-  }
+  dateBtn.textContent = "📅 " + dateText;
 }
+
+document.addEventListener('DOMContentLoaded', updateDate);
 
 
 async function updateTonPriceInMainSection() {
     const symbol = 'TONUSDT';
     const btn = document.getElementById("tonBtn");
+    const lang = LANG_DATA[currentLang];
     
-    const errorText = currentLang === 'ar' ? "خطأ" : "Error";
+    const loadingText = lang.main.tonLoading;
+    const errorText = lang.other.tonError;
     const icon = '💎 TON';
+
+    if (!btn.textContent.includes('...')) {
+        btn.textContent = `${icon}: ${loadingText}`;
+    }
 
     try {
         const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`);
@@ -761,7 +847,7 @@ async function updateTonPriceInMainSection() {
         }
 
     } catch (e) {
-        console.error("Failed to fetch TON price:", e);
+        console.error("Failed to fetch TON price from Binance:", e);
         btn.textContent = `${icon}: ${errorText}`;
     }
 }
@@ -771,9 +857,10 @@ setInterval(updateTonPriceInMainSection, 60000);
 
 async function fetchCryptoPrices(forceRefresh = false, toPopulateCalc = false) {
   const cryptoListDiv = document.getElementById('cryptoList');
+  const lang = LANG_DATA[currentLang];
   
-  const loadingText = currentLang === 'ar' ? "جاري تحميل الأسعار..." : "Loading Prices...";
-  const errorText = currentLang === 'ar' ? "تعذر جلب الأسعار، حاول لاحقاً." : "Failed to fetch prices, try later.";
+  const loadingText = lang.crypto.cryptoStatusLoading;
+  const errorText = lang.crypto.cryptoStatusError;
   
   if (forceRefresh || !cryptoListDiv.innerHTML.includes('table')) {
      cryptoListDiv.innerHTML = `<p id="cryptoStatus">${loadingText}</p>`;
@@ -781,68 +868,57 @@ async function fetchCryptoPrices(forceRefresh = false, toPopulateCalc = false) {
      if (!newStatusP) cryptoListDiv.querySelector('p').id = 'cryptoStatus';
   }
 
-
-  const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=1&sparkline=false&locale=en';
+  const symbolsQuery = BINANCE_TOP_SYMBOLS.map(s => `"${s}"`).join(',');
+  const url = `https://api.binance.com/api/v3/ticker/price?symbols=[${symbolsQuery}]`;
   
-  let tonCoinData = null; 
-
   try {
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
-    let data = await response.json();
+    let data = await response.json(); 
     
-
-    try {
-        const tonRes = await fetch('https://api.coingecko.com/api/v3/coins/the-open-network?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false');
-        const tonData = await tonRes.json();
-        if (tonData && tonData.market_data) {
-             tonCoinData = {
-                id: 'the-open-network',
-                symbol: 'TON',
-                name: 'The Open Network',
-                current_price: tonData.market_data.current_price.usd,
-                market_cap_rank: tonData.market_data.market_cap_rank || 1000,
-            };
-        }
-    } catch(e) {
-        console.warn("Failed to fetch TON data separately.");
-    }
+    data = data.filter(item => item.price);
     
-
-    if (tonCoinData) {
-        data = data.filter(coin => coin.id !== 'the-open-network');
-        data.push(tonCoinData);
-        data.sort((a, b) => (a.market_cap_rank || 1000) - (b.market_cap_rank || 1000));
-        data = data.slice(0, 15); 
-    }
+    data.forEach(item => {
+        item.price = parseFloat(item.price);
+    });
     
+    cryptoPricesData = data.map(item => ({
+        symbol: item.symbol,
+        price: item.price
+    }));
 
-    cryptoPricesData = data;
     if (toPopulateCalc) {
         populateCoinButtons(); 
-        
         if (!selectedCoin && cryptoPricesData.length > 0) {
             selectCoin(cryptoPricesData[0]); 
         } else if (selectedCoin) {
-            const updatedCoin = cryptoPricesData.find(c => c.id === selectedCoin.id);
+            const updatedCoin = cryptoPricesData.find(c => c.symbol === selectedCoin.symbol);
             if(updatedCoin) {
-                selectedCoin.price = updatedCoin.current_price;
+                selectedCoin.price = updatedCoin.price;
                 calculateCryptoValue();
             }
         }
     }
 
-    let tableHTML = '<table><thead><tr><th>#</th><th>' + (currentLang === 'ar' ? 'العملة' : 'Coin') + '</th><th>' + (currentLang === 'ar' ? 'السعر (USD)' : 'Price (USD)') + '</th></tr></thead><tbody>';
+    let tableHTML = '<table><thead><tr><th>' + lang.crypto.tableHeaders[0] + '</th><th>' + lang.crypto.tableHeaders[1] + '</th><th>' + lang.crypto.tableHeaders[2] + '</th></tr></thead><tbody>';
 
-    data.forEach((coin, index) => {
-        const price = coin.current_price ? parseFloat(coin.current_price).toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: (coin.current_price < 1 && coin.current_price > 0.01) ? 4 : (coin.current_price < 0.01) ? 6 : 2 }) : (currentLang === 'ar' ? 'غير متوفر' : 'N/A');
+    data.forEach((item, index) => {
+        const symbolBase = item.symbol.replace('USDT', '');
+        const coinName = symbolToNameMap[item.symbol] || symbolBase;
+        
+        const price = item.price ? item.price.toLocaleString('en-US', { 
+            style: 'currency', 
+            currency: 'USD', 
+            minimumFractionDigits: 2, 
+            maximumFractionDigits: (item.price < 1 && item.price > 0.01) ? 4 : (item.price < 0.01) ? 6 : 2 
+        }) : lang.other.cryptoNA;
         
         tableHTML += `
             <tr>
                 <td>${index + 1}</td>
-                <td class="name">${coin.name} (${coin.symbol.toUpperCase()})</td>
+                <td class="name">${coinName} (${symbolBase})</td>
                 <td class="price">${price}</td>
             </tr>
         `;
@@ -852,7 +928,7 @@ async function fetchCryptoPrices(forceRefresh = false, toPopulateCalc = false) {
     cryptoListDiv.innerHTML = tableHTML;
     
   } catch (error) {
-    console.error('Error fetching crypto prices:', error);
+    console.error('Error fetching crypto prices from Binance:', error);
     cryptoListDiv.innerHTML = `<p id="cryptoStatus" style="color:red;">${errorText}</p>`;
   }
 }
@@ -879,7 +955,7 @@ document.addEventListener('click', function(event) {
   const calcPopup = document.getElementById('crypto-calc-popup');
   const calcBtn = document.querySelector('.crypto-calc-btn-in-section');
 
-
+  
   if(sidebar.style.left === "0px" && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
     sidebar.style.left = "-240px";
   }
@@ -890,7 +966,7 @@ document.addEventListener('click', function(event) {
       }
   }
 });
-
+ 
 
 document.addEventListener('DOMContentLoaded', () => {
     setLang('ar');
