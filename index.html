@@ -8,6 +8,13 @@
 <meta name="keywords" content="سوبر ميكس, تيليجرام, وسطاء, مبيعات, عربي">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
+/* تعريف اللون الأحمر الجديد الأكثر واقعية والتوهج */
+:root {
+  --real-red: #cc0000; /* لون أحمر أغمق وأكثر واقعية */
+  --light-glow: #ff5555; /* لون التوهج الخفيف */
+  --shadow-color: #990000; /* لون الظل الداكن */
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: 'Tajawal', sans-serif;
@@ -33,45 +40,63 @@ body.dark-mode::before { filter: brightness(0.15); }
 .content { display: none; margin-top: 20px; }
 .content.active { display: block; }
 
-h1 { font-size: 1.8em; margin-top: 10px; color: #fff; text-shadow: 0 0 8px #ff4d4d; }
-h2 { font-size: 1.2em; margin-top: 10px; color: #ccc; text-shadow: 0 0 6px #ff4d4d; }
-p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
+/* تصغير الخطوط وتوهج خفيف وواقعي */
+h1 { 
+  font-size: 1.7em; /* أصغر قليلاً */
+  margin-top: 10px; 
+  color: #fff; 
+  text-shadow: 0 0 6px var(--light-glow); /* توهج خفيف باللون الأحمر الجديد */
+}
+h2 { 
+  font-size: 1.1em; /* أصغر قليلاً */
+  margin-top: 10px; 
+  color: #ccc; 
+  text-shadow: 0 0 4px var(--light-glow); /* توهج خفيف باللون الأحمر الجديد */
+}
+p { font-size: 0.95em; color: #ddd; margin: 5px 0 15px 0; }
 
-.logo { width: 100px; border-radius: 50%; box-shadow: 0 0 12px #ff4d4d; margin-top: 20px; }
+.logo { 
+  width: 90px; /* أصغر قليلاً */
+  border-radius: 50%; 
+  box-shadow: 0 0 10px var(--real-red); /* توهج واقعي حول اللوجو */
+  margin-top: 20px; 
+}
 
-/* 3D Button Style - Red and Gray */
+/* 3D Button Style */
 .btn-3d {
   display: block;
-  background-color: #333; /* Gray background */
+  background-color: rgba(30, 30, 30, 0.85); /* خلفية رمادية مع شفافية خفيفة */
   color: #fff;
   text-decoration: none;
-  margin: 8px auto; /* Increased margin for better spacing */
-  padding: 12px; /* Increased padding */
-  border-radius: 12px;
-  width: 250px; /* Fixed size */
+  margin: 7px auto; /* أصغر قليلاً */
+  padding: 10px; /* أصغر قليلاً */
+  border-radius: 10px; /* أصغر قليلاً */
+  width: 240px; /* أصغر قليلاً */
   font-weight: bold;
   border: none;
-  font-size: 0.95em;
+  font-size: 0.9em; /* أصغر قليلاً */
   cursor: pointer;
   
-  /* 3D Effect */
-  box-shadow: 0 5px 0 #8b0000; /* Darker red shadow for 3D depth */
-  border-bottom: 2px solid #ff4d4d; /* Red bottom border */
+  /* 3D Effect - استخدام الألوان الجديدة */
+  box-shadow: 0 4px 0 var(--shadow-color); /* ظل داكن للعمق */
+  border-bottom: 2px solid var(--real-red); /* حدود واقعية */
   transition: all 0.1s ease-out;
+  /* توهج خفيف للأزرار */
+  filter: drop-shadow(0 0 3px rgba(255, 85, 85, 0.5));
 }
 
 .btn-3d:hover {
-  background-color: #444; 
-  transform: translateY(2px); /* Lift up slightly */
-  box-shadow: 0 3px 0 #8b0000;
+  background-color: rgba(40, 40, 40, 0.9); 
+  transform: translateY(1px); /* رفع خفيف */
+  box-shadow: 0 3px 0 var(--shadow-color);
 }
 .btn-3d:active {
-  transform: translateY(5px); /* Press down effect */
-  box-shadow: 0 0px 0 #8b0000; 
+  transform: translateY(4px); /* ضغط لأسفل */
+  box-shadow: 0 0px 0 var(--shadow-color); 
 }
 
 
-/* Menu Button - 3D Hamburger */
+/* Menu Button */
 .menu-btn { 
   position: fixed; 
   top: 15px; 
@@ -92,46 +117,47 @@ p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
   display: block;
   height: 3px;
   width: 100%;
-  background: #ff4d4d; /* Red color for lines */
+  background: var(--real-red); /* اللون الأحمر الواقعي */
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 1px 0 #444; /* 3D light effect */
+  box-shadow: 0 0 2px var(--light-glow); /* توهج خفيف لخطوط القائمة */
   transform-origin: left center;
 }
 
-/* Sidebar - 3D Look */
+/* Sidebar - 3D Look وشفافية خفيفة */
 .sidebar {
-  width: 260px; /* Wider for better 3D effect */
+  width: 250px; /* أصغر قليلاً */
   height: 100%;
-  background: rgba(30,30,30,0.95); /* Darker gray background */
+  background: rgba(15, 15, 15, 0.9); /* خلفية داكنة جداً مع شفافية بسيطة */
   backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
-  left: -260px; 
-  transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Spring-like transition for 3D feel */
+  left: -250px; 
+  transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   padding-top: 70px;
   z-index: 1001;
-  border-right: 3px solid #ff4d4d; /* Red border */
-  box-shadow: 5px 0 15px rgba(255,77,77,0.4); /* Red glow shadow */
-  transform: rotateY(15deg); /* Initial slight 3D rotation */
+  border-right: 2px solid var(--real-red); /* حدود أرق */
+  box-shadow: 3px 0 10px rgba(204,0,0,0.3); /* توهج أحمر خفيف وواقعي */
+  transform: rotateY(10deg); /* تدوير أقل */
   transform-origin: right;
 }
 
 .sidebar.open {
   left: 0px;
-  transform: rotateY(0deg); /* Straighten when open */
+  transform: rotateY(0deg);
 }
 
 .sidebar .btn-3d {
-  width: 90%;
+  width: 85%; /* أصغر قليلاً */
 }
 
 
+/* Popups - خلفية شفافة وتوهج خفيف */
 .popup-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85); /* شفافية بسيطة */
   display: none;
   justify-content: center;
   align-items: center;
@@ -139,46 +165,46 @@ p { font-size: 1em; color: #ddd; margin: 5px 0 15px 0; }
   animation: fadeIn 0.4s;
 }
 .popup-box {
-  background: rgba(40,40,40,0.95); /* Gray background */
-  border: 2px solid #ff4d4d; /* Red border */
-  border-radius: 15px;
-  padding: 20px;
+  background: rgba(30, 30, 30, 0.9); /* خلفية رمادية داكنة مع شفافية خفيفة */
+  border: 1px solid var(--real-red); /* حدود أرق */
+  border-radius: 12px;
+  padding: 18px; /* أصغر قليلاً */
   width: 85%;
-  max-width: 400px;
-  box-shadow: 0 0 25px rgba(255,77,77,0.7); /* Stronger red glow */
+  max-width: 380px; /* أصغر قليلاً */
+  box-shadow: 0 0 20px rgba(204,0,0,0.5); /* توهج أحمر خفيف وواقعي */
   text-align: center;
   animation: fadeInUp 0.4s;
 }
 .popup-box h3 {
-  color: #ff4d4d;
-  margin-bottom: 15px;
-  text-shadow: 0 0 5px #ff4d4d;
+  color: var(--real-red);
+  margin-bottom: 12px;
+  text-shadow: 0 0 3px var(--light-glow); /* توهج خفيف */
 }
 .popup-box p {
   color: #ccc;
-  font-size: 1em;
-  line-height: 1.6em;
+  font-size: 0.95em;
+  line-height: 1.5em;
 }
 .close-btn {
-  background: #ff4d4d;
+  background: var(--real-red);
   color: #fff;
   border: none;
-  padding: 10px 25px;
-  border-radius: 10px;
-  margin-top: 20px;
+  padding: 8px 20px; /* أصغر قليلاً */
+  border-radius: 8px; /* أصغر قليلاً */
+  margin-top: 15px;
   cursor: pointer;
   font-weight: bold;
   transition: 0.3s;
-  box-shadow: 0 4px 0 #cc0000;
+  box-shadow: 0 3px 0 var(--shadow-color);
 }
 .close-btn:hover {
-  background: #cc0000;
-  transform: scale(1.05);
-  box-shadow: 0 4px 0 #990000;
+  background: var(--shadow-color);
+  transform: scale(1.03);
+  box-shadow: 0 3px 0 #660000;
 }
 .close-btn:active {
-  transform: translateY(4px);
-  box-shadow: 0 0px 0 #990000;
+  transform: translateY(3px);
+  box-shadow: 0 0px 0 #660000;
 }
 
 
@@ -194,13 +220,13 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding: 10px 0;
-  background: rgba(30,30,30,0.9);
-  font-size: 0.8em;
-  color: #ff4d4d;
+  padding: 8px 0; /* أصغر قليلاً */
+  background: rgba(15, 15, 15, 0.9); /* خلفية داكنة مع شفافية بسيطة */
+  font-size: 0.75em;
+  color: var(--real-red);
   z-index: 10;
-  box-shadow: 0 0 10px rgba(255,77,77,0.5);
-  border-top: 1px solid #ff4d4d;
+  box-shadow: 0 0 8px rgba(204,0,0,0.4);
+  border-top: 1px solid var(--real-red);
 }
 
 /* New Section for Super Assets */
@@ -208,8 +234,26 @@ footer {
   padding: 20px;
 }
 #superAssets h2 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
+
+/* Snowflakes for better realistic glow effect - adjusted */
+.snowflake {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.8); /* لون أبيض مائل للشفافية */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 5px rgba(255, 85, 85, 0.7); /* توهج خفيف باللون الأحمر */
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -288,13 +332,13 @@ footer {
     <h1 id="brokersTitle">سوبر ميكس - Super Mix</h1>
     <h2 id="brokersDesc">الوسطاء المعتمدون</h2>
     <div id="brokersList">
-      <a class="btn-3d" href="https://t.me/vwvvxv" target="_blank" onclick="playSound()">• الوسيط تيمو •</a>
-      <a class="btn-3d" href="https://t.me/vrwvw" target="_blank" onclick="playSound()">• الوسيط حمو •</a>
-      <a class="btn-3d" href="https://t.me/GreaTeeid" target="_blank" onclick="playSound()">• الوسيط عيد •</a>
-      <a class="btn-3d" href="https://t.me/x_o_z" target="_blank" onclick="playSound()">• الوسيط سالك •</a>
-      <a class="btn-3d" href="https://t.me/j_e_o" target="_blank" onclick="playSound()">• الوسيط يوسف •</a>
-      <a class="btn-3d" href="https://t.me/mrtrgm" target="_blank" onclick="playSound()">• الوسيط ايرور •</a>
-      <a class="btn-3d" href="https://t.me/ahmedrio" target="_blank" onclick="playSound()">• الوسيط ريو •</a>
+      <a id="broker-timo" class="btn-3d" href="https://t.me/vwvvxv" target="_blank" onclick="playSound()">• الوسيط تيمو •</a>
+      <a id="broker-hamo" class="btn-3d" href="https://t.me/vrwvw" target="_blank" onclick="playSound()">• الوسيط حمو •</a>
+      <a id="broker-eid" class="btn-3d" href="https://t.me/GreaTeeid" target="_blank" onclick="playSound()">• الوسيط عيد •</a>
+      <a id="broker-salek" class="btn-3d" href="https://t.me/x_o_z" target="_blank" onclick="playSound()">• الوسيط سالك •</a>
+      <a id="broker-youssef" class="btn-3d" href="https://t.me/j_e_o" target="_blank" onclick="playSound()">• الوسيط يوسف •</a>
+      <a id="broker-error" class="btn-3d" href="https://t.me/mrtrgm" target="_blank" onclick="playSound()">• الوسيط ايرور •</a>
+      <a id="broker-rio" class="btn-3d" href="https://t.me/ahmedrio" target="_blank" onclick="playSound()">• الوسيط ريو •</a>
     </div>
     <button class="btn-3d" onclick="playSound(); show('main')">• العودة للقائمة الرئيسية •</button>
   </section>
@@ -390,6 +434,13 @@ function setLang(lang) {
     // Brokers Section
     document.getElementById('brokersTitle').innerText = 'سوبر ميكس - Super Mix';
     document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
+    document.getElementById('broker-timo').innerText = '• الوسيط تيمو •';
+    document.getElementById('broker-hamo').innerText = '• الوسيط حمو •';
+    document.getElementById('broker-eid').innerText = '• الوسيط عيد •';
+    document.getElementById('broker-salek').innerText = '• الوسيط سالك •';
+    document.getElementById('broker-youssef').innerText = '• الوسيط يوسف •';
+    document.getElementById('broker-error').innerText = '• الوسيط ايرور •';
+    document.getElementById('broker-rio').innerText = '• الوسيط ريو •';
     document.querySelector('#brokers button').innerText = '• العودة للقائمة الرئيسية •';
     
 
@@ -401,6 +452,8 @@ function setLang(lang) {
     document.querySelector('#usagePopup .popup-box h3').innerText = '• معني السوبر •';
     document.querySelector('#usagePopup .popup-box p').innerHTML = 'سوبر ميكس هو عباره عن متجر لبيع وشراء الجروبات والقنوات والنجوم والهدايا والي اخر...<br>نقوم بتسهيل سرعه البيع علي المستخدم لبيع ممتلكاته في اسرع وقت<br>والتعامل في السوبر يكون مع وسيط لضمان حق الطرفين.';
     document.querySelector('#usagePopup .close-btn').innerText = 'إغلاق';
+
+    document.querySelector('footer').innerHTML = '© 2025 سوبر ميكس | جميع الحقوق محفوظة 🔥';
   } else if(lang === 'en') {
     document.documentElement.setAttribute('lang', 'en');
     document.documentElement.setAttribute('dir', 'ltr');
@@ -425,9 +478,16 @@ function setLang(lang) {
     document.querySelector('#assetsList a:nth-child(3)').innerText = '• Super Trust •';
     document.querySelector('#superAssets button').innerText = '• Back to Main Menu •';
 
-    // Brokers Section
+    // Brokers Section - تم تعديل الوسطاء هنا لقلبها للانجليزية
     document.getElementById('brokersTitle').innerText = 'Super Mix - Super Mix';
     document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
+    document.getElementById('broker-timo').innerText = '• Broker Timo •';
+    document.getElementById('broker-hamo').innerText = '• Broker Hamo •';
+    document.getElementById('broker-eid').innerText = '• Broker Eid •';
+    document.getElementById('broker-salek').innerText = '• Broker Salek •';
+    document.getElementById('broker-youssef').innerText = '• Broker Youssef •';
+    document.getElementById('broker-error').innerText = '• Broker Error •';
+    document.getElementById('broker-rio').innerText = '• Broker Rio •';
     document.querySelector('#brokers button').innerText = '• Back to Main Menu •';
 
     // Popups
@@ -438,6 +498,8 @@ function setLang(lang) {
     document.querySelector('#usagePopup .popup-box h3').innerText = '• Meaning of Super •';
     document.querySelector('#usagePopup .popup-box p').innerHTML = 'Super Mix is a store for buying and selling groups, channels, stars, gifts, and more...<br>We facilitate fast sales for users to sell their possessions quickly<br>Dealing in the Super is with a broker to ensure the rights of both parties.';
     document.querySelector('#usagePopup .close-btn').innerText = 'Close';
+
+    document.querySelector('footer').innerHTML = '© 2025 Super Mix | All Rights Reserved 🔥';
   }
 }
 
@@ -459,16 +521,16 @@ document.addEventListener('DOMContentLoaded', () => {
 function createSnowflake() {
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
-  const size = Math.random() * 4 + 2;
+  const size = Math.random() * 3 + 1; /* أصغر قليلاً */
   snow.style.width = `${size}px`;
   snow.style.height = `${size}px`;
   snow.style.left = `${Math.random() * window.innerWidth}px`;
-  snow.style.animationDuration = `${Math.random() * 5 + 5}s`;
-  snow.style.opacity = Math.random();
+  snow.style.animationDuration = `${Math.random() * 4 + 4}s`; /* أسرع قليلاً */
+  snow.style.opacity = Math.random() * 0.7 + 0.3; /* شفافية وواقعية أكبر */
   document.body.appendChild(snow);
   setTimeout(() => snow.remove(), 10000);
 }
-setInterval(createSnowflake, 200);
+setInterval(createSnowflake, 300); /* معدل أقل لخلق كرات الثلج لواقعية أكثر */
 </script>
 </body>
 </html>
