@@ -124,7 +124,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
     font-weight: 500;
 }
 
-/* تنسيق زر الحاسبة داخل قسم العملات */
+/* تنسيق زر الحاسبة داخل قسم العملات - الزر العلوي الجديد */
 .crypto-calc-btn-in-section {
     display: block; /* لضمان أخذ العرض الكامل */
     width: 80%; /* زيادة العرض */
@@ -612,8 +612,13 @@ function setLang(lang) {
     // تحديث قسم العملات لـ 15
     document.getElementById('cryptoTitle').innerText = 'سوبر زون - Super Zwn';
     document.getElementById('cryptoDesc').innerText = 'أفضل 15 عملة رقمية';
-    document.querySelector('#cryptoPrices button:nth-of-type(1)').innerText = '• العودة للقائمة الرئيسية •';
-    document.querySelector('#cryptoPrices button:nth-of-type(2)').innerText = '🔁 تحديث الأسعار';
+    
+    // تحديث أزرار قسم العملات
+    const cryptoButtons = document.querySelectorAll('#cryptoPrices .btn');
+    if (cryptoButtons.length >= 2) {
+        cryptoButtons[0].innerText = '• العودة للقائمة الرئيسية •';
+        cryptoButtons[1].innerText = '🔁 تحديث الأسعار';
+    }
     document.getElementById('cryptoStatus').innerText = 'جاري تحميل الأسعار...';
 
 
@@ -682,8 +687,13 @@ function setLang(lang) {
     // تحديث قسم العملات لـ 15
     document.getElementById('cryptoTitle').innerText = 'Super Zwn - Super Zwn';
     document.getElementById('cryptoDesc').innerText = 'Top 15 Cryptocurrencies';
-    document.querySelector('#cryptoPrices button:nth-of-type(1)').innerText = '• Back to Main Menu •';
-    document.querySelector('#cryptoPrices button:nth-of-type(2)').innerText = '🔁 Refresh Prices';
+    
+    // تحديث أزرار قسم العملات
+    const cryptoButtons = document.querySelectorAll('#cryptoPrices .btn');
+    if (cryptoButtons.length >= 2) {
+        cryptoButtons[0].innerText = '• Back to Main Menu •';
+        cryptoButtons[1].innerText = '🔁 Refresh Prices';
+    }
     document.getElementById('cryptoStatus').innerText = 'Loading Prices...';
     
 
