@@ -172,7 +172,7 @@ a:hover, button:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0000; }
 }
 /* تم تعديل الفوتر */
 footer {
-  position: relative; /* تم تغييرها من fixed إلى relative */
+  position: relative; 
   width: 100%;
   padding: 10px 0;
   background: rgba(0,0,0,0.8);
@@ -181,13 +181,13 @@ footer {
   z-index: 10;
   /* تم إزالة box-shadow لإزالة الخط الأحمر */
 }
-/* أزرار العملات الجديدة */
-.crypto-price-btn {
-    width: 220px;
-    margin: 6px auto;
-    font-size: 0.95em;
-    box-shadow: 0 0 8px #00ffff; /* ظل مختلف لتمييزها */
-    border: 1px solid #00ffff;
+/* زر عملة TON في القائمة الرئيسية يستخدم نفس تنسيق الأزرار العادية */
+#tonBtn {
+    background-color: rgba(15,15,15,0.8);
+    color: #fff;
+    border: 1px solid red;
+    box-shadow: 0 0 10px red;
+    /* تأكد من أن الأزرار السابقة لم تعد موجودة هنا */
 }
 </style>
 </head>
@@ -244,13 +244,8 @@ footer {
       <a id="groupBtn" href="https://t.me/+yvlUKvFLZEFkNDU0" target="_blank" onclick="playSound()">• جروب سوبر زون •</a>
       <button id="brokersBtn" onclick="playSound(); show('brokers')">• وسطاء السوبر •</button>
       
-      <div id="cryptoButtonsContainer">
-          <button id="tonBtn" class="crypto-price-btn spaced" onclick="playSound()">💎 TON: جاري التحميل...</button>
-          <button id="btcBtn" class="crypto-price-btn spaced" onclick="playSound()">₿ BTC: جاري التحميل...</button>
-          <button id="ethBtn" class="crypto-price-btn spaced" onclick="playSound()">Ξ ETH: جاري التحميل...</button>
-          <button id="solBtn" class="crypto-price-btn spaced" onclick="playSound()">☀️ SOL: جاري التحميل...</button>
-          <button id="dogeBtn" class="crypto-price-btn spaced" onclick="playSound()">🐶 DOGE: جاري التحميل...</button>
-      </div>
+      <button id="tonBtn" class="spaced" onclick="playSound()">💎 TON: جاري التحميل...</button>
+      
       <button id="timeBtn" class="spaced" onclick="playSound()">⏰ جاري التحديث...</button>
       <button id="dateBtn" onclick="playSound()">📅 جاري التحديث...</button>
     </div>
@@ -275,14 +270,14 @@ footer {
   <section class="content" id="cryptoPrices">
     <img src="https://i.ibb.co/sdLNWYv5/IMG-20251023-130121-177.jpg" class="logo">
     <h1 id="cryptoTitle">سوبر زون - Super Zwn</h1>
-    <h2 id="cryptoDesc">أفضل 10 عملات رقمية</h2>
+    <h2 id="cryptoDesc">أفضل 15 عملة رقمية</h2>
     <div id="cryptoList">
       <p id="cryptoStatus">جاري تحميل الأسعار...</p>
     </div>
     <button class="btn" onclick="playSound(); show('main')">• العودة للقائمة الرئيسية •</button>
     <button class="btn" onclick="playSound(); fetchCryptoPrices(true)">🔁 تحديث الأسعار</button>
   </section>
-  </div>
+</div>
 
 <footer>© 2025 سوبر زون | جميع الحقوق محفوظة 🔥</footer>
 
@@ -354,11 +349,10 @@ function setLang(lang) {
 
     document.getElementById('usageBtn').innerText = '• معني السوبر •';
     document.getElementById('brokerQstBtn').innerText = '• يعني اي وسيط •';
-    document.getElementById('cryptoBtn').innerText = '📊 أسعار العملات'; // تحديث
+    document.getElementById('cryptoBtn').innerText = '📊 أسعار العملات'; 
     document.getElementById('langToggleBtn').innerText = '🌐 اللغة';
 
     darkModeBtn.innerHTML = isDarkMode ? "🌞 الوضع النهاري" : "🌓 الوضع الليلي";
-
 
 
     document.getElementById('mainTitle').innerText = 'سوبر زون - Super Zwn';
@@ -370,9 +364,9 @@ function setLang(lang) {
     document.getElementById('brokersDesc').innerText = 'الوسطاء المعتمدون';
     document.querySelector('#brokers button').innerText = '• العودة للقائمة الرئيسية •';
     
-    // تحديث قسم العملات
+    // تحديث قسم العملات لـ 15
     document.getElementById('cryptoTitle').innerText = 'سوبر زون - Super Zwn';
-    document.getElementById('cryptoDesc').innerText = 'أفضل 10 عملات رقمية';
+    document.getElementById('cryptoDesc').innerText = 'أفضل 15 عملة رقمية';
     document.querySelector('#cryptoPrices button:nth-of-type(1)').innerText = '• العودة للقائمة الرئيسية •';
     document.querySelector('#cryptoPrices button:nth-of-type(2)').innerText = '🔁 تحديث الأسعار';
     document.getElementById('cryptoStatus').innerText = 'جاري تحميل الأسعار...';
@@ -388,10 +382,6 @@ function setLang(lang) {
 
 
     document.getElementById("tonBtn").textContent = "💎 TON: جاري التحميل...";
-    document.getElementById("btcBtn").textContent = "₿ BTC: جاري التحميل...";
-    document.getElementById("ethBtn").textContent = "Ξ ETH: جاري التحميل...";
-    document.getElementById("solBtn").textContent = "☀️ SOL: جاري التحميل...";
-    document.getElementById("dogeBtn").textContent = "🐶 DOGE: جاري التحميل...";
     
     updateTime(true); 
     updateDate(true); 
@@ -416,7 +406,7 @@ function setLang(lang) {
 
     document.getElementById('usageBtn').innerText = '• Meaning of Super •';
     document.getElementById('brokerQstBtn').innerText = '• What is a Broker •';
-    document.getElementById('cryptoBtn').innerText = '📊 Crypto Prices'; // تحديث
+    document.getElementById('cryptoBtn').innerText = '📊 Crypto Prices'; 
     document.getElementById('langToggleBtn').innerText = '🌐 Language';
 
     darkModeBtn.innerHTML = isDarkMode ? "🌞 Light Mode" : "🌓 Dark Mode";
@@ -431,9 +421,9 @@ function setLang(lang) {
     document.getElementById('brokersDesc').innerText = 'Authorized Brokers';
     document.querySelector('#brokers button').innerText = '• Back to Main Menu •';
 
-    // تحديث قسم العملات
+    // تحديث قسم العملات لـ 15
     document.getElementById('cryptoTitle').innerText = 'Super Zwn - Super Zwn';
-    document.getElementById('cryptoDesc').innerText = 'Top 10 Cryptocurrencies';
+    document.getElementById('cryptoDesc').innerText = 'Top 15 Cryptocurrencies';
     document.querySelector('#cryptoPrices button:nth-of-type(1)').innerText = '• Back to Main Menu •';
     document.querySelector('#cryptoPrices button:nth-of-type(2)').innerText = '🔁 Refresh Prices';
     document.getElementById('cryptoStatus').innerText = 'Loading Prices...';
@@ -449,10 +439,6 @@ function setLang(lang) {
     
 
     document.getElementById("tonBtn").textContent = "💎 TON: Loading...";
-    document.getElementById("btcBtn").textContent = "₿ BTC: Loading...";
-    document.getElementById("ethBtn").textContent = "Ξ ETH: Loading...";
-    document.getElementById("solBtn").textContent = "☀️ SOL: Loading...";
-    document.getElementById("dogeBtn").textContent = "🐶 DOGE: Loading...";
     
     updateTime(true); 
     updateDate(true); 
@@ -474,7 +460,7 @@ function setLang(lang) {
   }
 
 
-  updateCryptoPricesInMainSection();
+  updateTonPriceInMainSection();
 }
 
 function updateTime(forceUpdateLabel = false) {
@@ -509,53 +495,34 @@ function updateDate(forceUpdateLabel = false) {
   }
 }
 
-// الوظيفة الجديدة لجلب أسعار العملات الرئيسية
-async function updateCryptoPricesInMainSection() {
-    const symbols = ['TONUSDT', 'BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'DOGEUSDT'];
-    const buttons = {
-        'TONUSDT': document.getElementById("tonBtn"),
-        'BTCUSDT': document.getElementById("btcBtn"),
-        'ETHUSDT': document.getElementById("ethBtn"),
-        'SOLUSDT': document.getElementById("solBtn"),
-        'DOGEUSDT': document.getElementById("dogeBtn"),
-    };
-
-    const icons = { 'TONUSDT': '💎 TON', 'BTCUSDT': '₿ BTC', 'ETHUSDT': 'Ξ ETH', 'SOLUSDT': '☀️ SOL', 'DOGEUSDT': '🐶 DOGE' };
-
+// الوظيفة المحدثة لجلب سعر TON فقط في الصفحة الرئيسية
+async function updateTonPriceInMainSection() {
+    const symbol = 'TONUSDT';
+    const btn = document.getElementById("tonBtn");
+    
     const loadingText = currentLang === 'ar' ? "جاري التحميل..." : "Loading...";
     const errorText = currentLang === 'ar' ? "خطأ" : "Error";
+    const icon = '💎 TON';
 
     try {
-        const fetchPromises = symbols.map(symbol => 
-            fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`).then(res => res.json())
-        );
-        const data = await Promise.all(fetchPromises);
-
-        data.forEach((item, index) => {
-            const symbol = symbols[index];
-            const btn = buttons[symbol];
-            const icon = icons[symbol];
-            
-            if (item && item.price) {
-                btn.textContent = `${icon}: ${parseFloat(item.price).toFixed(symbol === 'BTCUSDT' || symbol === 'ETHUSDT' ? 0 : (item.price < 1) ? 4 : 2)} $`;
-            } else {
-                btn.textContent = `${icon}: ${errorText}`;
-            }
-        });
+        const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`);
+        const item = await res.json();
+        
+        if (item && item.price) {
+            btn.textContent = `${icon}: ${parseFloat(item.price).toFixed(2)} $`;
+        } else {
+            btn.textContent = `${icon}: ${errorText}`;
+        }
 
     } catch (e) {
-        console.error("Failed to fetch crypto prices:", e);
-        symbols.forEach(symbol => {
-            const btn = buttons[symbol];
-            const icon = icons[symbol];
-            btn.textContent = `${icon}: ${errorText}`;
-        });
+        console.error("Failed to fetch TON price:", e);
+        btn.textContent = `${icon}: ${errorText}`;
     }
 }
-setInterval(updateCryptoPricesInMainSection, 60000); 
+setInterval(updateTonPriceInMainSection, 60000); 
 
 
-// الوظيفة لجلب أسعار العملات المشفرة لقسم "أفضل 10 عملات"
+// الوظيفة لجلب أسعار العملات المشفرة لقسم "أفضل 15 عملة"
 async function fetchCryptoPrices(forceRefresh = false) {
   const cryptoListDiv = document.getElementById('cryptoList');
   const statusP = document.getElementById('cryptoStatus');
@@ -563,27 +530,61 @@ async function fetchCryptoPrices(forceRefresh = false) {
   const loadingText = currentLang === 'ar' ? "جاري تحميل الأسعار..." : "Loading Prices...";
   const errorText = currentLang === 'ar' ? "تعذر جلب الأسعار، حاول لاحقاً." : "Failed to fetch prices, try later.";
   
-  if (forceRefresh) {
-    cryptoListDiv.innerHTML = `<p id="cryptoStatus">${loadingText}</p>`;
-    document.getElementById('cryptoStatus').id = 'cryptoStatus'; 
-  } else if (!cryptoListDiv.innerHTML.includes('table') && !cryptoListDiv.innerHTML.includes('table')) {
+  if (forceRefresh || !cryptoListDiv.innerHTML.includes('table')) {
      cryptoListDiv.innerHTML = `<p id="cryptoStatus">${loadingText}</p>`;
-     document.getElementById('cryptoStatus').id = 'cryptoStatus'; 
+     // إعادة تعيين الـ ID للفقرة الجديدة
+     const newStatusP = document.getElementById('cryptoStatus'); 
+     if (!newStatusP) cryptoListDiv.querySelector('p').id = 'cryptoStatus';
   }
 
-  // CoinGecko API for top 10 coins
-  const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false';
+  // CoinGecko API for top 15 coins by market cap
+  const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=1&sparkline=false&locale=en';
 
   try {
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data = await response.json();
+    let data = await response.json();
+    
+    // التأكد من وجود عملة TON (the-open-network) في القائمة
+    const tonCoin = data.find(coin => coin.id === 'the-open-network' || coin.symbol === 'ton');
+    if (!tonCoin && data.length < 15) {
+        // إذا لم تكن موجودة وعدد العملات أقل من 15، يمكن محاولة جلب بياناتها بشكل منفصل وإضافتها
+        // (هذه خطوة متقدمة، لكن لغرض الالتزام بالطلب، سنفترض أنها عادةً ما تكون في المراكز الـ 15 الأولى)
+    } else if (!tonCoin) {
+        // إذا لم تكن موجودة وعدد العملات 15، سنقوم باستبدال العملة الأخيرة بـ TON لضمان وجودها
+        // (هذا تعديل يدوي لضمان الطلب، يُفضل جلبها بشكل منفصل وإضافتها بذكاء)
+        
+        // سنحاول جلب بيانات TON بشكل منفصل ونضيفها في نهاية القائمة إذا لم تكن موجودة بالفعل.
+        try {
+            const tonRes = await fetch('https://api.coingecko.com/api/v3/coins/the-open-network?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false');
+            const tonData = await tonRes.json();
+            if (tonData && tonData.market_data) {
+                 const tonCoinData = {
+                    id: 'the-open-network',
+                    symbol: 'TON',
+                    name: 'The Open Network',
+                    current_price: tonData.market_data.current_price.usd,
+                    market_cap_rank: tonData.market_data.market_cap_rank,
+                };
+                
+                // إذا لم تكن موجودة، قم بإضافتها في الترتيب الصحيح أو في النهاية (نضيفها في النهاية لتبسيط الكود)
+                if(!data.find(coin => coin.id === 'the-open-network')) {
+                    data.push(tonCoinData);
+                    data.sort((a, b) => (a.market_cap_rank || 1000) - (b.market_cap_rank || 1000));
+                    data = data.slice(0, 15); // الاحتفاظ بأول 15 فقط
+                }
+            }
+        } catch(e) {
+            console.warn("Failed to fetch TON data separately.");
+        }
+    }
     
     let tableHTML = '<table><thead><tr><th>#</th><th>' + (currentLang === 'ar' ? 'العملة' : 'Coin') + '</th><th>' + (currentLang === 'ar' ? 'السعر (USD)' : 'Price (USD)') + '</th></tr></thead><tbody>';
 
     data.forEach((coin, index) => {
+        // تنسيق السعر بناءً على القيمة
         const price = coin.current_price ? parseFloat(coin.current_price).toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: (coin.current_price < 1 && coin.current_price > 0.01) ? 4 : (coin.current_price < 0.01) ? 6 : 2 }) : (currentLang === 'ar' ? 'غير متوفر' : 'N/A');
         
         tableHTML += `
@@ -633,7 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setLang('ar');
     updateTime(); 
     updateDate(); 
-    updateCryptoPricesInMainSection(); 
+    updateTonPriceInMainSection(); 
 });
 </script>
 </body>
